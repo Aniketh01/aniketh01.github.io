@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Fixing Broadcom wifi driver issues in ubuntu, debian kernels.</title>
+    <meta charset="utf-8"/>
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="../css/magnific-popup.css">
+    <link rel="stylesheet" type="text/css" href="../css/line-icons.css">
+    <link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <link rel="stylesheet" type="text/css"
+          href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,800%7CMontserrat:700%7COswald:300%7CRaleway:300,900)">
+
+    <link href="../style.css" rel="stylesheet" type="text/css">
+    <link href="../css/responsive.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body id="bigWrapper" data-spy="scroll" data-target=".navbar-default" data-offset="100">
+
+<!--preloader-->
+<div class="ip-header">
+    <div class="ip-logo">
+        <img class="img-responsive preloaderLogo center-block" src="../img/logoWhite.png" alt="preloader">
+    </div>
+
+    <div class="ip-loader" id="IDID">
+        <img src="../img/preloader.svg" width="50" alt="">
+    </div>
+</div>
+<!--end preloader-->
+
+
+<header>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" data-spy="affix" data-offset-top="50">
+
+
+        <div class="container-fluid">
+
+
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand Glow" href="#">Aniketh</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right" id="navbar-collapse">
+
+                <ul class="nav navbar-nav">
+
+                  <li><a  href="../index.html">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contributions<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a class="last-child" href="#">KDE</a></li>
+                            <li><a class="last-child" href="#">Articles</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="../all-in-one/pages-blog.html">Blog</a></li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Non-Techie<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a class="last-child" href="#">Version 1</a></li>
+                            <li><a class="last-child" href="#">Version 2</a></li>
+                            <li><a class="last-child" href="#">Version 3</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Techie<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a class="last-child" href="#">Coming Soon</a></li>
+                            <li><a class="last-child" href="#">Coming Soon<span
+                                    class="badge">New</span></a></li>
+                            <li><a data-scroll class="last-child" href="#">Coming Soon</a></li>
+                            <li><a class="last-child" href="#">Coming Soon</a></li>
+                            <li><a class="last-child" href="#">Coming Soon</a></li>
+                            <li><a class="last-child" href="#">Coming Soon</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><i class="fa fa-facebook last-child"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter last-child"></i></a></li>
+                    <li><a href="#"><i class="fa fa-dribbble last-child"></i></a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+</header>
+
+
+<!--/* Intro  */-->
+
+<section id="intro">
+    <div class="black-overlay"></div>
+
+
+    <div class="container VContentWrapperTable">
+        <div class="row VContent">
+
+            <div class="col-md-12 text-center">
+                <h2 class="WhiteText Glow"><font-size="20px">Fixing Broadcom wifi driver issues in ubuntu, debian kernels.</font></h2>
+                <div class="line-separator-small"></div>
+                <h4 class="WhiteText">Techie</h4 >
+            </div>
+
+
+        </div>
+    </div>
+</section>
+
+<!--/* END Intro  */-->
+
+
+
+<section class="backgroundWhite clearfix BlogSection">
+    <div class="container PaddingVertical100">
+
+        <div class="row">
+
+            <div class="col-md-9 col-sm-8">
+
+
+                    <!--item-->
+                    <div class="BlogFullWidthWrapper ">
+
+                        <div class="ImageWrapper positionRelative">
+                            <a href="pages-blog-single-page.html">
+
+                                <img alt="thumbnail" class="galleryImage" src="../img/Post images/techie/tutorials/bcl3 first.jpg">
+                            </a>
+                        </div>
+                        <!-- caption -->
+                        <br>
+                        <br>
+                        <div class="BlogPostInfoWrapper">
+
+                            <h3>FIX: Broadcom wifi driver issues.</h3>
+
+                            <p class="text-justify">Today I am going to show you guys how to fix the wifi driver issue which most of the new laptops
+                               today which installs any new distro of ubuntu or Debian. Here I am going to show how to fix the error faced when
+                               the network card is of Broadcom. This error is faced by every laptop which has new wifi-card with Linux installed irrespective of wifi card.
+                               Ie, even laptops with Realtek wifi-driver face this issue . But take care, fixing it is done in a different manner. If needed I will post that in future.</p>
+                               <p>Before getting started, let me tell you guys that fixing the error in Broadcom driver is really easy compared
+                                 to Realtek and intel wifi cards. </p>
+                                 <p>So let’s start.</p>
+                                 <p>#1 : First of all, get your system up-to-date.</p>
+                                 <code>$ sudo apt-get update</code>
+                                 <br>
+                                 <p>#2: Next, what we are going to do is that we are going remove the installed driver at first and then move on.</p>
+                                 <code>$ sudo apt-get purge bcmwl-kernel-source</code>
+                                 <br>
+                                 <br>
+                                 <img alt="thumbnail" class="galleryImage" src="../img/Post images/techie/tutorials/purging2b.png">
+                                 <br>
+                                 <br>
+                                 <p>#3: So as we have removed the driver now we are going to re-install the driver.</p>
+                                 <code>$ sudo apt-get install linux-generic bcmwl-kernel-source</code>
+                                 <br>
+                                 <br>
+                                 <img alt="thumbnail" class="galleryImage" src="../img/Post images/techie/tutorials/reinstalling2bbroadcom.png">
+                                 <br>
+                                 <p>#4: Done. reboot your system now.</p>
+                                 <code>$ sudo reboot</code>
+                                 <br>
+                                <p> Hope this will work for you guys. If not comment below.</p>
+                                <p>Cheers.</p>
+                                <br>
+                                <p>Note: If you don't know which wifi card you have, then do this in the terminal(Ctrl+Alt+T)</p>
+                                <code>$ lspci</code>
+                                <p>This will give your network controller name.</p>
+                                <img alt="thumbnail" class="galleryImage" src="../img/Post images/techie/tutorials/screenshot2bfrom2b2016-09-232b15253a09253a07.png">
+
+
+                        </div>
+                        <!-- end caption -->
+                    </div>
+
+
+</div>
+            <div class="col-md-3 col-sm-4">
+
+                <div class="textWidget widget">
+                    <h5>And I quote</h5>
+
+                    <div class="line-separator-small"></div>
+                    <p>Sharing is good, and with digital technology, sharing is easy.</p>
+                </div>
+
+
+                <div class="widget">
+                    <h5>Tags</h5>
+
+                    <div class="line-separator-small"></div>
+                    <a href="#"><span class="label label-default">Tutuorial</span></a>
+                    <a href="#"><span class="label label-default">Command line</span></a>
+                    <a href="#"><span class="label label-default">Drivers</span></a>
+                    <a href="#"><span class="label label-default">Ubuntu</span></a>
+                    <a href="#"><span class="label label-default">Debian</span></a>
+                    <a href="#"><span class="label label-default">Broadcom</span></a>
+                    <a href="#"><span class="label label-default">sudo</span></a>
+                    <a href="#"><span class="label label-default">FOSS</span></a>
+                    <a href="#"><span class="label label-default">wireless</span></a>
+                    <a href="#"><span class="label label-default">kernels</span></a>
+
+
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+
+
+
+<script type="text/javascript" src="../js/scripts.min.js"></script>
+
+<script src="../js/custom.js"></script>
+
+
+<script>
+
+    (function($) {
+        "use strict";
+        $('.ZoomIn').magnificPopup({
+            type: 'image',
+            image: {
+                verticalFit: true
+            },
+            gallery: {
+                enabled: true, // set to true to enable gallery
+
+                preload: [0, 2], // read about this option in next Lazy-loading section
+
+                navigateByImgClick: true,
+
+                arrowMarkup: '<button title="%title%" type="button" class="mfp-arrow mfp-arrow-%dir%"></button>', // markup of an arrow button
+
+                tPrev: 'Previous (Left arrow key)', // title for left button
+                tNext: 'Next (Right arrow key)', // title for right button
+                tCounter: '<span class="mfp-counter">%curr% of %total%</span>' // markup of counter
+            },
+            mainClass: 'mfp-with-zoom', // this class is for CSS animation below
+            closeBtnInside: false
+
+        });
+    })(jQuery);
+
+
+</script>
+
+
+</body>
+</html>
