@@ -1,13 +1,3 @@
-/**
- * main.js
- * http://www.codrops.com
- *
- * Licensed under the MIT license.
- * http://www.opensource.org/licenses/mit-license.php
- * 
- * Copyright 2015, Codrops
- * http://www.codrops.com
- */
 ;(function(window) {
 
 	'use strict';
@@ -35,7 +25,7 @@
 	/**
 	 * some helper functions
 	 */
-	
+
 	function throttle(fn, delay) {
 		var allowSample = true;
 
@@ -57,7 +47,7 @@
 	}
 
 	function extend( a, b ) {
-		for( var key in b ) { 
+		for( var key in b ) {
 			if( b.hasOwnProperty( key ) ) {
 				a[key] = b[key];
 			}
@@ -72,7 +62,7 @@
 		this.gridEl = el;
 		this.options = extend( {}, this.options );
 		extend( this.options, options );
-		
+
 		this.items = [].slice.call(this.gridEl.querySelectorAll('.gallery-inner-style2'));
 		this.previewEl = nextSibling(this.gridEl);
 		this.isExpanded = false;
@@ -132,10 +122,10 @@
 			var touchend = function(ev) {
 					ev.preventDefault();
 					self._openItem(ev, item);
-					item.removeEventListener('touchend', touchend);	
+					item.removeEventListener('touchend', touchend);
 				},
 				touchmove = function(ev) {
-					item.removeEventListener('touchend', touchend);	
+					item.removeEventListener('touchend', touchend);
 				},
 				manageTouch = function() {
 					item.addEventListener('touchend', touchend);
@@ -155,7 +145,7 @@
 
 		// close expanded image
 		this.closeCtrl.addEventListener('click', function() {
-			self._closeItem(); 
+			self._closeItem();
 		});
 
 		window.addEventListener('resize', throttle(function(ev) {
@@ -181,7 +171,7 @@
 
 		// set the src of the original image element (large image)
 		this._setOriginal(item.querySelector('a').getAttribute('href'));
-		
+
 		// callback
 		this.options.onOpenItem(this, item);
 
@@ -215,7 +205,7 @@
 		}
 
 		var self = this;
-		setTimeout(function() { 
+		setTimeout(function() {
 			// controls the elements inside the expanded view
 			classie.add(self.previewEl, 'preview--open');
 			// callback
@@ -239,8 +229,8 @@
 
 					self.isAnimating = false;
 				});
-				
-			});	
+
+			});
 		});
 	};
 
@@ -303,7 +293,7 @@
 
 		classie.remove(this.previewEl, 'preview--open');
 		classie.remove(this.previewEl, 'preview--image-loaded');
-		
+
 		// callback
 		this.options.onCloseItem(this, gridItem);
 
@@ -317,8 +307,8 @@
 			z = gridImg.offsetWidth/this.originalImg.offsetWidth;
 
 		this.originalImg.style.WebkitTransform = 'translate3d(' + dx + 'px, ' + dy + 'px, 0) scale3d(' + z + ', ' + z + ', 1)';
-		this.originalImg.style.transform = 'translate3d(' + dx + 'px, ' + dy + 'px, 0) scale3d(' + z + ', ' + z + ', 1)';	
-		
+		this.originalImg.style.transform = 'translate3d(' + dx + 'px, ' + dy + 'px, 0) scale3d(' + z + ', ' + z + ', 1)';
+
 		// once that's done..
 		onEndTransition(this.originalImg, function() {
 			// clear description
