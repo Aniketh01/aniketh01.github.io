@@ -292,6 +292,12 @@ hr{
     height: 499px;
 }
 
+.ImageWrapper1 img{
+    padding:40px;
+    margin-left: 100px;
+    width: 500px;
+    height: 500px;
+}
 
 .BackgroundSoftGray{
     background: #f6f6f6;
@@ -1560,24 +1566,6 @@ h3.TextNexttoNumber {
     /*min-width:100%;*/
     width: 100%;
     height: auto;
-}
-
-
-.portfolioIntroDetails {
-    margin-top:10px;
-    border:1px solid #ddd;
-    padding:20px;
-}
-
-.portfolioIntroDetails li {
-    line-height:30px;
-}
-
-.portfolioIntroDetails li span {
-    display: inline-block;
-    width: 150px;
-    font-weight: 700;
-    color: #777;
 }
 
 .SinglePagePagination{

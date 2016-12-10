@@ -3,7 +3,7 @@
 
 <head>
 
-    <title>Fixing Broadcom wifi driver issues in ubuntu, debian kernels.</title>
+    <title>Introduction to Git and GitHub.</title>
     <meta charset="utf-8"/>
 
 
@@ -124,7 +124,7 @@
         <div class="row VContent">
 
             <div class="col-md-12 text-center">
-                <h2 class="WhiteText Glow"><font-size="20px">Fixing Broadcom wifi driver issues in ubuntu, debian kernels.</font></h2>
+                <h2 class="WhiteText Glow"><font-size="20px">Introduction to Git and GitHub.</font></h2>
                 <div class="line-separator-small"></div>
                 <h4 class="WhiteText">Techie</h4 >
             </div>
@@ -149,10 +149,10 @@
                     <!--item-->
                     <div class="BlogFullWidthWrapper ">
 
-                        <div class="ImageWrapper positionRelative">
+                        <div class="ImageWrapper1 positionRelative">
                             <a href="pages-blog-single-page.html">
 
-                                <img alt="thumbnail" class="galleryImage" src="../img/Post images/techie/tutorials/bcl3 first.jpg">
+                                <img alt="thumbnail" class="galleryImage" src="../img/Post images/techie/tutorials/git first.jpg">
                             </a>
                         </div>
                         <!-- caption -->
@@ -160,41 +160,65 @@
                         <br>
                         <div class="BlogPostInfoWrapper">
 
-                            <h3>FIX: Broadcom wifi driver issues.</h3>
+                            <h3>Intro: add, commit, push.</h3>
 
-                            <p class="text-justify">Today I am going to show you guys how to fix the wifi driver issue which most of the new laptops
-                               today which installs any new distro of ubuntu or Debian. Here I am going to show how to fix the error faced when
-                               the network card is of Broadcom. This error is faced by every laptop which has new wifi-card with Linux installed irrespective of wifi card.
-                               Ie, even laptops with Realtek wifi-driver face this issue . But take care, fixing it is done in a different manner. If needed I will post that in future.</p>
-                               <p>Before getting started, let me tell you guys that fixing the error in Broadcom driver is really easy compared
-                                 to Realtek and intel wifi cards. </p>
-                                 <p>So let’s start.</p>
-                                 <p>#1 : First of all, get your system up-to-date.</p>
-                                 <code>$ sudo apt-get update</code>
+                            <p class="text-justify">Today I am going to explain how to push files and folders through the terminal to git.
+                               It's pretty simple when you get a hang of it. So let's start. </p>
+                                 <p>I will start with what is Git and Github.</p>
+                                 <strong>what is GIT ?</strong>
+                                 <br><br>
+                                 <b>Git</b> is a version control system that is used for software development and other version control tasks.
+                                 As a distributed revision control system it is aimed at speed,data integrity<sup>,</sup> and support for distributed,
+                                 non-linear workflows.
+                                 <br><br>
+                                 <strong>What is GITHUB</strong> ?<br><br>
+                                 <b>GitHub</b> is a web-based Git repository hosting service.
+                                 It offers all of the distributed version control and source code management (SCM) functionality of Git as well as adding its own features.
+
+                                 <p>Let's get started.</p>
+
+                                 <strong>Step 1</strong>: Firstly we need to setup Git on our machine.
                                  <br>
-                                 <p>#2: Next, what we are going to do is that we are going remove the installed driver at first and then move on.</p>
-                                 <code>$ sudo apt-get purge bcmwl-kernel-source</code>
+                                 <p>In ubuntu:</p>
+                                 <code>Sudo apt-get install git</code>
+                                 <br><br>
+                                 <strong>Step 2</strong>: Second we need to create a GitHub account.
                                  <br>
+                                 <p>Register into <a href="http://www.github.com"><u>GitHub</u></a> for free.</p>
                                  <br>
-                                 <img alt="thumbnail" class="galleryImage" src="../img/Post images/techie/tutorials/purging2b.png">
+                                 <strong>Step</strong> 3 : Create a new repository
                                  <br>
-                                 <br>
-                                 <p>#3: So as we have removed the driver now we are going to re-install the driver.</p>
-                                 <code>$ sudo apt-get install linux-generic bcmwl-kernel-source</code>
-                                 <br>
-                                 <br>
-                                 <img alt="thumbnail" class="galleryImage" src="../img/Post images/techie/tutorials/reinstalling2bbroadcom.png">
-                                 <br>
-                                 <p>#4: Done. reboot your system now.</p>
-                                 <code>$ sudo reboot</code>
-                                 <br>
-                                <p> Hope this will work for you guys. If not comment below.</p>
-                                <p>Cheers.</p>
-                                <br>
-                                <p>Note: If you don't know which wifi card you have, then do this in the terminal(Ctrl+Alt+T)</p>
-                                <code>$ lspci</code>
-                                <p>This will give your network controller name.</p>
-                                <img alt="thumbnail" class="galleryImage" src="../img/Post images/techie/tutorials/screenshot2bfrom2b2016-09-232b15253a09253a07.png">
+                                 <p>Go to Your repositories at the right side of the window and click on the new repository.
+                                   Give the name of the repository what you want and make the repository public. Then click on Create repository.</p>
+                                   <br>
+                                   <strong>Step</strong> 4: Setting up for pushing files to Github.
+                                   <br>
+                                   <p>Copy the https link because we are going to push files and folders via https link.
+                                     You can follow the inbuilt tutorial on GitHub for pushing or follow this blog.</p>
+                                     <ol>
+                                       <li>Open terminal (<strong>ctrl+alt+T</strong>).</li><br>
+                                    	<li>Go to your directory using 'cd' command in terminal and follow the next steps as follows.</li><br>
+                                    	<li>Type in <strong>git init</strong> : Create an empty Git repository or reinitialize an existing one.<br>
+                                        This command creates an empty Git repository - basically a <tt>.git</tt> directory with subdirectories for
+                                        <tt>objects</tt> and template files. An initial <tt>HEAD</tt> file that references the HEAD of
+                                        the master branch is also created.</li><br>
+                                    	<li><strong>git add filename.extension or folder name</strong> : This command updates the index using the current content
+                                        found in the working tree, to prepare the content staged for the next commit. It typically adds the current content
+                                        of existing paths as a whole, but with some options, it can also be used to add content to only part of the changes
+                                         made to the working tree files applied, or remove paths that do not exist in the working tree anymore.
+                                       (Note that if you just want to push everything to your repo, then just do <strong>git add --all</strong>)</li><br>
+                                    	<li><strong>git commit -m "message you want"</strong> : This shows the message on the file you had pushed.</li><br>
+                                    	<li><strong>git remote add origin <link of repository copied from https> </strong> : This command links the repository in
+                                          GitHub with our files in our system.</li><br>
+                                    	<li><strong>git push -u origin master</strong> : This command at last pushes the file or folder to Github.</li><br>
+                                    </ol>
+                                    Note: If you want to see the status of what all  have happened to your files in GitHub repository you can use the command '<strong>git status</strong>'.
+
+                                    Hence your files or folders got pushed to Github.
+
+
+
+
 
 
                         </div>
@@ -209,7 +233,7 @@
                     <h5>And I quote</h5>
 
                     <div class="line-separator-small"></div>
-                    <p>Sharing is good, and with digital technology, sharing is easy.</p>
+                    <p>In case of fire.<br><center> git add <br> git commit <br> git push</center></p>
                 </div>
 
 
@@ -219,14 +243,18 @@
                     <div class="line-separator-small"></div>
                     <a href="#"><span class="label label-default">Tutuorial</span></a>
                     <a href="#"><span class="label label-default">Command line</span></a>
-                    <a href="#"><span class="label label-default">Drivers</span></a>
+                    <a href="#"><span class="label label-default">Git</span></a>
                     <a href="#"><span class="label label-default">Ubuntu</span></a>
                     <a href="#"><span class="label label-default">Debian</span></a>
-                    <a href="#"><span class="label label-default">Broadcom</span></a>
-                    <a href="#"><span class="label label-default">sudo</span></a>
+                    <a href="#"><span class="label label-default">github</span></a>
+                    <a href="#"><span class="label label-default">push</span></a>
                     <a href="#"><span class="label label-default">FOSS</span></a>
-                    <a href="#"><span class="label label-default">wireless</span></a>
-                    <a href="#"><span class="label label-default">kernels</span></a>
+                    <a href="#"><span class="label label-default">commit</span></a>
+                    <a href="#"><span class="label label-default">add</span></a>
+                    <a href="#"><span class="label label-default">pull</span></a>
+                    <a href="#"><span class="label label-default">git clone</span></a>
+                    <a href="#"><span class="label label-default">add --all</span></a>
+
 
 
 
