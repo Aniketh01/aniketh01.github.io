@@ -122,7 +122,7 @@ body {
 }
 
 .PaddingVertical100{
-    padding-top:100px;
+    padding-top: 10px;
     padding-bottom:100px;
 }
 
@@ -4953,4 +4953,19 @@ a.ServiceTab:focus {
   color: #9C9795;
   text-decoration: none;
   text-align: right;
+}
+
+#bcl3 {
+  height: 380px;
+  width: 343px;
+  margin-bottom: 2.333%;
+
+}
+
+#introgit {
+  height: 380px;
+  width: 343px;
+  margin-bottom: 2.333%;
+  left: 5%;
+
 }
