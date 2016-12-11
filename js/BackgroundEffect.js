@@ -203,7 +203,7 @@ var _gsScope="undefined"!=typeof module&&module.exports&&"undefined"!=typeof glo
             if(!_this.active) return;
             ctx.beginPath();
             ctx.arc(_this.pos.x, _this.pos.y, _this.radius, 0, 2 * Math.PI, false);
-            ctx.fillStyle = 'rgba(92,219,231,'+ _this.active+')';
+            ctx.fillStyle = 'rgba(136, 88, 239,'+ _this.active+')';
             ctx.fill();
         };
     }
