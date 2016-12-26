@@ -731,7 +731,7 @@ p {
     font-size: 14px;
     color: #4c4c4c;
     line-height: 26px;
-    font-family: 'Raleway';
+    font-family: 'Raleway', sans-serif;
 }
 
 p.bold, .bold{
