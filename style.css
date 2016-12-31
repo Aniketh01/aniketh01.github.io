@@ -4967,3 +4967,29 @@ a.ServiceTab:focus {
   left: 5%;
 
 }
+
+.RAHA {
+  width: 350px;
+  height: 280px;
+  float: left;
+  border-style: solid;
+}
+
+.rahaflyer{
+    position: absolute;
+    top: 225px;
+    right: 20px;
+    background: #a7a7a7;
+    padding:10px 10px;
+    -webkit-transition: all .5s ease .25s;
+    transition: all .5s ease .25s;
+      opacity: 0.8;
+}
+.rahaflyer:hover {
+  position: absolute;
+  top: 230px;
+  right: 30px;
+  opacity: 1;
+  -webkit-transition: all .5s ease .25s;
+  transition: all .5s ease .25s;
+}
