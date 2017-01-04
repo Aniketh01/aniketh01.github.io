@@ -1422,6 +1422,44 @@ h3.TextNexttoNumber {
     padding-top:30px;
 }
 
+
+
+.gallery {
+    max-width: 100%;
+}
+
+.gallery-inner .caption{
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    -moz-transition-duration: 0.5s;
+    -o-transition-duration: 0.5s;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    background: rgba(0,0,0,0.8);
+}
+
+
+
+.gallery-inner:hover .caption,
+.gallery-inner.hover .caption{
+    opacity: 1;
+}
+
+
+
+.gallery {
+    background: #4c4c4c;
+    min-height:500px;
+}
+
+.gallerySmall{
+    background: #f6f6f6;
+}
+
+
 .CaptionWrapper{
     padding:30px;
     padding-left:60px;
@@ -1449,6 +1487,17 @@ h3.TextNexttoNumber {
     padding-top:20px;
     padding-right:20px;
 }
+
+/* ---- isotope ---- */
+/* clear fix */
+.gallery:after {
+    content: '';
+    display: block;
+    clear: both;
+
+}
+
+
 
 .CaptionWrapper h4{
     position:relative;
@@ -1478,8 +1527,43 @@ h3.TextNexttoNumber {
 
 }
 
+.gallery-inner:hover h4:after{
+    opacity: 1;
+    width: 100% !important;
+}
+
+
+
+
+.gallery .gallery-inner {
+    float: left;
+    height: auto;
+    background: #4c4c4c;
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin:0;
+}
+
+
+.gallery-inner, .grid-sizer{
+    width:33.33%;
+}
+
+.grid-sizer-2col-gutter, .gallery-inner-2col-gutter{
+    width:40%;
+    margin-bottom:10% !important;
+}
+
 .gutter-sizer-2col{
     width:10%;
+}
+
+
+.galleryImage{
+    /*min-width:100%;*/
+    width: 100%;
+    height: auto;
 }
 
 .SinglePagePagination{
@@ -2669,6 +2753,14 @@ h2.AnimatedHeadline b i em{
 }
 
 
+/*------------------------------------------------------------------
+[20. Blog Section]
+*/
+
+.BlogSection  .blog-gallery{
+    background:white;
+}
+
 .BlogSection .btn-black{
     margin:10px auto;
     margin-top:30px;
@@ -2682,6 +2774,31 @@ h2.AnimatedHeadline b i em{
 
 .BlogSection .btn-black:before{
     z-index: -1;
+}
+
+.BlogSection .blog-gallery .ImageWrapper img{
+    padding:0;
+}
+
+.BlogSection .gallery .blog-inner {
+    float: left;
+    height: auto;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.BlogSection .blog-gallery .videoWrapper{
+    padding-top:0;
+}
+.BlogSection .gallery .item-3col-gutter,
+.BlogSection .gallery .grid-sizer-3col-gutter{
+    width: 30%;/* change here the column width */
+}
+
+.BlogSection .gallery .item-3col-gutter{
+    margin-bottom:3.33333%;
+    margin-left:3.33333%;
 }
 
 .BlogSection .gutter-sizer-3col{
@@ -3155,8 +3272,17 @@ h2.AnimatedHeadline b i em{
     font-size:10px;
 }
 
+.EcommercePart .gallery .item-2col-gutter,
+.EcommercePart .gallery .grid-sizer-2col-gutter{
+    width: 45%; /* change here the column width */
+}
+
 .EcommercePart .gutter-sizer-2col{
     width: 5%;
+}
+
+.EcommercePart .gallery{
+    background: transparent;
 }
 
 .EcommercePart .ImageWrapper img {
@@ -3389,6 +3515,9 @@ h2.AnimatedHeadline b i em{
     white-space: nowrap;
 }
 
+.MoreImageEcommerceGallery img{
+    padding:20px;
+}
 
 .EcommerceReviewComment img{
     width:130px;
@@ -4369,6 +4498,19 @@ a.ServiceTab:focus {
     font-size:140px;
 }
 
+
+.gallery-inner-2col, .grid-sizer-2col{
+    width:50%;
+}
+
+
+.gallerySmall .gallery-inner-2col .CaptionWrapper{
+    padding:10px;
+    padding-left:20px;
+
+}
+
+
 #clients2 img{
     padding: 20px;
     width:100%;
@@ -4457,6 +4599,14 @@ a.ServiceTab:focus {
 
 .js .grid--loaded::after {
     opacity: 0;
+}
+
+.gallery-inner-style2 {
+    width: 33.33%;
+}
+
+.gallery-inner-style2--current {
+    opacity: 0 !important;
 }
 
 .Portfolio2ItemWrap {
