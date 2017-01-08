@@ -4996,15 +4996,6 @@ a.ServiceTab:focus {
 
 /* Below is the code block of table in bugs list.*/
 
-
-h1{
-  font-size: 30px;
-  color: #fff;
-  text-transform: uppercase;
-  font-weight: 300;
-  text-align: center;
-  margin-bottom: 15px;
-}
 table{
   width:100%;
   table-layout: fixed;
