@@ -5041,8 +5041,8 @@ td a {
 
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
 .tablebody{
-  background: -webkit-linear-gradient(left, #336b87, #f98866);
-  background: linear-gradient(to right, #336b87, #f98866);
+  background: -webkit-linear-gradient(left, #659, #f98);
+  background: linear-gradient(to right, #659, #f98);
   font-family: 'Roboto', sans-serif;
 
 }
