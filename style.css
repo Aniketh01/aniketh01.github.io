@@ -2809,9 +2809,12 @@ h2.AnimatedHeadline b i em{
 
 .BlogSection .BlogPostInfoWrapper{
     padding:20px;
-    background:#f5f5f5
+    background:#f5f5f5;
 }
 
+.BlogSection .BlogPostInfoWrapper p {
+    color: #000;
+}
 
 .BlogSection .BlogPostInfoWrapperHover{
     position:absolute;
