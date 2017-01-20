@@ -2805,15 +2805,9 @@ h2.AnimatedHeadline b i em{
     width:3.33333%;
 }
 
-
-
 .BlogSection .BlogPostInfoWrapper{
     padding:20px;
     background:#f5f5f5;
-}
-
-.BlogSection .BlogPostInfoWrapper p {
-    color: #000;
 }
 
 .BlogSection .BlogPostInfoWrapperHover{
@@ -4997,7 +4991,11 @@ a.ServiceTab:focus {
   transition: all .5s ease .25s;
 }
 
+
+
 /* Below is the code block of table in bugs list.*/
+
+
 
 table{
   width:100%;
