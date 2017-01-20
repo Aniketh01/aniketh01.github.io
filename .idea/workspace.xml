@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6f8c4649-4d24-4dfb-86f7-916a00b87c6b" name="Default" comment="" />
+    <list default="true" id="6f8c4649-4d24-4dfb-86f7-916a00b87c6b" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Blog-single pages/ddcommand.html" afterPath="$PROJECT_DIR$/Blog-single pages/ddcommand.html" />
+    </list>
     <ignored path="anikethfoss.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -26,8 +28,8 @@
       <file leaf-file-name="ddcommand.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Blog-single pages/ddcommand.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="430">
-              <caret line="146" column="117" selection-start-line="146" selection-start-column="117" selection-end-line="146" selection-end-column="117" />
+            <state relative-caret-position="-989">
+              <caret line="210" column="100" selection-start-line="210" selection-start-column="100" selection-end-line="210" selection-end-column="100" />
               <folding />
             </state>
           </provider>
@@ -167,12 +169,12 @@
       <updated>1484839683282</updated>
       <workItem from="1484839686018" duration="1098000" />
       <workItem from="1484854200895" duration="80000" />
-      <workItem from="1484926295531" duration="4433000" />
+      <workItem from="1484926295531" duration="4676000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5611000" />
+    <option name="totallyTimeSpent" value="5854000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1044" extended-state="6" />
@@ -246,8 +248,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Blog-single pages/ddcommand.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="146" column="117" selection-start-line="146" selection-start-column="117" selection-end-line="146" selection-end-column="117" />
+        <state relative-caret-position="-989">
+          <caret line="210" column="100" selection-start-line="210" selection-start-column="100" selection-end-line="210" selection-end-column="100" />
           <folding />
         </state>
       </provider>
