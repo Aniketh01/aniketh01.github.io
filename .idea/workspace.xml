@@ -28,8 +28,8 @@
       <file leaf-file-name="ddcommand.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Blog-single pages/ddcommand.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="223" column="125" selection-start-line="223" selection-start-column="125" selection-end-line="223" selection-end-column="125" />
+            <state relative-caret-position="380">
+              <caret line="244" column="0" selection-start-line="244" selection-start-column="0" selection-end-line="244" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -170,12 +170,12 @@
       <workItem from="1484839686018" duration="1098000" />
       <workItem from="1484854200895" duration="80000" />
       <workItem from="1484926295531" duration="5275000" />
-      <workItem from="1484998875703" duration="936000" />
+      <workItem from="1484998875703" duration="1477000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7389000" />
+    <option name="totallyTimeSpent" value="7930000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1044" extended-state="6" />
@@ -265,8 +265,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Blog-single pages/ddcommand.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="223" column="125" selection-start-line="223" selection-start-column="125" selection-end-line="223" selection-end-column="125" />
+        <state relative-caret-position="380">
+          <caret line="244" column="0" selection-start-line="244" selection-start-column="0" selection-end-line="244" selection-end-column="0" />
           <folding />
         </state>
       </provider>
