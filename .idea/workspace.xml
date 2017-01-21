@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6f8c4649-4d24-4dfb-86f7-916a00b87c6b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Blog-single pages/ddcommand.html" afterPath="$PROJECT_DIR$/Blog-single pages/ddcommand.html" />
     </list>
     <ignored path="anikethfoss.github.io.iws" />
@@ -29,8 +28,8 @@
       <file leaf-file-name="ddcommand.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Blog-single pages/ddcommand.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="494">
-              <caret line="242" column="71" selection-start-line="242" selection-start-column="71" selection-end-line="242" selection-end-column="71" />
+            <state relative-caret-position="414">
+              <caret line="223" column="125" selection-start-line="223" selection-start-column="125" selection-end-line="223" selection-end-column="125" />
               <folding />
             </state>
           </provider>
@@ -171,12 +170,12 @@
       <workItem from="1484839686018" duration="1098000" />
       <workItem from="1484854200895" duration="80000" />
       <workItem from="1484926295531" duration="5275000" />
-      <workItem from="1484998875703" duration="82000" />
+      <workItem from="1484998875703" duration="936000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6535000" />
+    <option name="totallyTimeSpent" value="7389000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1044" extended-state="6" />
@@ -266,8 +265,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Blog-single pages/ddcommand.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="242" column="71" selection-start-line="242" selection-start-column="71" selection-end-line="242" selection-end-column="71" />
+        <state relative-caret-position="414">
+          <caret line="223" column="125" selection-start-line="223" selection-start-column="125" selection-end-line="223" selection-end-column="125" />
           <folding />
         </state>
       </provider>
