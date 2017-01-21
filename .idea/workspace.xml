@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6f8c4649-4d24-4dfb-86f7-916a00b87c6b" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Blog-single pages/ddcommand.html" afterPath="$PROJECT_DIR$/Blog-single pages/ddcommand.html" />
     </list>
     <ignored path="anikethfoss.github.io.iws" />
@@ -28,8 +29,8 @@
       <file leaf-file-name="ddcommand.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Blog-single pages/ddcommand.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-989">
-              <caret line="210" column="100" selection-start-line="210" selection-start-column="100" selection-end-line="210" selection-end-column="100" />
+            <state relative-caret-position="494">
+              <caret line="242" column="71" selection-start-line="242" selection-start-column="71" selection-end-line="242" selection-end-column="71" />
               <folding />
             </state>
           </provider>
@@ -38,7 +39,7 @@
       <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="511">
+            <state relative-caret-position="74880">
               <caret line="4992" column="0" selection-start-line="4992" selection-start-column="0" selection-end-line="4992" selection-end-column="0" />
               <folding />
             </state>
@@ -109,7 +110,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -144,6 +144,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -169,12 +170,13 @@
       <updated>1484839683282</updated>
       <workItem from="1484839686018" duration="1098000" />
       <workItem from="1484854200895" duration="80000" />
-      <workItem from="1484926295531" duration="4676000" />
+      <workItem from="1484926295531" duration="5275000" />
+      <workItem from="1484998875703" duration="82000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5854000" />
+    <option name="totallyTimeSpent" value="6535000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1044" extended-state="6" />
@@ -222,6 +224,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="74880">
+          <caret line="4992" column="0" selection-start-line="4992" selection-start-column="0" selection-end-line="4992" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Blog-single pages/ddcommand.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Blog-single pages/ddcommand.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2175">
@@ -240,7 +258,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="511">
+        <state relative-caret-position="74880">
           <caret line="4992" column="0" selection-start-line="4992" selection-start-column="0" selection-end-line="4992" selection-end-column="0" />
           <folding />
         </state>
@@ -248,8 +266,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Blog-single pages/ddcommand.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-989">
-          <caret line="210" column="100" selection-start-line="210" selection-start-column="100" selection-end-line="210" selection-end-column="100" />
+        <state relative-caret-position="494">
+          <caret line="242" column="71" selection-start-line="242" selection-start-column="71" selection-end-line="242" selection-end-column="71" />
           <folding />
         </state>
       </provider>
