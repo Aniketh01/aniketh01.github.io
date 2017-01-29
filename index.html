@@ -705,7 +705,7 @@ I'm Aniketh Girish. Welcomes you to my Blog. I will be writing all sorts of thin
                             <textarea name="comments" id="comments" placeholder="Enter Your Message" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;"></textarea>
                         </label>
 
-                        <input type="submit" class="submit btn btn-default btn-black" id="submit" value="Submit">
+                        <input type="submit" class="submit btn btn-default btn-black" id="submit" value="Submit" onclick="popup()">
                     </fieldset>
 
                 </form>
@@ -725,6 +725,13 @@ I'm Aniketh Girish. Welcomes you to my Blog. I will be writing all sorts of thin
 
 <script type="text/javascript" src="js/scripts.min.js"></script>
 <script src="js/custom.js"></script>
+
+<script>
+    function popup() {
+        var frm = document.getElementsByName("contactform");
+        frm.reset();
+    }
+</script>
 
 <script>
 
