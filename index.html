@@ -735,6 +735,7 @@ I'm Aniketh Girish. Welcomes you to my Blog. I will be writing all sorts of thin
         var frm = document.getElementById("contactform");
         window.alert("Thanks for your feedback. Will have a peek soon. :)");
         frm.reset();
+        grecaptcha.reset();
     }
 </script>
 
@@ -742,7 +743,6 @@ I'm Aniketh Girish. Welcomes you to my Blog. I will be writing all sorts of thin
 
 function recaptchaCallback() {
     $('#submit').removeAttr('disabled');
-    grecaptcha.reset();
 };
 
 </script>
