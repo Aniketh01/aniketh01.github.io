@@ -741,7 +741,8 @@ I'm Aniketh Girish. Welcomes you to my Blog. I will be writing all sorts of thin
 <script>
 
 function recaptchaCallback() {
-    $('#submit').removeAttr('disabled').reset();
+    $('#submit').removeAttr('disabled');
+    grecaptcha.reset();
 };
 
 </script>
