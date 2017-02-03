@@ -688,7 +688,7 @@ I'm Aniketh Girish. Welcomes you to my Blog. I will be writing all sorts of thin
                 <h3 class="SimpleText">I love to hear about your Queries and help you through.<br><br></h3>
 
                 <div id="result"></div>
-                <form method="post" action="https://formspree.io/anikethgireesh@gmail.com" name="contactform" id="contactform">
+                <form method="POST" action="https://formspree.io/anikethgireesh@gmail.com" name="contactform" id="contactform">
 
                     <fieldset id="contact_form">
                         <label for="name">
@@ -741,7 +741,7 @@ I'm Aniketh Girish. Welcomes you to my Blog. I will be writing all sorts of thin
 <script>
 
 function recaptchaCallback() {
-    $('#submit').removeAttr('disabled');
+    $('#submit').removeAttr('disabled').reset();
 };
 
 </script>
