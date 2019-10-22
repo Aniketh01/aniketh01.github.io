@@ -2,15 +2,18 @@
   code: https://github.com/ukontainer/dockerd-darwin/tree/darwin-port/cmd/dockerd
   image: docker.jpg
   description: "Dockerd port for macOS. Dockerd is self-sufficient runtime for containers."
+  highlight: 1
 
 - title: Probe
   image: probe.jpg
   description: "A high performant lightweight userspace Network stack over Go exhibiting full kernel bypass."
+  highlight: 2
 
 - title: goRFC
   image: RFC.png
   description: "goRFC, an RFC prettifie written in Go."
-
+  highlight: 3
+  
 - title: amFOSS.in
   code: https://github.com/amfoss/fosswebsite
   image: amfoss.png

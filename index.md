@@ -9,7 +9,7 @@ class: home
 <div class="columns" markdown="1">
 
 <div class="intro" markdown="1">
-I'm a Final year bachelor student at [Amrita Vishwa Vidyapeetham](https://www.amrita.edu/) , working on Internet protocols, security and privacy. My research interests lie in the intersection of systems and networks in the broadest sense with a particular focus on QoE, security, privacy, measurement and deployment of Internet protocols.
+I'm a Final year bachelor student at [Amrita Vishwa Vidyapeetham](https://www.amrita.edu/), working on Internet protocols, security and privacy. My research interests lie in the intersection of systems and networks in the broadest sense with a particular focus on QoE, security, privacy, measurement and deployment of Internet protocols.
 
 I spend most of my time in [amFOSS](https://amfoss.in) advised by [Vipin P](https://www.linkedin.com/in/vipin-pavithran?originalSubdomain=in). amFOSS, a student-run community where like-minded people gather together to learn, solve and have tonnes of fun working on computer science problems and on exciting projects.
 </div>
@@ -31,9 +31,9 @@ I have been a Google Summer of Code student twice with KDE in 2017 and GNU Linux
 
 I have been lucky to collaborate with awesome researchers around the globe. [Tijay](https://taejoong.github.io), [Hajime](https://www.iij-ii.co.jp/members/tazaki.html) being the few of them. Thankyou for being the wonderful mentors :)
 
-More Details are in my [CV]({{ "/assets/Aniketh_CV.pdf" | relative_url }}). Detailed description of my interest could be found in [here]({{ "/assests/Cover letter.pdf" | relative_url }}).
+More Details are in my [CV]({{ "/assets/Aniketh_CV.pdf" | relative_url }}). Detailed description of my interest could be found in [here]({{ "/assets/Cover_letter.pdf" | relative_url }}).
 
-<!-- ## Featured Projects
+## Featured Projects
 
 <div class="featured-projects">
   {% assign sorted_projects = site.data.projects | sort: 'highlight' %}
@@ -46,7 +46,7 @@ More Details are in my [CV]({{ "/assets/Aniketh_CV.pdf" | relative_url }}). Deta
 <a href="{{ "/projects/" | relative_url }}" class="button">
   <i class="fas fa-chevron-circle-right"></i>
   Show More Projects
-</a> -->
+</a> 
 
 <!-- ## Featured Publications
 
