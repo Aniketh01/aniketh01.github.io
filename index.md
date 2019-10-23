@@ -13,7 +13,7 @@ class: home
 
 <div class="intro" markdown="1">
 
-<p style="color:red;">From January 2020 onwards, I'm actively looking for Research Associate/Assitant/Internship position to exploring the general areas of networking, measurements, internet protocols and it's security extensions. <b>Email me</b> if you find an overlap of interests!</p>
+<p style="color:red;"><i>From January 2020 onwards, I'm actively looking for Research Associate/Assitant/Internship position to exploring the general areas of networking, measurements, internet protocols and it's security extensions. <b>Email me</b> if you find an overlap of interests!</i></p>
 
 I'm a Final year bachelor student at [Amrita Vishwa Vidyapeetham](https://www.amrita.edu/), working on Internet protocols, security and privacy. My research interests lie in the intersection of systems and networks in the broadest sense with a particular focus on QoE, security, privacy, measurement and deployment of Internet protocols.
 
