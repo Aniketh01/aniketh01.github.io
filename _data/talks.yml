@@ -1,14 +1,3 @@
-- title: ”Object tracking using OpenCV and Qt”
-  location: conf.KDE.in ’17 at IIT Guwahati
-  city: Assam, India.
-  date: 2017-03
-
-- title: "Strengthen Code Review Culture: rm -rf ‘Toxic Behaviors"
-  slides: https://slides.com/anikethgireesh/deck-12#/
-  location: Akademy'18
-  city: Tu Wein, Austria
-  date: 2018-07
-
 - title: "DOH? DONUT! - The new internet according to RFC 8484"
   slides: https://slides.com/anikethgireesh/deck-10#/
   location: FOSSDEM'19
@@ -23,9 +12,20 @@
 
 - title: "Strengthen Code Review Culture: rm -rf ‘Toxic Behaviors"
   slides: https://slides.com/anikethgireesh/deck-12#/
+  location: Akademy'18
+  city: Tu Wein, Austria
+  date: 2018-07
+
+- title: "Strengthen Code Review Culture: rm -rf ‘Toxic Behaviors"
+  slides: https://slides.com/anikethgireesh/deck-12#/
   location: Akademy'19
   city: Università degli Studi di Milano-Bicocca, Milan, Italy
   date: 2019-08
+
+- title: ”Object tracking using OpenCV and Qt”
+  location: conf.KDE.in ’17 at IIT Guwahati
+  city: Assam, India.
+  date: 2017-03
 
 # - title: "Visualization for People + Systems"
 #   location: Microsoft Research
