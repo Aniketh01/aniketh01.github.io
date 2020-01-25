@@ -3,8 +3,9 @@
   <nav class="container">
     <a class="site-title" href="{{ absolute_url }}/">{{ site.title }}</a>
 
+	<a href="{{ '/interests/' | relative_url }}" {% if current[1] == 'interests' %}class="active"{% endif %}>Research</a>
     <a href="{{ '/projects/' | relative_url }}" {% if current[1] == 'projects' %}class="active"{% endif %}>Projects</a>
-    <!-- <a href="{{ '/publications/' | relative_url }}" {% if current[1] == 'publications' %}class="active"{% endif %}>Publications</a> -->
+	<!-- <a href="{{ '/publications/' | relative_url }}" {% if current[1] == 'publications' %}class="active"{% endif %}>Publications</a> -->
     <a href="{{ '/talks/' | relative_url }}" {% if current[1] == 'talks' %}class="active"{% endif %}>Talks</a>
     <a href="https://anikethfoss.wordpress.com" {% if current[1] == 'blog' %}class="active"{% endif %}>Blog</a>
     <a href="{{ "/assets/Aniketh_CV.pdf" | relative_url }}">CV</a>
