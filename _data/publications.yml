@@ -98,7 +98,7 @@
   short_doi: 10/cwrw
   pdf: https://www.biorxiv.org/content/early/2018/11/05/462788.full.pdf
   link: https://www.biorxiv.org/content/early/2018/11/05/462788
-  blog: http://ivory.idyll.org/blog/2018-spacegraphcats-paper.html
+  blog: https://ivory.idyll.org/blog/2018-spacegraphcats-paper.html
   tags:
     - Science
     - Genomics
@@ -165,7 +165,7 @@
     - VIS
     - InfoVis
   venue_location: Berlin, Germany
-  venue_url: http://ieeevis.org/year/2018/welcome
+  venue_url: https://ieeevis.org/year/2018/welcome
   doi: 10.1109/TVCG.2018.2865240
   short_doi: 10/cs68
   pdf: /papers/2018-Draco-InfoVis.pdf
@@ -220,7 +220,7 @@
   venue: SIAM Workshop on Network Science
   venue_tags:
     - SIAM NS
-  pdf: http://www.siam.org/meetings/ns17/ns17_abstracts.pdf
+  pdf: https://www.siam.org/meetings/ns17/ns17_abstracts.pdf
   tags:
     - Science
     - Genomics
@@ -231,7 +231,7 @@
   year: 2017
   authors:
     - Dominik Moritz
-  pdf: http://www.theoj.org/joss-papers/joss.00235/10.21105.joss.00235.pdf
+  pdf: https://www.theoj.org/joss-papers/joss.00235/10.21105.joss.00235.pdf
   doi: 10.21105/joss.00235
   short_doi: 10/b89p
   venue: The Journal of Open Source Software
@@ -256,7 +256,7 @@
     - SIGMOD
     - HILDA
   venue_location: Chicago, IL, USA
-  venue_url: http://www.hilda.io/2017
+  venue_url: https://www.hilda.io/2017
   pdf: /papers/2017-EDAonAQPSystems-HILDA.pdf
   slides: /talks/AQP_UX-HILDA-2017.pdf
   doi: 10.1145/3077257.3077258
@@ -277,7 +277,7 @@
     - CHI
     - Designing for Uncertainty
   venue_location: Denver, CO, USA
-  venue_url: http://visualization.ischool.uw.edu/hci_uncertainty/
+  venue_url: https://visualization.ischool.uw.edu/hci_uncertainty/
   pdf: /papers/2017-Pangloss-Uncertainty.pdf
   tweet: Tools need to better support analysts who work with approximate data.
   tags:
@@ -371,8 +371,8 @@
   venue_tags:
     - CIDR
   venue_location: Chaminade, CA, USA
-  venue_url: http://cidrdb.org/cidr2017/
-  pdf: http://cidrdb.org/cidr2017/papers/p37-wang-cidr17.pdf
+  venue_url: https://cidrdb.org/cidr2017/
+  pdf: https://cidrdb.org/cidr2017/papers/p37-wang-cidr17.pdf
   tweet: Myria is a distributed DB for data science.
   tags:
     - Big Data
@@ -392,9 +392,9 @@
   venue_tags:
     - VIS
     - InfoVis
-  venue_url: http://ieeevis.org/
+  venue_url: https://ieeevis.org/
   venue_location: Baltimore, MD, USA
-  pdf: http://idl.cs.washington.edu/files/2017-VegaLite-InfoVis.pdf
+  pdf: https://idl.cs.washington.edu/files/2017-VegaLite-InfoVis.pdf
   video: https://vimeo.com/177767802
   link: https://vega.github.io/vega-lite/
   doi: 10.1109/TVCG.2016.2599030
@@ -424,7 +424,7 @@
   venue_tags:
     - SIGMOD
   venue_location: San Francisco, CA, USA
-  venue_url: http://sigmod2016.org/
+  venue_url: https://sigmod2016.org/
   link: https://uwescience.github.io/sqlshare/
   pdf: https://uwescience.github.io/sqlshare/pdfs/sqlshare_shrainik.pdf
   doi: 10.1145/2882903.2882957
@@ -452,7 +452,7 @@
     - SIGMOD
     - HILDA
   venue_location: San Francisco, CA, USA
-  venue_url: http://www.hilda.io/2016
+  venue_url: https://www.hilda.io/2016
   doi: 10.1145/2939502.2939506
   short_doi: 10/cssd
   pdf: /papers/2016-Compassql-HILDA.pdf
@@ -490,7 +490,7 @@
     - DSIA
   venue_url: https://www.interactive-analysis.org/year/2015/
   venue_location: Chicago, IL, USA
-  pdf: http://www.interactive-analysis.org/papers/2015/moritz.pdf
+  pdf: https://www.interactive-analysis.org/papers/2015/moritz.pdf
   tweet: Interactive visualizations in client-server systems can have reduced latency.
   highlight: true
   tags:
@@ -513,7 +513,7 @@
   venue_tags:
     - VIS
     - InfoVis
-  venue_url: http://ieeevis.org/
+  venue_url: https://ieeevis.org/
   venue_location: Chicago, IL, USA
   link: https://github.com/vega/voyager
   pdf: https://idl.cs.washington.edu/files/2015-Voyager-InfoVis.pdf
@@ -544,7 +544,7 @@
   venue: EuroVis
   venue_tags:
     - EuroVis
-  venue_url: http://www.eurovis2015.it/
+  venue_url: https://www.eurovis2015.it/
   venue_location: Cagliari, Italy
   link: https://idl.cs.washington.edu/papers/perfopticon
   pdf: https://idl.cs.washington.edu/files/2015-Perfopticon-EuroVis.pdf
@@ -563,14 +563,14 @@
 - id: myria-demo
   title: Demonstration of the Myria Big Data Management Service
   year: 2014
-  description: Demo paper about the [Myria system](http://myria.cs.washington.edu/).
+  description: Demo paper about the [Myria system](https://myria.cs.washington.edu/).
   venue: SIGMOD
   venue_tags:
     - SIGMOD
-  venue_url: http://www.sigmod2014.org/
+  venue_url: https://www.sigmod2014.org/
   venue_location: Snowbird, UT, USA
-  link: http://myria.cs.washington.edu/
-  pdf: http://www.halper.in/pubs/halperin_myria_sigmod14_demo.pdf
+  link: https://myria.cs.washington.edu/
+  pdf: https://www.halper.in/pubs/halperin_myria_sigmod14_demo.pdf
   authors:
     - Daniel Halperin
     - Victor Teixeira de Almeida
@@ -604,7 +604,7 @@
   venue: International Conference on Information Visualization Theory and Applications (IVAPP)
   venue_tags:
     - IVAPP
-  venue_url: http://www.ivapp.visigrapp.org/
+  venue_url: https://www.ivapp.visigrapp.org/
   pdf: https://hpi.de/fileadmin/user_upload/fachgebiete/doellner/publications/2014/STMD2014/Visualization_of_Varying_Hierarchies_by_Stable_Layout_of_Voronoi_Treemaps.pdf
   link: https://hpi.de/de/computer-graphics-systems/publications/year/2014/102334/STMD2014.html
   tweet: Use Voronoi tesselation for stable treemaps.

@@ -72,14 +72,14 @@
 #   description: "I contribute to Vega, a declarative visualization grammar that introduces novel primitives for interactive visualization design."
 
 # - title: Voyager
-#   code: http://github.com/vega/voyager
-#   demo: http://vega.github.io/voyager
+#   code: https://github.com/vega/voyager
+#   demo: https://vega.github.io/voyager
 #   paper: /papers/2015-Voyager-InfoVis.pdf
 #   image: voyager.jpg
 #   description: "I co-created Voyager. The system accelerates exploratory data analysis by augmenting visual analysis tools with visualization recommendations."
 
 # - title: CompassQL
-#   code: http://github.com/vega/compassql
+#   code: https://github.com/vega/compassql
 #   paper: /papers/2016-CompassQL-HILDA.pdf
 #   image: compassql.jpg
 #   description: "Query language and engine that unifies visualization specifications and recommendations."
@@ -90,13 +90,13 @@
 #   description: "As a control condition for Voyager, I co-created Polestar, a Tableau-like data exploration tool."
 
 # - title: Vega-Editor
-#   code: http://github.com/vega/editor
-#   demo: http://vega.github.io/editor
+#   code: https://github.com/vega/editor
+#   demo: https://vega.github.io/editor
 #   image: editor.jpg
 #   description: "I maintain the Vega and Vega-Lite online editor."
 
 # - title: Vega Embed
-#   code: http://github.com/vega/vega-embed
+#   code: https://github.com/vega/vega-embed
 #   demo: https://beta.observablehq.com/@domoritz/hello-vega-embed
 #   image: embed.gif
 #   description: "I maintain Vega-Embed, a library to embed Vega and Vega-Lite visualizations on the web."
@@ -107,13 +107,13 @@
 #   description: "I maintain a tool to generate JSON schema from Typescript code. The tool uses the TypeScript compiler to parse into an AST and then generates an equivalent JSON schema. We use this tool to generate the [schema for Vega-Lite](https://github.com/vega/schema/)."
 
 # - title: Vega Tooltip
-#   code: http://github.com/vega/vega-tooltip
+#   code: https://github.com/vega/vega-tooltip
 #   demo: https://vega.github.io/vega-tooltip
 #   image: tooltip.jpg
 #   description: "I maintain the library to add tooltips to charts."
 
 # - title: Vega Themes
-#   code: http://github.com/vega/vega-themes
+#   code: https://github.com/vega/vega-themes
 #   image: themes.jpg
 #   description: "I maintain a collection of reusable themes for Vega and Vega-Lite."
 
@@ -134,10 +134,10 @@
 #   description: "I contribute to Altair, a popular Python wrapper for Vega-Lite."
 
 # - title: Myria
-#   url: http://myria.cs.washington.edu/
+#   url: https://myria.cs.washington.edu/
 #   code: https://github.com/uwescience/myria
 #   image: myria.png
-#   description: "I developed new operators and debugging tools for Myria, a distributed database systems from the [UW database group](http://db.cs.washington.edu/)."
+#   description: "I developed new operators and debugging tools for Myria, a distributed database systems from the [UW database group](https://db.cs.washington.edu/)."
 
 # - title: Perfopticon
 #   paper: /papers/2015-Perfopticon-EuroVis.pdf
@@ -161,11 +161,11 @@
 #   url: https://ckan.org/
 #   code: https://github.com/ckan/ckan
 #   image: ckan.jpg
-#   description: "CKAN is the world's leading open-source data portal platform used by [data.gov.uk](http://data.gov.uk), [data.gov](http://catalog.data.gov/) and [publicdata.eu](http://publicdata.eu/) among many others. I developed the new data store, a data ingestion service, and a preview extension API."
+#   description: "CKAN is the world's leading open-source data portal platform used by [data.gov.uk](https://data.gov.uk), [data.gov](https://catalog.data.gov/) and [publicdata.eu](https://publicdata.eu/) among many others. I developed the new data store, a data ingestion service, and a preview extension API."
 
 # - title: Text detection with NN
 #   code: https://github.com/domoritz/label_generator
-#   paper: http://www.theoj.org/joss-papers/joss.00235/10.21105.joss.00235.pdf
+#   paper: https://www.theoj.org/joss-papers/joss.00235/10.21105.joss.00235.pdf
 #   image: text-detection.png
 #   description: "For a class project, I extracted 500k labeled images of figures from roughly 1M papers. For each image I created a mask that shows where the text in the image is. I then used the images to train a neural network that would find text in images."
 
@@ -183,18 +183,18 @@
 # - title: LocateControl
 #   code: https://github.com/domoritz/leaflet-locatecontrol
 #   image: locate.jpg
-#   description: "A simple Leaflet map control to find your current location on a leaflet map. Very popular and used on [the OpenStreetMap home page](http://osm.org/)."
+#   description: "A simple Leaflet map control to find your current location on a leaflet map. Very popular and used on [the OpenStreetMap home page](https://osm.org/)."
 
 # - title: MaskCanvas
 #   code: https://github.com/domoritz/leaflet-maskcanvas
-#   demo: http://domoritz.github.io/vbb-coverage/
+#   demo: https://domoritz.github.io/vbb-coverage/
 #   image: vbb.jpg
 #   description: "Visualize coverage on a Leaflet map. The data is store in a quad-tree to make queries to the data super fast."
 
 # - title: Heatmap layer
-#   url: http://www.patrick-wied.at/static/heatmapjs/example-heatmap-leaflet.html
+#   url: https://www.patrick-wied.at/static/heatmapjs/example-heatmap-leaflet.html
 #   image: heatmap.jpg
-#   description: "For this project I combined the MaskCanvas layer and `heatmap.js` from my friend [Patrick](http://www.patrick-wied.at)."
+#   description: "For this project I combined the MaskCanvas layer and `heatmap.js` from my friend [Patrick](https://www.patrick-wied.at)."
 
 # - title: Space Clean Up
 #   code: https://github.com/matthias-springer/space-cleanup
@@ -205,7 +205,7 @@
 #   image: maplink.jpg
 #   paper: /papers/2013-MapLink.pdf
 #   video: https://www.youtube.com/watch?v=U9-zceFffSY
-#   description: "For [Patrick Baudisch's](http://www.patrickbaudisch.com/) [HCI class at HPI](https://hpi.de/baudisch/teaching.html), we had to implement an application that usually requires large screens on a iPod nano (enough for 4 buttons). We implemented a GIS application to geo-reference images by simply aligning points. We introduced the concept of an X-Ray layer to align points on small devices."
+#   description: "For [Patrick Baudisch's](https://www.patrickbaudisch.com/) [HCI class at HPI](https://hpi.de/baudisch/teaching.html), we had to implement an application that usually requires large screens on a iPod nano (enough for 4 buttons). We implemented a GIS application to geo-reference images by simply aligning points. We introduced the concept of an X-Ray layer to align points on small devices."
 
 # - title: Singing VHDL board
 #   image: s76d.jpg
@@ -216,7 +216,7 @@
 
 # - title: SoSat
 #   image: sosat.jpg
-#   description: "A SAT solver that uses different statistical optimization algorithms to solve SAT problems encoded in the DIMACS format. This solver is written in Python and uses [Numpy](http://www.numpy.org/) to speed up calculations. The two main algorithms in this solver are an *ant colony optimization algorithm* and a *genetic algorithm*. To support these algorithms, there are some pre-processing algorithms."
+#   description: "A SAT solver that uses different statistical optimization algorithms to solve SAT problems encoded in the DIMACS format. This solver is written in Python and uses [Numpy](https://www.numpy.org/) to speed up calculations. The two main algorithms in this solver are an *ant colony optimization algorithm* and a *genetic algorithm*. To support these algorithms, there are some pre-processing algorithms."
 #   code: https://github.com/domoritz/SoSAT
 #   paper: https://github.com/domoritz/SoSAT/raw/master/paper.pdf
 

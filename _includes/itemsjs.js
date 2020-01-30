@@ -5,7 +5,7 @@ module.exports = require('./src/index');
 
 },{"./src/index":5}],2:[function(require,module,exports){
 /**
- * lunr - http://lunrjs.com - A bit like Solr, but much smaller and not as bright - 1.0.0
+ * lunr - https://lunrjs.com - A bit like Solr, but much smaller and not as bright - 1.0.0
  * Copyright (C) 2017 Oliver Nightingale
  * @license MIT
  */
@@ -1433,12 +1433,12 @@ lunr.Store.prototype.toJSON = function () {
 /*!
  * lunr.stemmer
  * Copyright (C) 2017 Oliver Nightingale
- * Includes code from - http://tartarus.org/~martin/PorterStemmer/js.txt
+ * Includes code from - https://tartarus.org/~martin/PorterStemmer/js.txt
  */
 
 /**
  * lunr.stemmer is an english language stemmer, this is a JavaScript
- * implementation of the PorterStemmer taken from http://tartarus.org/~martin
+ * implementation of the PorterStemmer taken from https://tartarus.org/~martin
  *
  * @module
  * @param {String} str The string to stem
@@ -1839,7 +1839,7 @@ lunr.Pipeline.registerFunction(lunr.trimmer, 'trimmer')
 /*!
  * lunr.stemmer
  * Copyright (C) 2017 Oliver Nightingale
- * Includes code from - http://tartarus.org/~martin/PorterStemmer/js.txt
+ * Includes code from - https://tartarus.org/~martin/PorterStemmer/js.txt
  */
 
 /**
