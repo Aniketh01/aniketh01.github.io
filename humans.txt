@@ -1,7 +1,7 @@
 /* TEAM */
-	Author/Theme: Dominik Moritz
-	Twitter: @domoritz
-	From: Berlin, Germany
+	Author/Theme: Aniketh Girish
+	Twitter: @SYN_ACKd
+	From: Kerala, India
 
 /* SITE */
 	Language: English / German

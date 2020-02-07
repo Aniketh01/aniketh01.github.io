@@ -39,22 +39,8 @@ I have been lucky to collaborate with awesome researchers around the globe. [Tij
 
 More Details are in my [CV]({{ "/assets/Aniketh_CV.pdf" | relative_url }}). Detailed description of my interest could be found in [here]({{ "/assets/Cover_letter.pdf" | relative_url }}).
 
-## Featured Projects
 
-<div class="featured-projects">
-  {% assign sorted_projects = site.data.projects | sort: 'highlight' %}
-  {% for project in sorted_projects %}
-    {% if project.highlight %}
-      {% include project.html project=project %}
-    {% endif %}
-  {% endfor %}
-</div>
-<a href="{{ "/projects/" | relative_url }}" class="button">
-  <i class="fas fa-chevron-circle-right"></i>
-  Show More Projects
-</a> 
-
-<!-- ## Featured Publications
+## Featured Publications
 
 <div class="featured-publications">
   {% for pub in site.data.publications %}
@@ -72,7 +58,23 @@ More Details are in my [CV]({{ "/assets/Aniketh_CV.pdf" | relative_url }}). Deta
 <a href="{{ "/publications/" | relative_url }}" class="button">
   <i class="fas fa-chevron-circle-right"></i>
   Show All Publications
-</a> -->
+</a>
+
+## Featured Projects
+
+<div class="featured-projects">
+  {% assign sorted_projects = site.data.projects | sort: 'highlight' %}
+  {% for project in sorted_projects %}
+    {% if project.highlight %}
+      {% include project.html project=project %}
+    {% endif %}
+  {% endfor %}
+</div>
+<a href="{{ "/projects/" | relative_url }}" class="button">
+  <i class="fas fa-chevron-circle-right"></i>
+  Show More Projects
+</a> 
+
 
 <div class="news-travel" markdown="1">
 
