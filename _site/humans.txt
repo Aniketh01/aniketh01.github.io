@@ -1,6 +1,6 @@
 /* TEAM */
 	Author/Theme: Aniketh Girish
-	Twitter: @SYNACKd
+	Twitter: @SYN_ACKd
 	From: Kerala, India
 
 /* SITE */

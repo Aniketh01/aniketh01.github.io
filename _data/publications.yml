@@ -14,9 +14,10 @@
     - USENIX Security
   venue_location: Boston, United States, August
   venue_url: https://www.usenix.org/conference/usenixsecurity20
+  pdf: /papers/sec20fall-final327.pdf
+  link: https://dane-study.github.io/
   # doi: 10.1109/TVCG.2018.2865240
   # short_doi: 10/cs68
-  # pdf: /papers/2018-Draco-InfoVis.pdf
   highlight: true
   tags:
     - Analysis of network and security protocols
