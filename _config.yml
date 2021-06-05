@@ -2,9 +2,9 @@
 title: Aniketh Girish
 email: aniketh.girish@imdea.org
 description: > # this means to ignore newlines until "baseurl:"
-  Aniketh Girish: Final year bachelor student in Computer
-  Science & Engineering at the Amrita Vishwa Vidhyapeetham.
-  Interested in the Internet protocols, security, privacy, and measurement.
+  Aniketh Girish: First year PhD student at IMDEA Networks Institute and 
+  Universidad Carlos III de Madrid. Interested in the privacy and measurement of 
+  IoT and mobile infrastructure.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://www.anikethgirish.in" # the base hostname & protocol for your site
 production_url: "https://www.anikethgirish.in"
