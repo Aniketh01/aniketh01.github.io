@@ -15,7 +15,7 @@ class: home
 
 <!-- <p style="color:red;"><i>From January 2020 onwards, I'm actively looking for Research Associate/Assitant/Internship position to exploring the general areas of networking, measurements, internet protocols and it's security extensions. <b>Email me</b> if you find an overlap of interests!</i></p> -->
 
-I am a first year CS PhD student in [Internet Analytics group](http://people.networks.imdea.org/~narseo_vallina/research.html) at the IMDEA Networks Institute and University Carlos III de Madrid, Madrid, Spain advised by [Dr. Narseo Vallina-Rodriguez](http://www1.icsi.berkeley.edu/~narseo/). I emperically measure and analysis the privacy and security risks of Mobile and Networked systems with a focus on data use.
+I am a first year CS PhD student in [Internet Analytics group](http://people.networks.imdea.org/~narseo_vallina/research.html) at the IMDEA Networks Institute and University Carlos III de Madrid, Madrid, Spain advised by [Dr. Narseo Vallina-Rodriguez](http://www1.icsi.berkeley.edu/~narseo/). I emperically measure and analysis the privacy and security risks of IoT and Mobile eco-system with a focus on data use.
 
 Prior to joining IMDEA, I was a Remote Research Intern at Rochester Institute of Technology, USA collaborating with the awesome [Tijay](https://taejoong.github.io) and also a Research Associate Intern at the IIJ Innovation Institute (IIJ-II), collaborating with the amazing [Hajime](https://www.iij-ii.co.jp/members/tazaki.html). My work was focused on Email and DNS Security extensions, and Process-based Isolation with Linux Unikernels.
 
@@ -45,7 +45,7 @@ I graduated from [Amrita Vishwa Vidyapeetham](https://www.amrita.edu/) in 2020, 
 
 I was also an active member of [amFOSS](https://amfoss.in) club advised by [Vipin P](https://www.linkedin.com/in/vipin-pavithran?originalSubdomain=in). amFOSS is a student-run community where like-minded people gather together to learn, solve and have tonnes of fun working on computer science problems and on exciting projects.
 
-More Details are enclosed in my [CV]({{ "/assets/Aniketh_CV.pdf" | relative_url }}). Detailed description of my interest could be found in [here]({{ "/assets/Cover_letter.pdf" | relative_url }}).
+<!-- More Details are enclosed in my [CV]({{ "/assets/Aniketh_CV.pdf" | relative_url }}). Detailed description of my interest could be found in [here]({{ "/assets/Cover_letter.pdf" | relative_url }}). -->
 
 
 ## Featured Publications
