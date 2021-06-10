@@ -1,10 +1,10 @@
 /* TEAM */
 	Author/Theme: Aniketh Girish
-	Twitter: @SYN_ACKd
+	Twitter: @__aniketh
 	From: Kerala, India
 
 /* SITE */
-	Language: English / German
+	Language: English
 	Doctype: HTML5
 	IDE: Sublime Text, VIM, VSCode
 	Software: Jekyll

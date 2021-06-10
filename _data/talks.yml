@@ -1,3 +1,8 @@
+- title: "Email security with DANE: Empirical Analysis of DANE for SMTP in the wild"
+  location: BSides India
+  city: Delhi, India (Remote)
+  date: 2020-07
+
 - title: "DOH? DONUT! - The new internet according to RFC 8484"
   slides: https://slides.com/anikethgireesh/deck-10#/
   location: FOSSDEM'19
