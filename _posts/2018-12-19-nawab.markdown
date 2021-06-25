@@ -1,0 +1,28 @@
+---
+comments: true
+layout: post
+title: "NaWab: A network protocol content curator"
+date: "2018-12-19"
+slug: "nawab"
+author: Aniketh Girish
+project: 'Project'
+tags: 
+- OSS
+- Networking
+---
+
+Hey all,
+
+Finally, it's time! :) I have been struck with this idea of building a Twitter bot recently, which would be curating a list of all relevant contents regarding Networking/Internet protocols, network security and future internet architecture which would make my life easier. So, this post serves as my official release of the bot to the public and I would certainly wish if I could get some inputs to make it better as this bot is just a work in progress :)
+
+Well wait, how precisely would this help to make my life easier? Well, let us rewind a bit.
+
+Back-story short, I have been indulged into learning more about Network protocols and future internet architecture with an interest in its design and security aspect of it. Well, cutting myself off from most of the social media, I went directly through to twitter. Where I found that the number of contents, discussions, opportunities to learn regarding my area of interest is tremendously enormous. I used to scroll day and night through Twitter to get all those fascinating and exciting feeds about my area of interests. Right now, my timeline would be just filled with contents related to network protocols and the major discussions around it. But then, it started to become a bit overwhelming to keep a tab on all of those resources and I wished if I could just get most of those relevant contents at one place.
+
+So, here you go; The idea of Nawab was born. I have just devised a simple bot that would just retweet all the relevant posts or discussions on Twitter into the bots profile timeline. It certainly needs work on and with my other commitments lately, I am not pretty much sure to put my entire effort into this product; so it would be just perfect if I get more reviews and your views on the bot and improvements that I could add upon this one. :D
+
+<!-- **Twitter bot:** [https://twitter.com/nawab\_bot](https://twitter.com/nawab_bot) -->
+
+**Github:** [https://github.com/Team-SYNACKd/NaWaB](https://github.com/Team-SYNACKd/NaWaB)
+
+Cheers.

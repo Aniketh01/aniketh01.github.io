@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="application-name" content="Aniketh Girish">
+  <meta name="theme-color" content="#572c9f">
+  <link rel="shortcut icon" href="/favicon.ico"/>
+  <link rel="icon" type="image/png" href="/favicon.png" sizes="250x250" />
+
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Dockerd port for macOS - Part 1. | Aniketh Girish</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Dockerd port for macOS - Part 1." />
+<meta name="author" content="Aniketh Girish" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="TLDR; This is something that I proposed for the entire workflow of dockerd port for macOS." />
+<meta property="og:description" content="TLDR; This is something that I proposed for the entire workflow of dockerd port for macOS." />
+<link rel="canonical" href="http://localhost:4000/blog/2019/09/dockerd_port_part_1.html" />
+<meta property="og:url" content="http://localhost:4000/blog/2019/09/dockerd_port_part_1.html" />
+<meta property="og:site_name" content="Aniketh Girish" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-09-14T00:00:00+02:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@__aniketh" />
+<meta name="twitter:creator" content="@Aniketh Girish" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"Aniketh Girish"},"url":"http://localhost:4000/blog/2019/09/dockerd_port_part_1.html","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2019/09/dockerd_port_part_1.html"},"headline":"Dockerd port for macOS - Part 1.","dateModified":"2019-09-14T00:00:00+02:00","datePublished":"2019-09-14T00:00:00+02:00","description":"TLDR; This is something that I proposed for the entire workflow of dockerd port for macOS.","@type":"BlogPosting","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link rel="alternate" type="application/rss+xml" title="Aniketh Girish" href="http://localhost:4000/feed.xml">
+
+  <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500" rel="stylesheet">
+  <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+  <link href="/styles.css" rel="stylesheet">
+</head>
+
+  <body>
+    
+<header class="page-header">
+  <nav class="container">
+    <a class="site-title" href="/">Aniketh Girish</a>
+
+	<!-- <a href="/interests/" >Research</a> -->
+	<a href="/publications/">Publications</a>
+	<a href="/projects/">Projects</a>
+	<!-- <a href="/publications/" >Publications</a> -->
+    <a href="/talks/">Talks</a>
+    <a href="/blog/" class="active">Blog</a>
+    <!-- <a href="/assets/Aniketh_CV.pdf">CV</a> -->
+
+    <span class="external">
+      <a href="https://twitter.com/__aniketh"><i class="fab fa-twitter"></i> Twitter</a>
+      <a href="https://github.com/Aniketh01"><i class="fab fa-github"></i> GitHub</a>
+    </span>
+  </nav>
+</header>
+
+
+    <div class="page-content">
+      <section class="container post">
+  <header class="post-header">
+    <h1 class="post-title">Dockerd port for macOS - Part 1.</h1>
+    
+    <p class="post-meta">
+      Published on Sep 14, 2019
+       • Aniketh Girish
+      
+      </p>
+  </header>
+
+  <article class="post-content">
+    <p>TLDR; This is something that I proposed for the entire workflow of dockerd port for macOS.</p>
+
+<p>Hi all,</p>
+
+<p>I have graciously given up on my wish of regularly blogging my life or even my work :(. Hence another late blog. I had spent 2 months in Tokyo interning as a research associate in Internet Initiative Japan - Innovation Institute(IIJ-II) where I worked on Docker port to macOS - and hence such a post. As always, I will try to write another blog on my experience living in Tokyo for two months in another post - but let this post be complete technical.</p>
+
+<p>I’m splitting the contents of this post into two. This post will contain the background study on what exactly are we looking at the port of dockerd for macOS and why we actually need that? Next post will be all about the work I did and the results.</p>
+
+<p>Let’s start with understanding the background of docker and how docker works.</p>
+
+<p>Docker is composed of two main components, a command-line application for users and a daemon which manages containers. The daemon relies on two sub-components to perform its job, storage on the host file system for image and container data; and the LXC interface(runC) to abstract away the raw kernel calls needed to construct a Linux container.</p>
+
+<p>All these functionalities are tightly coupled with Linux kernel features and our main motive is to bring agility for the docker project to co-exist in multiple platforms.</p>
+
+<p>Core Kernel dependencies were:</p>
+
+<ul>
+  <li>Kernel namespaces (ipc, uts, mount, pid, network and user)</li>
+  <li>Apparmor and SELinux profiles</li>
+  <li>Seccomp policies</li>
+  <li>Chroots (using pivot_root)</li>
+  <li>Kernel capabilities</li>
+  <li>and CGroups (control groups)</li>
+</ul>
+
+<p>To port <strong>dockerd</strong> server side daemon of docker to macOS. macOS currently uses a hypervisor to run the dockerd daemon on linux kernel system. Our goal is to eliminate this middleware, let the dockerd daemon communicate directly with the darwin kernel instead of running the daemon inside a isolated hypervisor providing Linux kernel architecture.</p>
+
+<p>The current scenario for macOS to run docker in the host system is that, it availes a docker client which runs in the host system itself while the server side dockerd daemon runs in the Linux VM/hypervisor. Therefore, for the client to connect with the server dockerd daemon it has to tunnel through this Linux hypervisor.</p>
+
+<p>Our intention is to port dockerd daemon to run in macOS without an intermediate Linux hypervisor to let docker communicate with the dockerd server directly without an overhead of another stack running beneath. Which implies. We provide Darwin based support for docker to run dockerd independent of LKL based VM and henceforth, let the dockerd  after the port to be able to instantiate a Linux application.</p>
+
+<p>Docker engine exposes the rest API which can be used to control the daemon. The client, docker uses this API to give instructions to the daemon. The Docker client interfacing through dockerd CLI to connect with the dockerd daemon, listens for Docker API requests and this dockerd  tracks everything related to Docker, including containers, images, volumes, service definition, and secrets.</p>
+
+<p>Docker engine is responsible for running processes in isolated environments. For each process, it generates a new Linux container, allocates a new filesystem for it, allocates a network interface, sets an IP for it, sets NAT for it and then runs processes inside of it. It also manages such things as creating, removing images, fetching images from the registry of choice, creating, restarting, removing containers and many other things.</p>
+
+<p><img src="https://lh6.googleusercontent.com/pQM3InukQ-puwKegsZMQwgEsrroqs4oo-9mWkGslK1Wi8m60W8hv2O6E2R7S02cpFppD23veRAXTEC8xLLb7drOoLY-tN1860ugtxi3Xp1wNyV0T-rxihl2XGYRVA1vWuvrhbKoU" alt=""></p>
+
+<p>The above image illustrates the way how docker works on macOS. Our main goal is to eliminate the LinuxKit VM from this architecture. Docker daemon uses Linux kernel vastly to communicate with the host. We need to figure out where all Linux kernel modules, drivers are used and further port those to analogues darwin based code. Further, while we remove the LinuxVM kit, there will dependencies that are related to the hypervisor (virtualisation), networking and the filesystem part. We have to bring in all of that changes into the engine so that dockerd runs independent of Linux kernel.</p>
+
+<p>We will start of with few minor ports which can be easily found out by compilation and building the dockerd engine in macOS system. This would give enough time to help us understand a bit of code architecture as well as would let us plan ahead on where are major changes has to be brought.</p>
+
+<p>On Docker for Mac, clients can connect to the Docker Engine through a Unix socket: <code class="highlighter-rouge">unix:///var/run/docker.sock</code>. We have to debug and trace how this call goes and connect the dockerd daemon server and port most of the underlying code that the stack shows.</p>
+
+<h3 id="--virtualization">- <strong>Virtualization</strong>
+</h3>
+
+<p>As mentioned, currently this is how virtualization happens inside the docker for macOS:</p>
+
+<center><img src="https://i1.wp.com/www.docker.com/blog/wp-content/uploads/Blog.-Are-containers-..VM-Image-1-1024x435.png?ssl=1"></center>
+
+<h3 id="--networking">- <strong>Networking</strong>
+</h3>
+
+<center><img src="https://docs.docker.com/engine/tutorials/bridge2.png" width="700"></center>
+
+<p>Our aim at this point is an effective way to reconstruct container traffic into separate TCP/IP flows and translate them into native OSX socket. Currently, it uses a VPN kit to channel the traffic between the client and the server.</p>
+
+<p>We need to figure out a way to have DHCP, NTP as a standalone ethernet datagram as how docker for Linux illustrates brought into macOS as well by separating the needful module from the VPN kit.  Henceforth, This lets the container to run and create socket with it to expose the container to localhost.</p>
+
+<p>Next, There is no docker0 bridge on macOS Because of the way networking is implemented in Docker Desktop for Mac, you cannot see a docker0 interface on the host. That is, there is no docker0 interface on the host for macOS, we need to separate that from the hypervisor network management interface. This interface is actually within the virtual machine. We need to bring that out of the virtual system and integrate it directly to the engine.</p>
+
+<h3 id="--filesystem-sharing">- <strong>Filesystem sharing</strong>
+</h3>
+
+<center><img src="https://image.slidesharecdn.com/dockerinternals-mountainviewmeetup-150422173344-conversion-gate02/95/docker-internals-7-638.jpg?cb=1429724071"></center>
+
+<p>Here in the filesystem segment, we have to figure out ways to communicate with osxfs system without a intermediate Linux host client like FUSE that provides API calls to osxfs system.</p>
+
+<p><strong>Namespaces</strong></p>
+
+<p>Docker uses a technology called namespaces to provide the isolated workspace called the container. When you run a container, Docker creates a set of namespaces for that container.</p>
+
+<p>These namespaces provide a layer of isolation. Each aspect of a container runs in a separate namespace and its access is limited to that namespace.</p>
+
+<p>Docker Engine uses namespaces such as the following on Linux:</p>
+
+<ul>
+  <li>The pid namespace: Process isolation (PID: Process ID).</li>
+  <li>The net namespace: Managing network interfaces (NET: Networking).</li>
+  <li>The ipc namespace: Managing access to IPC resources (IPC: InterProcess Communication).</li>
+  <li>The mnt namespace: Managing filesystem mount points (MNT: Mount).</li>
+  <li>The uts namespace: Isolating kernel and version identifiers. (UTS: Unix Timesharing System).</li>
+</ul>
+
+<p><strong>Control groups</strong></p>
+
+<p>Docker Engine on Linux also relies on another technology called control groups (cgroups). A cgroup limits an application to a specific set of resources. Control groups allow Docker Engine to share available hardware resources to containers and optionally enforce limits and constraints. For example, you can limit the memory available to a specific container.</p>
+
+<p><strong>Union file systems</strong></p>
+
+<p>Union file systems, or UnionFS, are file systems that operate by creating layers, making them very lightweight and fast. Docker Engine uses UnionFS to provide the building blocks for containers. Docker Engine can use multiple UnionFS variants, including AUFS, btrfs, vfs, and DeviceMapper.</p>
+
+<p><strong>Container format</strong></p>
+
+<p>Docker Engine combines the namespaces, control groups, and UnionFS into a wrapper called a container format. The default container format is libcontainer.</p>
+
+<p>This is the background study that we need to do a complete port of dockerd. Note, these changes are not just limited to dockerd alone but can span across containerd, runU and much more.</p>
+
+<p>Due to the time constraints, I couldn’t explain each and everything on how docker works exactly, but you can find other blog posts on the same. This majorly is a proposal on how I think dockerd could be ported to macOS without a Linux VM enacting as middleware and hence directly communicate with the host and provide a general cross-platform docker implementation.</p>
+
+<p>This post contains the rest of my work and how I achieved a cross-platform docker implementation:</p>
+
+<p><a href="https://anikethgirish.wordpress.com/2019/09/14/dockerd-port-for-macos-part-2/">https://anikethgirish.wordpress.com/2019/09/14/dockerd-port-for-macos-part-2/</a></p>
+
+<p>Happy reading peeps!</p>
+
+<p>Cheers.</p>
+
+  </article>
+
+  <section class="post-sharing">
+    <a class="twitter" href="https://twitter.com/intent/tweet?text=Dockerd%20port%20for%20macOS%20-%20Part%201.&amp;url=http://localhost:4000/blog/2019/09/dockerd_port_part_1.html&amp;via=&amp;related=" title="Share this post on Twitter"><i class="fab fa-twitter"></i> Tweet</a>
+  </section>
+
+  <div class="blog-links">
+  
+    <div>
+      <i class="fas fa-md fa-chevron-left"></i>
+      <a href="/blog/2018/12/nawab.html" title="Previous Post: NaWab: A network protocol content curator">NaWab: A network protocol content curator</a>
+    </div>
+  
+  
+    <div>
+      <a href="/blog/2019/09/dockerd_port_part_2.html" title="Next Post: ">Dockerd port for macOS - Part 2.</a>
+      <i class="fas fa-md fa-chevron-right"></i>
+    </div>
+  
+  </div>
+</section>
+
+    </div>
+
+    <footer>
+  <div class="container">
+    <div class="footer-col">
+      Hello from India.<br>
+      <abbr title="Last build on 2021-06-26">June 2021</abbr>
+    </div>
+    <!-- <div class="footer-col">
+      <a href="https://github.com/domoritz/domoritz.github.io/edit/master/_posts/2019-09-14-dockerd-port-1.markdown">Edit this page</a>
+    </div> -->
+    <div class="footer-col site-desc">Aniketh Girish: First year PhD student at IMDEA Networks Institute and  Universidad Carlos III de Madrid. Interested in the privacy and measurement of  IoT and mobile infrastructure.
+ I'm <a href="https://twitter.com/__aniketh">@__aniketh</a> on Twitter.</div>
+  </div>
+</footer>
+
+
+    <script>
+  function trim(str) {
+    return str.replace(/^\s+|\s+$/g, '');
+  }
+  var headers = document.querySelectorAll("h2, h3, h4, h5, h6");
+  for (var i=0; i<headers.length; i++) {
+    var h = headers[i];
+    var name = h.getAttribute("id");
+    var title = h.innerHTML;
+    h.innerHTML = '<a href="#' + name + '" class="anchor"><i class="fas fa-hashtag"></i></a>' + trim(title);
+  }
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-150757069-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+  </body>
+</html>

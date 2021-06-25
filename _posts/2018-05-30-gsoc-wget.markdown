@@ -1,0 +1,55 @@
+---
+comments: true
+layout: post
+title: "[GSoC'18]-DNS over HTTPS"
+date: "2018-05-30"
+slug: "gsoc_wget_doh"
+author: Aniketh Girish
+project: 'GSoC'
+tags: 
+- GSoC
+- OSS
+- Wget2
+---
+
+Hello folks,
+
+The past few weeks have been challenging and exciting as well. I have never been involved in and engaged myself in something that has intrigued me this much. Could say that might be the interest brought in by computer networks or probably you could say the active and kind nature of my mentor [ander juaristi.](https://www.linkedin.com/in/ajuaristi/en)
+
+Even though the wget community is small, but the people in the community is really free to help and let us learn even the simplest things. The first few weeks were a part of community bonding and I used this time to learn much more about my project DNS resolution over HTTPS and regarding multiple protocol suites to understand the better working condition of each. Further, I went through the codebase of wget2 too as to get a better understanding of the API architecture they follow throughout so that I could also write my API and code accordingly. Even the codebase is smaller as compared to the projects I have worked over the past few years. I don't know probably this smaller codebase or the thought of me contributing could make a difference gives a feel of greater purpose with a satisfaction that I am actually learning something that would benefit me in the long term as well.
+
+During the community bonding period rather than spending time on just reading the codebase and skimming through it and understanding other aspects as well, I thought of getting my hands dirty as well. Also, this will help my mentor and my community to see that I am actually working on getting things done and there is an urge to get things done.
+
+I started working on a bug fix, which was a part of the statistical module that existed in Wget2, it was a simple fix. But then, few of the error that showed up because I lacked experience in coding with C and moreover, I lacked good quality coding habits as well, like managing memory, leaks that might happen and probably implementing a harder version of something rather than going to solve that in a simpler manner. Basically, I tend to reinvent the wheel rather using what exists.
+
+Good things which happened while the struggle is that, I learned how to use GDB, how to use Valgrind at least in a small scale and hope to understand it in a deeper level as well. There were two mistakes that I remember now, ie, I used char* to store const char* and also I used xfree() to free the memory allocated by strdup() in the print function rather than in the free_stats() function which was already available. While in the learning process I have created notes as a Guide for the usage of Valgrind.
+
+Almost near to the end of community bonding, I started to think and draw a sketch of how the resolver API should be like. At the beginning of this, my focus was diverted and my mind was totally on implementing a DNS library, again, reinventing the wheel. But then, Ander brought my focus back to the DNS-over-HTTPS resolver back again. He provided me with the skeleton of the API that we should be hacking around.
+
+Few of the stub functions inside the API is which will be exposed throughout wget2 is:
+
+
+``` c
+void wget_dns_init(wget_dns_t *, wget_tcp_t *);
+
+void wget_dns_deinit(wget_dns_t *);
+
+void  wget_dns_set_config_int(wget_dns_t, int key, int value);
+
+void wget_dns_set_config_string(wget_dns_t, int key, const char *value);
+
+int wget_dns_resolve(wget_dns_t, const char *host, uint16_t port, struct addrinfo **out_addr);
+```
+
+
+Further, I have added the option --dns-over-https flag option to enable doh and let user tell wget2 that this type of resolver is active and added option --doh-resolver=[]. Which takes a string, which should be an IP address or a hostname of the server that supports DNS-over-HTTPS.
+
+To get a basic understanding of how the DNS over HTTPS resolver actually works, I completed reading RFC's for DNS and DNS-over-HTTPS. Moreover, I read through a few articles and other materials to understand how an actual resolver works and what is the difference here with our implementation and what exactly should be our end product. Further, I have been looking for many API's available to produce the end product that we desire to make. 
+
+During the time, when I was reading the RFC's to understand how things work, I was also trying to understand how the query should be parsed to HTTP/2 through TCP and how it is currently implemented in wget to find the possible options I have.
+
+As a part of the project, we decided to move on with two different type of resolvers for wget2. The user has the freedom to choose the type of resolver that they want to use in order to get the IP and connect to the servers they wish for. The two revolvers are, as mentioned in the DOH(DNS-over-HTTPS) resolver and a simple system call resolver using getaddrinfo(). The second one being the default resolver for wget2. The getaddrinfo() resolver already existed for wget2 and my task here was to refactor it and bring everything under one roof. The second resolver functions are almost done and will be moving into the second part of the resolver as soon as I get a green signal from my mentor as well :D
+
+That's it for now, will get more of the updates as soon as possible and when I get few more interesting tweaks inside wget2 codebase as a part of my project :)
+
+Cya all, Cheers.

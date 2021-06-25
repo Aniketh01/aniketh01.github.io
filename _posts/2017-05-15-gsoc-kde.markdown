@@ -1,0 +1,27 @@
+---
+comments: true
+layout: post
+title: "Introduction for GSoC 2017 with KDE, Krita"
+date: "2017-05-15"
+slug: "gsoc_krita_kde"
+author: Aniketh Girish
+project: 'GSoC'
+tags: 
+- OSS
+- KDE
+- GSoC
+---
+
+I'm Aniketh Girish. I’m a first-year Computer Science and Engineering student pursuing my bachelor’s from Amrita University. I’m an active member of FOSS club in our university(FOSS@Amrita). I started contributing to KDE since September 2016. I was selected for Season of KDE(KDE-SoK) 2016-17 in which I worked on the project Kstars.I was invited as a speaker for KDE India Conference 2017 in IIT Guwahati, where I gave a talk on the topic “Object tracking using OpenCV and Qt”. I have also contributed to other projects of KDE like Konsole, KIO and much more.
+
+My project for GSoC’17 aims in integrating share.krita.org with our Krita application. I aim in accomplishing this project using the Open Collaboration Services called libattica. Moreover, I will be creating a user friendly GUI for it as well. Next part of the project is to make the GUI of resource manager much more appealing. The resource manager which exits is quite buggy and its not that user-friendly, hence it requires a lot of triaging. Hence, I will me making the resource manager’s GUI much more better and have the open collaboration service to share the bundles and things with share.krita.org available here as well and fix the issues which it has. So my second part of the project will comprise of the following. I will be mentored by [Timothée Giet](http://timotheegiet.com/blog/) and [Scott Petrovic](http://www.scottpetrovic.com/) for the project. And I will be working with the design team together to make the GUI part a total success.
+
+I will just add the mockup for the project here:
+
+<center><img src="https://anikethgirish.files.wordpress.com/2017/05/brush_resources_management.png"></center>
+
+<center><img src="https://anikethgirish.files.wordpress.com/2017/05/untitled-drawing-3.jpg"></center>
+
+Also you could read my full proposal [here](https://anikethgirish.files.wordpress.com/2017/05/kritaproposalgsoc17.pdf "KritaProposalGSoC17")
+
+I hope this will be a good feature for the designers and it would make thier life easier :). Looking forward for a great summer hacking on Krita and the project. All the best for my fellow GSoCer's too :)

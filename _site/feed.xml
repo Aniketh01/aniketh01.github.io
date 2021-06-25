@@ -1,2 +1,509 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-06-10T17:59:09+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Aniketh Girish</title><subtitle>Aniketh Girish: First year PhD student at IMDEA Networks Institute and  Universidad Carlos III de Madrid. Interested in the privacy and measurement of  IoT and mobile infrastructure.
-</subtitle></feed>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-06-26T00:03:02+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Aniketh Girish</title><subtitle>Aniketh Girish: First year PhD student at IMDEA Networks Institute and  Universidad Carlos III de Madrid. Interested in the privacy and measurement of  IoT and mobile infrastructure.
+</subtitle><entry><title type="html">Dockerd port for macOS - Part 1.</title><link href="http://localhost:4000/blog/2019/09/dockerd_port_part_1.html" rel="alternate" type="text/html" title="Dockerd port for macOS - Part 1." /><published>2019-09-14T00:00:00+02:00</published><updated>2019-09-14T00:00:00+02:00</updated><id>http://localhost:4000/blog/2019/09/dockerd_port_part_1</id><content type="html" xml:base="http://localhost:4000/blog/2019/09/dockerd_port_part_1.html">&lt;p&gt;TLDR; This is something that I proposed for the entire workflow of dockerd port for macOS.&lt;/p&gt;
+
+&lt;p&gt;Hi all,&lt;/p&gt;
+
+&lt;p&gt;I have graciously given up on my wish of regularly blogging my life or even my work :(. Hence another late blog. I had spent 2 months in Tokyo interning as a research associate in Internet Initiative Japan - Innovation Institute(IIJ-II) where I worked on Docker port to macOS - and hence such a post. As always, I will try to write another blog on my experience living in Tokyo for two months in another post - but let this post be complete technical.&lt;/p&gt;
+
+&lt;p&gt;I’m splitting the contents of this post into two. This post will contain the background study on what exactly are we looking at the port of dockerd for macOS and why we actually need that? Next post will be all about the work I did and the results.&lt;/p&gt;
+
+&lt;p&gt;Let’s start with understanding the background of docker and how docker works.&lt;/p&gt;
+
+&lt;p&gt;Docker is composed of two main components, a command-line application for users and a daemon which manages containers. The daemon relies on two sub-components to perform its job, storage on the host file system for image and container data; and the LXC interface(runC) to abstract away the raw kernel calls needed to construct a Linux container.&lt;/p&gt;
+
+&lt;p&gt;All these functionalities are tightly coupled with Linux kernel features and our main motive is to bring agility for the docker project to co-exist in multiple platforms.&lt;/p&gt;
+
+&lt;p&gt;Core Kernel dependencies were:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Kernel namespaces (ipc, uts, mount, pid, network and user)&lt;/li&gt;
+  &lt;li&gt;Apparmor and SELinux profiles&lt;/li&gt;
+  &lt;li&gt;Seccomp policies&lt;/li&gt;
+  &lt;li&gt;Chroots (using pivot_root)&lt;/li&gt;
+  &lt;li&gt;Kernel capabilities&lt;/li&gt;
+  &lt;li&gt;and CGroups (control groups)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To port &lt;strong&gt;dockerd&lt;/strong&gt; server side daemon of docker to macOS. macOS currently uses a hypervisor to run the dockerd daemon on linux kernel system. Our goal is to eliminate this middleware, let the dockerd daemon communicate directly with the darwin kernel instead of running the daemon inside a isolated hypervisor providing Linux kernel architecture.&lt;/p&gt;
+
+&lt;p&gt;The current scenario for macOS to run docker in the host system is that, it availes a docker client which runs in the host system itself while the server side dockerd daemon runs in the Linux VM/hypervisor. Therefore, for the client to connect with the server dockerd daemon it has to tunnel through this Linux hypervisor.&lt;/p&gt;
+
+&lt;p&gt;Our intention is to port dockerd daemon to run in macOS without an intermediate Linux hypervisor to let docker communicate with the dockerd server directly without an overhead of another stack running beneath. Which implies. We provide Darwin based support for docker to run dockerd independent of LKL based VM and henceforth, let the dockerd  after the port to be able to instantiate a Linux application.&lt;/p&gt;
+
+&lt;p&gt;Docker engine exposes the rest API which can be used to control the daemon. The client, docker uses this API to give instructions to the daemon. The Docker client interfacing through dockerd CLI to connect with the dockerd daemon, listens for Docker API requests and this dockerd  tracks everything related to Docker, including containers, images, volumes, service definition, and secrets.&lt;/p&gt;
+
+&lt;p&gt;Docker engine is responsible for running processes in isolated environments. For each process, it generates a new Linux container, allocates a new filesystem for it, allocates a network interface, sets an IP for it, sets NAT for it and then runs processes inside of it. It also manages such things as creating, removing images, fetching images from the registry of choice, creating, restarting, removing containers and many other things.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://lh6.googleusercontent.com/pQM3InukQ-puwKegsZMQwgEsrroqs4oo-9mWkGslK1Wi8m60W8hv2O6E2R7S02cpFppD23veRAXTEC8xLLb7drOoLY-tN1860ugtxi3Xp1wNyV0T-rxihl2XGYRVA1vWuvrhbKoU&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The above image illustrates the way how docker works on macOS. Our main goal is to eliminate the LinuxKit VM from this architecture. Docker daemon uses Linux kernel vastly to communicate with the host. We need to figure out where all Linux kernel modules, drivers are used and further port those to analogues darwin based code. Further, while we remove the LinuxVM kit, there will dependencies that are related to the hypervisor (virtualisation), networking and the filesystem part. We have to bring in all of that changes into the engine so that dockerd runs independent of Linux kernel.&lt;/p&gt;
+
+&lt;p&gt;We will start of with few minor ports which can be easily found out by compilation and building the dockerd engine in macOS system. This would give enough time to help us understand a bit of code architecture as well as would let us plan ahead on where are major changes has to be brought.&lt;/p&gt;
+
+&lt;p&gt;On Docker for Mac, clients can connect to the Docker Engine through a Unix socket: &lt;code class=&quot;highlighter-rouge&quot;&gt;unix:///var/run/docker.sock&lt;/code&gt;. We have to debug and trace how this call goes and connect the dockerd daemon server and port most of the underlying code that the stack shows.&lt;/p&gt;
+
+&lt;h3 id=&quot;--virtualization&quot;&gt;- &lt;strong&gt;Virtualization&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;As mentioned, currently this is how virtualization happens inside the docker for macOS:&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;https://i1.wp.com/www.docker.com/blog/wp-content/uploads/Blog.-Are-containers-..VM-Image-1-1024x435.png?ssl=1&quot; /&gt;&lt;/center&gt;
+
+&lt;h3 id=&quot;--networking&quot;&gt;- &lt;strong&gt;Networking&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;center&gt;&lt;img src=&quot;https://docs.docker.com/engine/tutorials/bridge2.png&quot; width=&quot;700&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;Our aim at this point is an effective way to reconstruct container traffic into separate TCP/IP flows and translate them into native OSX socket. Currently, it uses a VPN kit to channel the traffic between the client and the server.&lt;/p&gt;
+
+&lt;p&gt;We need to figure out a way to have DHCP, NTP as a standalone ethernet datagram as how docker for Linux illustrates brought into macOS as well by separating the needful module from the VPN kit.  Henceforth, This lets the container to run and create socket with it to expose the container to localhost.&lt;/p&gt;
+
+&lt;p&gt;Next, There is no docker0 bridge on macOS Because of the way networking is implemented in Docker Desktop for Mac, you cannot see a docker0 interface on the host. That is, there is no docker0 interface on the host for macOS, we need to separate that from the hypervisor network management interface. This interface is actually within the virtual machine. We need to bring that out of the virtual system and integrate it directly to the engine.&lt;/p&gt;
+
+&lt;h3 id=&quot;--filesystem-sharing&quot;&gt;- &lt;strong&gt;Filesystem sharing&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;center&gt;&lt;img src=&quot;https://image.slidesharecdn.com/dockerinternals-mountainviewmeetup-150422173344-conversion-gate02/95/docker-internals-7-638.jpg?cb=1429724071&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;Here in the filesystem segment, we have to figure out ways to communicate with osxfs system without a intermediate Linux host client like FUSE that provides API calls to osxfs system.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Namespaces&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Docker uses a technology called namespaces to provide the isolated workspace called the container. When you run a container, Docker creates a set of namespaces for that container.&lt;/p&gt;
+
+&lt;p&gt;These namespaces provide a layer of isolation. Each aspect of a container runs in a separate namespace and its access is limited to that namespace.&lt;/p&gt;
+
+&lt;p&gt;Docker Engine uses namespaces such as the following on Linux:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The pid namespace: Process isolation (PID: Process ID).&lt;/li&gt;
+  &lt;li&gt;The net namespace: Managing network interfaces (NET: Networking).&lt;/li&gt;
+  &lt;li&gt;The ipc namespace: Managing access to IPC resources (IPC: InterProcess Communication).&lt;/li&gt;
+  &lt;li&gt;The mnt namespace: Managing filesystem mount points (MNT: Mount).&lt;/li&gt;
+  &lt;li&gt;The uts namespace: Isolating kernel and version identifiers. (UTS: Unix Timesharing System).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Control groups&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Docker Engine on Linux also relies on another technology called control groups (cgroups). A cgroup limits an application to a specific set of resources. Control groups allow Docker Engine to share available hardware resources to containers and optionally enforce limits and constraints. For example, you can limit the memory available to a specific container.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Union file systems&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Union file systems, or UnionFS, are file systems that operate by creating layers, making them very lightweight and fast. Docker Engine uses UnionFS to provide the building blocks for containers. Docker Engine can use multiple UnionFS variants, including AUFS, btrfs, vfs, and DeviceMapper.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Container format&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Docker Engine combines the namespaces, control groups, and UnionFS into a wrapper called a container format. The default container format is libcontainer.&lt;/p&gt;
+
+&lt;p&gt;This is the background study that we need to do a complete port of dockerd. Note, these changes are not just limited to dockerd alone but can span across containerd, runU and much more.&lt;/p&gt;
+
+&lt;p&gt;Due to the time constraints, I couldn’t explain each and everything on how docker works exactly, but you can find other blog posts on the same. This majorly is a proposal on how I think dockerd could be ported to macOS without a Linux VM enacting as middleware and hence directly communicate with the host and provide a general cross-platform docker implementation.&lt;/p&gt;
+
+&lt;p&gt;This post contains the rest of my work and how I achieved a cross-platform docker implementation:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://anikethgirish.wordpress.com/2019/09/14/dockerd-port-for-macos-part-2/&quot;&gt;https://anikethgirish.wordpress.com/2019/09/14/dockerd-port-for-macos-part-2/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Happy reading peeps!&lt;/p&gt;
+
+&lt;p&gt;Cheers.&lt;/p&gt;</content><author><name>Aniketh Girish</name></author><category term="OSS" /><category term="dockerd" /><summary type="html">TLDR; This is something that I proposed for the entire workflow of dockerd port for macOS.</summary></entry><entry><title type="html">Dockerd port for macOS - Part 2.</title><link href="http://localhost:4000/blog/2019/09/dockerd_port_part_2.html" rel="alternate" type="text/html" title="Dockerd port for macOS - Part 2." /><published>2019-09-14T00:00:00+02:00</published><updated>2019-09-14T00:00:00+02:00</updated><id>http://localhost:4000/blog/2019/09/dockerd_port_part_2</id><content type="html" xml:base="http://localhost:4000/blog/2019/09/dockerd_port_part_2.html">&lt;p&gt;TLDR;&lt;/p&gt;
+
+&lt;p&gt;Hey!!,&lt;/p&gt;
+
+&lt;p&gt;This is the continuation of the last post since I thought once I gave an introduction about what docker is and what this project was all about, it is better to have the rest written as a separate blog since it will be easier to skim through :D&lt;/p&gt;
+
+&lt;p&gt;The dockerd port to macOS eventually started as a subset research goal carried in the redesign of container stack to experiment and measure extensible and platform independence attained in containers on &lt;code class=&quot;highlighter-rouge&quot;&gt;µKontainer&lt;/code&gt; of which a library operating system was introduced which decouples the kernel component and uses that as the container kernel within pure user space processes. On this light, docker has introduced a light guest VM for docker to run on macOS - while docker in Linux run directly on the host machine. With the introduction of &lt;code class=&quot;highlighter-rouge&quot;&gt;µKontainer&lt;/code&gt; docker could be run directly on the macOS host. Therefore, this port of dockerd on macOS looks at the implementation of docker in macOS with the help of &lt;code class=&quot;highlighter-rouge&quot;&gt;µKontainer&lt;/code&gt; and henceforth attain an implementation of docker independent of the host kernel it runs on.&lt;/p&gt;
+
+&lt;center&gt;
+&lt;img src=&quot;https://lh4.googleusercontent.com/WQ3x3rBTL2SzyxLJw4uwODr479R_8LAwoVmT2EPlJZj65cdtBNfFy7DdCPG9tYyHVK0w19l-794laN4LYdE7w44X_Wr_e0q8iydyaskWJp55FLd5-_XMeDUy5hPV2Vzgh7uYYWoP&quot; /&gt;
+&lt;/center&gt;
+
+&lt;p&gt;With the context of the image above, docker for macOS heavily relies on the guest Linux VM to emulate missing components of Linux kernel in darwin host. Due to this advent of the guest Linux VM, Docker daemon is intertwined vastly with Linux kernel to communicate with the host. Henceforth, this makes it impossible to run dockerd directly on the host machine and rather has to use an intermediate guest VM - where the dockerd, the daemon side of docker exists within the VM while the docker client on host. Our proposed fix with &lt;code class=&quot;highlighter-rouge&quot;&gt;µKontainer&lt;/code&gt; improves this scenario of the existence of dockerd on macOS host without this intermediate guest VM to run docker independent of the host.&lt;/p&gt;
+
+&lt;p&gt;Introduction of &lt;code class=&quot;highlighter-rouge&quot;&gt;µKontainer&lt;/code&gt; does not only promises the platform independence attained by docker, but it also provides enough extensibility to introduce analogues components/features into the docker engine we introduce.&lt;/p&gt;
+
+&lt;p&gt;The low-level OCI Runtime environment, run&lt;strong&gt;U&lt;/strong&gt; handles the creation of containers. Within the context of run&lt;strong&gt;U,&lt;/strong&gt; it does a fork+exec call to initiate calls towards LKL (libOS) and the application to be executed. Containerd enacts as a process that could be used to manage these containers to build and start the execution of the application within the scope of these containers. Further, Docker engine/dockerd is responsible to run an application over the containers and scale.&lt;/p&gt;
+
+&lt;p&gt;Docker in macOS is split into two processes; docker client and dockerd daemon. Docker client uses dockerd daemon to communicate with the container processes.&lt;/p&gt;
+
+&lt;p&gt;With frankenlibc, and runu under ukontainer github-org, you can run Linux application on macOS.  we’ve also integrated this with docker image, which can be used with containerd and ctr utilities.&lt;/p&gt;
+
+&lt;p&gt;The docker image which we created, named runu-base[1] - this image gets executed since the image contains cross linked binaries of Linux specific programs compiled and build from the respective program-specific source code.&lt;/p&gt;
+
+&lt;p&gt;on a Linux host, you can run &lt;code class=&quot;highlighter-rouge&quot;&gt;docker run alpine uname -a&lt;/code&gt; with LKL-ed kernel (with Alpine Linux official image). This major focus of this project was to port dockerd daemon, which currently only supports Linux to macOS.&lt;/p&gt;
+
+&lt;p&gt;Currently, docker on macOS  uses guest Linux VM using Hypervisor.framework exposed by darwin kernel(macOS) to run the dockerd daemon on darwin kernel system. This hypervisor framework helps the VM to emulate a physical environment for the Linux kernel to act as an intermediate on darwin.  Our goal is to eliminate this middleware(guest VM), let the dockerd daemon communicate directly with the darwin kernel instead of running the daemon inside an isolated hypervisor providing Linux kernel architecture.&lt;/p&gt;
+
+&lt;p&gt;Initially on the port, learning more about the existing codebase, we realised that instead of porting each subset of features in the codebase as such, it was better to focus on the port which would let us completely execute &lt;code class=&quot;highlighter-rouge&quot;&gt;docker container run..&lt;/code&gt; command. Because, we learned that &lt;code class=&quot;highlighter-rouge&quot;&gt;docker container run&lt;/code&gt; has dependency over &lt;code class=&quot;highlighter-rouge&quot;&gt;docker create&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;docker start&lt;/code&gt; and much more internals of the code. This way we don’t need to look at just one aspect of the codebase but instead port major components at one go.&lt;/p&gt;
+
+&lt;p&gt;To achieve this subset of the research project - the port of docker engine was divided into mainly three aspects:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Operating system-level port&lt;/strong&gt;: The codebase of docker engine doesn’t support the direct compilation of docker engine on darwin platform. One of the tasks over this project was to extend the codebase to avoid such build/compile constraints and hence have the codebase to be platform-independent.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Runtime level port&lt;/strong&gt;: In the codebase, there exist components which should be executed only during runtime on specific platforms. This type of constraints blocked the docker engine port to successfully run over darwin as it neglected much-required features that should also be in darwin to build/run. Our work during the phase of runtime level port focused on exposing such aspect of the codebase to darwin as well. Apart from this, one of the major goals of this phase was the streamlined integration of the code in order to get docker engine running irrespective of the platform it runs on. Since there was a particular subset of components integrated that would only work in a specific platform, such runtime level segregation helped to improve the code integration. Henceforth, this led us to include platform-specific code, yet, this integration wouldn’t break the system as a whole either.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;The system features port:&lt;/strong&gt; Apart from exposing features like chroot, exposing mounting options and establishing ociSpec use for darwin the majority work for the port relied on the porting of Libnetwork, Libcontainerd, moby/buildkit modules.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Currently, our port of docker engine is supported only over VFS via graph driver module in docker engine.&lt;/p&gt;
+
+&lt;p&gt;Libcontainerd package of docker engine is a collection of gRPC client API for containerd. It initiates a gRPC client to invoke containerd process Since this package mostly handled the gRPC POST requests from the client to create, start, restart etc on the containerd process. A notable use case of libcontainerd is that at first it tries to spawn a dockerd managed containerd process. If that fails, then the only dockerd tries to spawn containerd as a different process. Most of the port here was only to attain platform independency of libcontainerd package which was Linux only and to extend it for darwin as well.&lt;/p&gt;
+
+&lt;p&gt;The libnetwork project of docker handles the networking of containers. The current docker libnetwork port consists of streamlined integration of darwin platform-specific code and build constraints in order to let docker engine use libnetwork APIs into the docker engine in darwin.&lt;/p&gt;
+
+&lt;p&gt;The buildkit API dependency of docker engine had to go through a series of changes in order to let its snapshotter control the filesystem to build the bundles properly and mount irrespective of the platform it is running upon after deflating the images. Updating the codebase of buildkit, we saw there were Linux only specific code like seccomp, speccov etc which were silently ignored over runtime while on darwin or introduced missing components in order to let docker run properly irrespective of the platform.&lt;/p&gt;
+
+&lt;center&gt;
+&lt;img src=&quot;https://s3.amazonaws.com/media-p.slid.es/uploads/618982/images/6392798/Screen_Shot_2019-07-26_at_9.57.44_AM.png&quot; width=&quot;500&quot; /&gt;
+&lt;/center&gt;
+
+&lt;p&gt;Another aspect of our work to port dockerd for macOS heavily relied on silently overriding the namespace and cgroups Linux only features. Containers are implemented using Linux namespaces and cgroups. Namespaces let you virtualize system resources, like the file system or networking, for each container. Cgroups provide a way to limit the number of resources like CPU and memory that each container can use. At the lowest level, container runtimes are responsible for setting up these namespaces and cgroups for containers and then running commands inside those namespaces and cgroups. Low-level runtimes support using these operating system features.&lt;/p&gt;
+
+&lt;p&gt;Additionally, we added support of another dependency of &lt;code class=&quot;highlighter-rouge&quot;&gt;sysconf&lt;/code&gt; [1] for Go, without using cgo or external binaries in libcontainer module in opencontainers/runc to get clock ticks. Which measures CPU ticks between the start and end of a process. This integration of &lt;code class=&quot;highlighter-rouge&quot;&gt;sysconf&lt;/code&gt; would help the future of docker engine port to include system platform-independent system configuration related functions calls in APIs directly which used to come from host kernels.&lt;/p&gt;
+
+&lt;p&gt;After the port of dockerd on darwin, we successfully support docker container to do major functionalities like &lt;code class=&quot;highlighter-rouge&quot;&gt;create&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;run&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;pull&lt;/code&gt; etc.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;row&quot; align=&quot;center&quot;&gt;
+  &lt;div class=&quot;column&quot;&gt;
+&lt;img src=&quot;https://s3.amazonaws.com/media-p.slid.es/uploads/618982/images/6392791/Screen_Shot_2019-07-26_at_9.52.18_AM.png&quot; width=&quot;440&quot; height=&quot;800&quot; /&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;column&quot;&gt;
+&lt;img src=&quot;https://s3.amazonaws.com/media-p.slid.es/uploads/618982/images/6392792/Screen_Shot_2019-07-26_at_9.52.41_AM.png&quot; width=&quot;440&quot; height=&quot;800&quot; /&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;work-in-progress&quot;&gt;&lt;strong&gt;Work in progress&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;Containerd process spawns multiple Childs as containerd-shim according to the number of containers running. Top to down, containerd initiates the call to create the containers and through this containerd-shim process, gives runU the action to create the containers.&lt;/p&gt;
+
+&lt;p&gt;Once runU creates the container properly and containerd is able build and handle the container, the low-level runtime runU process exits from the process chain and the container is handled by containerd-shim process alone.&lt;/p&gt;
+
+&lt;p&gt;That is, containerd-shim allows the runtime, runU to exit after it starts the container: This way we can run daemon-less containers because we are not having to have the long-running runtime processes for containers.&lt;/p&gt;
+
+&lt;p&gt;Once the &lt;code class=&quot;highlighter-rouge&quot;&gt;docker run&lt;/code&gt; is successfully executed, ideally, containerd-shim process should exit as well. In the current scenario, it doesn’t happen. One of the reasons for this is that the filesystem implementation (mount/unmount) is not well implemented to be used in darwin and henceforth docker engine is not able to find a rootfs path to currently mount and unmount. We have landed up in a few workarounds to do this, but that is not ideal.&lt;/p&gt;
+
+&lt;p&gt;Apart from the &lt;code class=&quot;highlighter-rouge&quot;&gt;thehajime/runu-base:0.1&lt;/code&gt; image we are not able to run another image, for example, an alpine image. Initially, the image as such wasn’t pulled/downloaded from the docker hub since it is unlikely to run Linux image over darwin host directly without a guest Linux VM. Currently, We have introduced a patch that would let this image to be successfully downloaded into the host system. Once the image is unpacked as bundles, docker engine fails to flatten these layers properly. We suspect this also occurs due to the inadequate implementation of graph driver in darwin.&lt;/p&gt;
+
+&lt;h3 id=&quot;future-additions-proposed&quot;&gt;&lt;strong&gt;Future additions proposed&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;Improvement of VFS to actually mount and unmount functionalities and the rest of the features that it offers. Along with this, maybe it should be possible to add other filesystem support as well.&lt;/p&gt;
+
+&lt;p&gt;Improvement on the libnetwork port. Current port of libnetwork only cares about the system platform independence while there still need to do a serious amount of work to actually use the libnetwork as a container networking platform. It would be ideal to replicate something similar to docker0 bridge which actually exists in Linux do communicate with the client and the server.&lt;/p&gt;
+
+&lt;p&gt;Code refactor: There exist stub functions which would be useful if we fill it in. As well as there exists a lot of hacky workaround in the codebase. To actually able to add our work into the upstream moby repository - it would be ideal to refactor the code in a better way.&lt;/p&gt;
+
+&lt;h3 id=&quot;-reference-&quot;&gt;&lt;ins&gt; &lt;strong&gt;Reference&lt;/strong&gt; &lt;/ins&gt;&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.docker.com/engine/reference/commandline/dockerd/&quot;&gt;https://docs.docker.com/engine/reference/commandline/dockerd/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.docker.com/engine/docker-overview/&quot;&gt;https://docs.docker.com/engine/docker-overview/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://collabnix.com/how-docker-for-mac-works-under-the-hood/&quot;&gt;http://collabnix.com/how-docker-for-mac-works-under-the-hood/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/docker/docker.github.io/tree/master/docker-for-mac&quot;&gt;https://github.com/docker/docker.github.io/tree/master/docker-for-mac&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.slideshare.net/AnilMadhavapeddy/advanced-docker-developer-workflows-on-macos-x-and-windows?ref=https://blog.docker.com/2016/05/docker-unikernels-open-source/&quot;&gt;https://www.slideshare.net/AnilMadhavapeddy/advanced-docker-developer-workflows-on-macos-x-and-windows?ref=https://blog.docker.com/2016/05/docker-unikernels-open-source/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;https://ieeexplore.ieee.org/document/5541547/&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://hub.docker.com/r/thehajime/runu-base&quot;&gt;https://hub.docker.com/r/thehajime/runu-base&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Aniketh Girish</name></author><summary type="html">TLDR;</summary></entry><entry><title type="html">NaWab: A network protocol content curator</title><link href="http://localhost:4000/blog/2018/12/nawab.html" rel="alternate" type="text/html" title="NaWab: A network protocol content curator" /><published>2018-12-19T00:00:00+01:00</published><updated>2018-12-19T00:00:00+01:00</updated><id>http://localhost:4000/blog/2018/12/nawab</id><content type="html" xml:base="http://localhost:4000/blog/2018/12/nawab.html">&lt;p&gt;Hey all,&lt;/p&gt;
+
+&lt;p&gt;Finally, it’s time! :) I have been struck with this idea of building a Twitter bot recently, which would be curating a list of all relevant contents regarding Networking/Internet protocols, network security and future internet architecture which would make my life easier. So, this post serves as my official release of the bot to the public and I would certainly wish if I could get some inputs to make it better as this bot is just a work in progress :)&lt;/p&gt;
+
+&lt;p&gt;Well wait, how precisely would this help to make my life easier? Well, let us rewind a bit.&lt;/p&gt;
+
+&lt;p&gt;Back-story short, I have been indulged into learning more about Network protocols and future internet architecture with an interest in its design and security aspect of it. Well, cutting myself off from most of the social media, I went directly through to twitter. Where I found that the number of contents, discussions, opportunities to learn regarding my area of interest is tremendously enormous. I used to scroll day and night through Twitter to get all those fascinating and exciting feeds about my area of interests. Right now, my timeline would be just filled with contents related to network protocols and the major discussions around it. But then, it started to become a bit overwhelming to keep a tab on all of those resources and I wished if I could just get most of those relevant contents at one place.&lt;/p&gt;
+
+&lt;p&gt;So, here you go; The idea of Nawab was born. I have just devised a simple bot that would just retweet all the relevant posts or discussions on Twitter into the bots profile timeline. It certainly needs work on and with my other commitments lately, I am not pretty much sure to put my entire effort into this product; so it would be just perfect if I get more reviews and your views on the bot and improvements that I could add upon this one. :D&lt;/p&gt;
+
+&lt;!-- **Twitter bot:** [https://twitter.com/nawab\_bot](https://twitter.com/nawab_bot) --&gt;
+
+&lt;p&gt;&lt;strong&gt;Github:&lt;/strong&gt; &lt;a href=&quot;https://github.com/Team-SYNACKd/NaWaB&quot;&gt;https://github.com/Team-SYNACKd/NaWaB&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Cheers.&lt;/p&gt;</content><author><name>Aniketh Girish</name></author><category term="OSS" /><category term="Networking" /><summary type="html">Hey all,</summary></entry><entry><title type="html">TINA: The crime hero, A new wonder woman in town.</title><link href="http://localhost:4000/blog/2018/12/tina_crime.html" rel="alternate" type="text/html" title="TINA: The crime hero, A new wonder woman in town." /><published>2018-12-08T00:00:00+01:00</published><updated>2018-12-08T00:00:00+01:00</updated><id>http://localhost:4000/blog/2018/12/tina_crime</id><content type="html" xml:base="http://localhost:4000/blog/2018/12/tina_crime.html">&lt;p&gt;Hey everyone,&lt;/p&gt;
+
+&lt;p&gt;Recently, I along with Abhinand ettan, Anu Chechi, Devi Chechi and Vibhoothi flew all the way to The Netherlands to participate in a hackathon. This hackathon was called hackathon for good and organised by The Municipality of The Hague with the motto to built and find solutions for Peace, Justice and Security. It was our first international hackathon and we were all super excited to spend our 36 hours hacking into an awesome project that we poured our heart and soul into from weeks before the event. In this short blog post, I will mainly focus on to describe what our hack was on and what we hacked during the entire 36 hours. Here we go ;)&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;https://anikethgirish.files.wordpress.com/2018/12/hakathon.jpg&quot; width=&quot;900&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;We all are worried about dangerous people walking down the street just because we cannot read the information fast enough. As part of the evidence gathering and analysis process, the International Criminal Court has to analyse a number of written documents which can be a huge data set containing various information. The analysis is completely manual. The International Criminal Court has to go through all these information manually, figure out various entities from each file and layout relationships between those entities. Because of this slow and manual process, criminals spend more time outside rather than doing their time inside their cells. As this is a major issue the world is facing, so International Criminal Court had hosted a Challenge in the Hackathon for Peace Justice and Security.&lt;/p&gt;
+
+&lt;p&gt;Henceforth, we thought to pick this up because we felt that we could actually help to solve this problem. Even this being a tedious task, the thought that our solution would highly benefit lives of people at International criminal court and to help citizens of our nation to walk around freely in their neighbourhood without being scared of such criminals was the best motivation we had.&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;https://anikethgirish.files.wordpress.com/2018/12/unnamed-e1544288146535.jpg&quot; width=&quot;800&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;We introduced a hack, which we named &lt;strong&gt;TINA&lt;/strong&gt;(&lt;strong&gt;T&lt;/strong&gt;ext m&lt;strong&gt;I&lt;/strong&gt;ning a&lt;strong&gt;N&lt;/strong&gt;alysis d&lt;strong&gt;A&lt;/strong&gt;tabase) to address this problem, yes we know that sounds a bit weird, that is weird Acronym.&lt;/p&gt;
+
+&lt;p&gt;TINA aimed at helping the International Criminal Court, by providing a simple, yet conclusive and complete automated application which takes care of all the Witness statements, NGO Reports, Media Articles, and much more and produce the expected entities along with the relationships it possessed by the application of various Machine Learning, Artificial Intelligence and deep learning techniques which is served as a whole package under the name of TINA.&lt;/p&gt;
+
+&lt;p&gt;What International criminal court expected was just a node + edge graphical representation stored over graphical database format – such as a .json file or a .csv. But as a team, we thought this isn’t enough. This can provide the International criminal court to identify the entities and relationships among the information but it wouldn’t speed up the process as it should be because we are talking about a very large dataset with the very high number of nodes and edges representing a crime alone maybe.&lt;/p&gt;
+
+&lt;p&gt;Henceforth, we decided to make sure Tina represent the data and visualise them in ways that would not only help to identify entities or the relationships that exists but will list the entire details in a dashboard. We included multiple features into the dashboard such as Crime Heat Map, Google Maps based Location Searching, Smart Table, Graphical Representation of the Data Extracted.&lt;/p&gt;
+
+&lt;p&gt;With the aim to provide a complete automated package to the International criminal court, we broke down the entire process into different parts for the application:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Evidence Analysis&lt;/li&gt;
+  &lt;li&gt;Extractor part&lt;/li&gt;
+  &lt;li&gt;The dashboard&lt;/li&gt;
+  &lt;li&gt;The Core (ML/NLP)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;evidence-analysis&quot;&gt;&lt;strong&gt;Evidence Analysis&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;This section could be considered as a formal training for ourselves to identify the core aspect of the project. As a part of Evidence analysis, we tried hard to gather as much as dataset get some valid data to train our models. The process to understand the dataset provided by the ICC was hard until an extend - mainly because we only saw very less usable data points that can be used to layout the model. Henceforth, we decided to spend a considerable amount of our time during the hackathon just to find out dataset that could at least be used to as an example to train. We faced some amount of difficulty to find various resources from where we will get such important documents, even if it be bogus. But we were successful up to an extent to collect enough dataset for our project to train for but we couldn’t expect much rate of accuracy from those datasets though.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-extractor&quot;&gt;&lt;strong&gt;The Extractor&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;Next, it was about how to collectively process this entire dataset that the International criminal court would have. Since it these documents was of different file formats, we had to process them. Further, International criminal court would have this as a dataset of 10s or 100s of GB, so it would be highly unlikely for them to process them one by one. So, built an API which can take all the files like PDF, docx, txt and jpg irrespective of its file type and makes it to text which could be passed on to the next module of TINA. The input for this API can also be some folder, it will provide the OTP more flexibility like never before. The folder can contain any sort of data which is needed to be extracted. We went a bit out of the scope for giving a better User Experience (UX.). The Extractor can also take inputs as a URLs or any sort of web links to the Office of the Prosecutor at International criminal court can have an easier way to feed information directly through the internet. In the future, we are planning to integrate a proper Google Search feature inside the dashboard so instead of the linking, a whole new option which will be easier. Then after the extraction, we will be writing this into different files and also in a single file which appends all results as TXT along with the file metadata so that we don’t lose any information regarding a crime that can be useful in all ways possible. After parsing, this text file is passed to the Core module of Tina where the ML and NLP are processed and the detailed things about that later in this post below. Below you may find a snapshot of how our Office of the Prosecutor at International criminal court could interact with the extractor API through our dashboard.&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;https://anikethgirish.files.wordpress.com/2018/12/2018-11-18-11-49-42.jpg&quot; width=&quot;800&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;&lt;strong&gt;The Dashboard&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The dashboard is the core aspect of our project, We have specially designed the Dashboard with only one thing in mind that everyone who is 20 or who is 70 can use at the same time without being complex. That is, we really wanted our tool to be easy to use and doesn’t require someone to read through huge documentations to have a basic understanding of how to use it. For Instance, a person who doesn’t have much knowledge on understanding the directed Graphs it will be nearly not possible for him to read from the graph so we made integration of Google Maps for showing the Crime Location instead of showing the Location as a label. We have lots of numbers in where X person Killed Y people so we made that as an input for visual Graph. Also, we have made a special Heat Map of Crime, where all global crime details are shown. Below, you can find a few screenshots of how the dataset is being represented in various forms through our dashboard.&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;https://anikethgirish.files.wordpress.com/2018/12/2018-11-18-13-22-46.jpg&quot; width=&quot;800&quot; /&gt;&lt;/center&gt;
+
+&lt;center&gt; Analysis of the Crime with help of Advance Graphs &lt;/center&gt;
+
+&lt;center&gt;&lt;img src=&quot;https://anikethgirish.files.wordpress.com/2018/12/2018-11-18-13-22-38.jpg&quot; width=&quot;800&quot; /&gt;&lt;/center&gt;
+
+&lt;center&gt;Smart Table: Showing the CSV in a neat way &lt;/center&gt;
+
+&lt;center&gt;&lt;img src=&quot;https://anikethgirish.files.wordpress.com/2018/12/2018-11-18-11-50-00.jpg&quot; width=&quot;800&quot; /&gt;&lt;/center&gt;
+
+&lt;center&gt;Crime Heat Map&lt;/center&gt;
+
+&lt;center&gt;&lt;img src=&quot;https://anikethgirish.files.wordpress.com/2018/12/2018-11-18-11-49-55.jpg&quot; width=&quot;800&quot; /&gt;&lt;/center&gt;
+&lt;center&gt;Show Crime Location with search option with Google Maps&lt;/center&gt;
+
+&lt;h2 id=&quot;the-core-mlnlp&quot;&gt;&lt;strong&gt;The Core( ML/NLP)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;The core part of the project mainly focuses on automating the process of analyzing the evidence of various crimes that needed to be handled by ICC. After The extractor API did its black magic, the text is moved into the ML module to extract entities and find relationships between them in the context of ICC easily. While coding, we made use of various python packages like Spacy, nltk, keras. numpy and sklearn to do the needful. In order to achieve the process of identifying entities (or nodes) such as events, dates, places etc, we have used an approach which can provide better results. spaCy is one of the powerful natural language processing tools which excels at large-scale information extraction tasks. Combining the power of spaCy with LSTM to identify the nodes was one of the novel methods which we have used in this tool. Moreover using the output from spaCy as an input to LSTM gave us better results in cherry picking entities from the huge amount of text data.&lt;/p&gt;
+
+&lt;p&gt;One of the main challenges was that we had very less ground truth or factual data that were given to us. We focused on designing a better model which would work with a very minimal amount of data and further produce better results. We used the classification technique in order to train the model for classifying the relationships. So when a new data is fed to the model it will classify the relationship among the entities. For eg: it will classify that event and date is connected ie the event happened on XYZ date.&lt;/p&gt;
+
+&lt;p&gt;Keeping future in mind, if we plan to improve the model even further by using character-level embeddings we could use used implementation provided by the keras-contrib package, that contains useful extensions to the official keras package where it could also help to have a large number of datasets with more complicated named entities to have a stronger and well-trained model.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-technical-stack&quot;&gt;&lt;strong&gt;The technical stack&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;As a techie, this blog post is only half done without TINA’s technical stack ;)&lt;/p&gt;
+
+&lt;center&gt;
+&lt;img src=&quot;https://anikethgirish.files.wordpress.com/2018/12/snapshot1.png&quot; /&gt;
+&lt;/center&gt;
+
+&lt;p&gt;The above figure illustrates the entire workflow of TINA in one place. Providing a brief explanation on this: At first, we have the entire dataset, let it be files of any kind - PDF, DOC(X) etc, this can be all in just one folder. It is then dumped into the Extractor API. All the black magic to extract the texts from those various files will be taken care of by the Extractor API. Further, the results from the API to the NER and REL module. Where NER module makes use of classical Natural Language Processing methodologies to extract various entities from the texts. Further, the REL Library makes sure the extracted entities have a better contextual meaning and finds a relationship with the entities extracted. Algorithms like LSTM works behind this library to help us to do that. Finally, we draw all our inferences through either via Geo Maps, graphs, CSV or heatmap through the dashboard that we designed using by Angular 6, Typescript as front-end stack and Django python web framework to support the backend.&lt;/p&gt;
+
+&lt;p&gt;You can find the Codebase here: &lt;a href=&quot;https://gitlab.com/Aniketh01/tina&quot;&gt;https://gitlab.com/Aniketh01/tina&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Cheers.&lt;/p&gt;</content><author><name>Aniketh Girish</name></author><category term="Hackathon" /><category term="Travel" /><summary type="html">Hey everyone,</summary></entry><entry><title type="html">Touchdown: IND→(IL|TLV)→IND</title><link href="http://localhost:4000/blog/2018/08/israel_trip.html" rel="alternate" type="text/html" title="Touchdown: IND→(IL|TLV)→IND" /><published>2018-08-10T00:00:00+02:00</published><updated>2018-08-10T00:00:00+02:00</updated><id>http://localhost:4000/blog/2018/08/israel_trip</id><content type="html" xml:base="http://localhost:4000/blog/2018/08/israel_trip.html">&lt;p&gt;Hey folks.&lt;/p&gt;
+
+&lt;p&gt;The last few months were something special - something different. It was an emotional rollercoaster, brought me down, tore me apart.  In spite of them, there was the experience of my lifetime, best moments of my life ever and this post is all about it. I was lucky enough to get an opportunity to spend a month in an international university and thereby I spend almost 1 month as an International summer exchange student at Ben Gurion University, Israel.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;“Decide whether or not the goal is worth the risks involved. If it is, stop worrying.”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In a nutshell, Each second I spend added to my life learning. It was rigorous - exciting - scary and just a perfect medium to introspect the actual me and who I am and how I react to things out of my comfort zone.&lt;/p&gt;
+
+&lt;p&gt;By inspecting the life of foreigners and moreover we as a third person in an entirely different situation, I think I reached to an understanding and could be said as the best takeaways for me from the entire trip would be: Life is short. Enjoy the most out of it. Never left out something or procrastinate because we cannot assure yourself about what will happen tomorrow. Do what you need to do, say what you wish to say, right away. Because you should never regret it later. Because we always see the situation that we are in at the point of time while we are blindsided to see the bigger picture. The other best learning I would say is that how to stand for yourself and stay put on your decisions. Something else that which keeps ringing inside my head is that never let others opinion and destroys your inner peace. Everyone might have heard this. Even I did too. But this was different. I experienced it. I believe it’s hardcoded into me.&lt;/p&gt;
+
+&lt;p&gt;I started off this fantastic adventurous journey at the start of July (1st of July) and  I am writing this down when it’s time to wrap up the entire trip and while just hours before I boarding the return flight to India(IND). Well, you know, I got lazy and stopped it in the middle and right now I am completing this post in my hostel room at Amritapuri. Thanks to a friend of mine, &lt;a href=&quot;https://amritsreekumar.wordpress.com&quot;&gt;Amrit Sreekumar&lt;/a&gt; who hosted me for the night before and dropped me off till the airport in Kochi. I think I should start from there as the initial/starting point of this entire journey. The flight journey was quite nice. Firstly good experience with Air India and a book in hand to help me strike out boredom.&lt;/p&gt;
+
+&lt;p&gt;I landed in Israel by 2nd of July midnight probably and went straight to the accommodation that was arranged for us by BGU. Rather than saying that they arranged an accommodation for us wouldn’t do justice for exactly what they did for us in co-operation with the Ben Gurion Campus tower. The welcoming was so sweet and enriching. Who does like to see a welcoming sweet note at your doorstep when you enter the place that you are going to live in for the rest of the month?  :D&lt;/p&gt;
+
+&lt;p&gt;Let me start off by talking about the whole BGU and Beer Sheva experience. The course - most of it engaged with classes in Machine learning, Security and a great exposure towards leveraging Machine Learning to bring down Cyber Security threats that prevail in the society. This week mostly included roaming around the whole Beer Sheva, our Ben Gurion University and the place where we were accommodated. Beer Sheva is beautiful, BGU is just amazing - vibrant students culture and amazing university architecture. There was a building just left for students to conduct their programs as they wish for and engage in social activities. They screen different movies in different weeks and they have theatres inside the university itself for that. Moreover, during the FIFA football world cup fever, they screened the game in the student’s centre. And to enjoy the game we had unlimited beer, popcorn, coke and much more. (PS: You have to pay though :P). One thing that is evidently notable is that they love their country and they portray it everywhere. You could find Israel flags all around the place, in apartments - in houses - in cars etc. Further,  The sunset over there is just love &amp;lt;3. You can find those beautiful pictures that I captured during the entire trip here and I have attached a few pictures of the sunset above.&lt;/p&gt;
+
+&lt;p&gt;During the first week at Israel, we were lucky enough to witness the socio-cultural fest that happened in the old city of Beer Sheva. Good amount of fantastic street food, Pub and clubs open all night, gathering arranged at a central location with music and dance - just the perfect way to spend your weekends :)&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;https://anikethgirish.files.wordpress.com/2018/08/lrm_export_20180711_144433.jpg?w=169&quot; height=&quot;440&quot; /&gt;&lt;/center&gt;
+
+&lt;center&gt;How BGU treated us during the international students fair &amp;lt;3&lt;/center&gt;
+
+&lt;p&gt;One thing that I loved about Israel was that everything that happened around there was well organised and the traffic policy that they followed was terrific. Pedestrians come first always and that is the best thing to be followed by a human being on the road. “Inside of us - it truly did make us feel that we own the street bruh :P”&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;https://anikethgirish.files.wordpress.com/2018/08/lrm_export_20180720_092850.jpg&quot; width=&quot;440&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;This is where the fantastic people I met would come into the picture. Dana, Rotem, Amit, our professor Dr Nir Nissim and much. Few of the very best people whom I have met in my whole life. The enthusiasm with which they work and develop this upbringing of an international summer program is tremendous. The counsellors were a great support for every little detail we had. The people we meet. Other than that, my colleagues were great. Different - the mixture of people around the globe. China, India, Russia and Greece. Further talking about Israeli’s in general - most of them are really healthy and stays fit unlike in India :P. Maybe because their appetite is incredibly huge as compared. Next thing would be that - because they are this fit, most of them are quite big as compared to the physique Indian, especially south Indians carry. Talking about Indians, they love India and Indians a lot. They take vacations for like 2-6 months and travel all around India. Most of the Israeli’s whom I met and engaged in a conversation outside from BGU had visited India and talking to me had made me miss our country :P. Sweet thing to hear :D.&lt;/p&gt;
+
+&lt;p&gt;We roamed around in different places in Israel such as the Old City of Beer Sheva, Tel Aviv, Jaffa, Jerusalem, Ashdod and much more. Few as a part of the field trips will the others to just enjoy the place - get along with the whole community and experience the country. Few of my bucket list didn’t work out to be successful because of our tight schedule such as Haifa, scuba diving etc. I wish to go back soon and get that done as well ;). Another thing that I missed is to enjoy the nightlife of Tel Aviv - the party land. The night we choose to stay in Tel Aviv was the worst day anyone could have chosen because it was a public holiday :(. Even though a club was open late night, we were denied to enter :( - long story. (Long story short - age limit was of 24 :P). But still, we roamed around Tel Aviv the whole night until 3 AM. Ahh, the place we crashed for the night is called Roger hostels and it is just a great place to spend a night. We get to mingle with different people staying in your dorm and learn from the experience. Of all the places where we went to the Ashdod and Jerusalem was the best of all. It was just beautiful and lovely. You will never realise how fast time went away. The beaches are just beautiful, alluring, pleasing and what not. The turquoise water and the vibrant people around the place are just put me in an aww &amp;lt;3. The memories weived out there is incredibly a lot - writing down each line brings other memory into my head.&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;https://anikethgirish.files.wordpress.com/2018/08/lrm_export_20180704_174223.jpg?w=440&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;Ever heard of falafel and Hummus? That is the best and the authentic food that is served at Israel. It was good at first. But eating it continuously for weeks started to put an hatred in me for this. Almost all the time, my mouth craved for Indian food. It was probably the daily meal. Either falafel, schnitzel or the halo(aalo :P) paratha from the Indian restaurant I found out near the university called little India. At the end of 1 month - I just got sick of it. I was craving to have some good proper Indian food that was scarcely available and even if we found a place to eat Indian food it’s too costly for an Indian ;).&lt;/p&gt;
+
+&lt;p&gt;Well, other than the meal other things we’re sorted B). Well, in the morning, either cornflakes or bread with coffee. Then, at night, either I would cook rice (which is the only thing that I knew to cook properly and the resource that actually helped). Maggie noodles, soups, biscuits added up to this by the way ;). And this was just perfect. For a month though ;). I really started to appreciate our mess food which seems totally impossible to think of when you stay at your hostel. In the end, when I got so desperate to have a different dish, I even started to experiment with different varieties of things using rice. That made all the difference :P&lt;/p&gt;
+
+&lt;p&gt;One of the best thing that happened during the entire stay at Israel together with the whole summer program team was the potluck! It was just awesome. We had to cook some food and all of us in the program would share it with each other. Just had an amazing time with all of the colleagues in the program sharing food, memories and on top of it all - love! &amp;lt;3&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;https://anikethgirish.files.wordpress.com/2018/08/lrm_export_20180803_114035.jpg&quot; width=&quot;400&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;Reaching the end of this post, the heartbreaking event would be the return back to India. I literally didn’t want to come back. I got accustomed to how Israeli’s lived and enjoyed their livelihood or moreover, I didn’t want to end my full of bursting surprising journey to end. I would miss the place - the entire country. The peeps out there. The whole OSP team. I never expected to create this whole of the best experience in my life ever with millions of memories made in just 1 month. When I landed in Israel, I saw a quote in the airport somewhere saying that ‘Once you visit Israel, you stay an Israel forever!’ well, me being an Indian right now, I’m a small Israeli at heart ;). Wrapping this post up - I wish to see Israel once again and hope to spend another fantastic summer there!&lt;/p&gt;
+
+&lt;p&gt;To an awesome life ahead!&lt;/p&gt;
+
+&lt;p&gt;Cheers.&lt;/p&gt;</content><author><name>Aniketh Girish</name></author><category term="Travel" /><category term="summer School" /><category term="Israel" /><summary type="html">Hey folks.</summary></entry><entry><title type="html">[GSoC’18]-DNS over HTTPS</title><link href="http://localhost:4000/blog/2018/05/gsoc_wget_doh.html" rel="alternate" type="text/html" title="[GSoC'18]-DNS over HTTPS" /><published>2018-05-30T00:00:00+02:00</published><updated>2018-05-30T00:00:00+02:00</updated><id>http://localhost:4000/blog/2018/05/gsoc_wget_doh</id><content type="html" xml:base="http://localhost:4000/blog/2018/05/gsoc_wget_doh.html">&lt;p&gt;Hello folks,&lt;/p&gt;
+
+&lt;p&gt;The past few weeks have been challenging and exciting as well. I have never been involved in and engaged myself in something that has intrigued me this much. Could say that might be the interest brought in by computer networks or probably you could say the active and kind nature of my mentor &lt;a href=&quot;https://www.linkedin.com/in/ajuaristi/en&quot;&gt;ander juaristi.&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Even though the wget community is small, but the people in the community is really free to help and let us learn even the simplest things. The first few weeks were a part of community bonding and I used this time to learn much more about my project DNS resolution over HTTPS and regarding multiple protocol suites to understand the better working condition of each. Further, I went through the codebase of wget2 too as to get a better understanding of the API architecture they follow throughout so that I could also write my API and code accordingly. Even the codebase is smaller as compared to the projects I have worked over the past few years. I don’t know probably this smaller codebase or the thought of me contributing could make a difference gives a feel of greater purpose with a satisfaction that I am actually learning something that would benefit me in the long term as well.&lt;/p&gt;
+
+&lt;p&gt;During the community bonding period rather than spending time on just reading the codebase and skimming through it and understanding other aspects as well, I thought of getting my hands dirty as well. Also, this will help my mentor and my community to see that I am actually working on getting things done and there is an urge to get things done.&lt;/p&gt;
+
+&lt;p&gt;I started working on a bug fix, which was a part of the statistical module that existed in Wget2, it was a simple fix. But then, few of the error that showed up because I lacked experience in coding with C and moreover, I lacked good quality coding habits as well, like managing memory, leaks that might happen and probably implementing a harder version of something rather than going to solve that in a simpler manner. Basically, I tend to reinvent the wheel rather using what exists.&lt;/p&gt;
+
+&lt;p&gt;Good things which happened while the struggle is that, I learned how to use GDB, how to use Valgrind at least in a small scale and hope to understand it in a deeper level as well. There were two mistakes that I remember now, ie, I used char* to store const char* and also I used xfree() to free the memory allocated by strdup() in the print function rather than in the free_stats() function which was already available. While in the learning process I have created notes as a Guide for the usage of Valgrind.&lt;/p&gt;
+
+&lt;p&gt;Almost near to the end of community bonding, I started to think and draw a sketch of how the resolver API should be like. At the beginning of this, my focus was diverted and my mind was totally on implementing a DNS library, again, reinventing the wheel. But then, Ander brought my focus back to the DNS-over-HTTPS resolver back again. He provided me with the skeleton of the API that we should be hacking around.&lt;/p&gt;
+
+&lt;p&gt;Few of the stub functions inside the API is which will be exposed throughout wget2 is:&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;wget_dns_init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wget_dns_t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wget_tcp_t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;wget_dns_deinit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wget_dns_t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;  &lt;span class=&quot;nf&quot;&gt;wget_dns_set_config_int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wget_dns_t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;wget_dns_set_config_string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wget_dns_t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;wget_dns_resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wget_dns_t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;uint16_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;addrinfo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;out_addr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Further, I have added the option –dns-over-https flag option to enable doh and let user tell wget2 that this type of resolver is active and added option –doh-resolver=[]. Which takes a string, which should be an IP address or a hostname of the server that supports DNS-over-HTTPS.&lt;/p&gt;
+
+&lt;p&gt;To get a basic understanding of how the DNS over HTTPS resolver actually works, I completed reading RFC’s for DNS and DNS-over-HTTPS. Moreover, I read through a few articles and other materials to understand how an actual resolver works and what is the difference here with our implementation and what exactly should be our end product. Further, I have been looking for many API’s available to produce the end product that we desire to make.&lt;/p&gt;
+
+&lt;p&gt;During the time, when I was reading the RFC’s to understand how things work, I was also trying to understand how the query should be parsed to HTTP/2 through TCP and how it is currently implemented in wget to find the possible options I have.&lt;/p&gt;
+
+&lt;p&gt;As a part of the project, we decided to move on with two different type of resolvers for wget2. The user has the freedom to choose the type of resolver that they want to use in order to get the IP and connect to the servers they wish for. The two revolvers are, as mentioned in the DOH(DNS-over-HTTPS) resolver and a simple system call resolver using getaddrinfo(). The second one being the default resolver for wget2. The getaddrinfo() resolver already existed for wget2 and my task here was to refactor it and bring everything under one roof. The second resolver functions are almost done and will be moving into the second part of the resolver as soon as I get a green signal from my mentor as well :D&lt;/p&gt;
+
+&lt;p&gt;That’s it for now, will get more of the updates as soon as possible and when I get few more interesting tweaks inside wget2 codebase as a part of my project :)&lt;/p&gt;
+
+&lt;p&gt;Cya all, Cheers.&lt;/p&gt;</content><author><name>Aniketh Girish</name></author><category term="GSoC" /><category term="OSS" /><category term="Wget2" /><summary type="html">Hello folks,</summary></entry><entry><title type="html">[GNU-Wget2] GSoC’18: DNS-over-HTTPS</title><link href="http://localhost:4000/blog/2018/04/gsoc_18_doh.html" rel="alternate" type="text/html" title="[GNU-Wget2] GSoC'18: DNS-over-HTTPS" /><published>2018-04-25T00:00:00+02:00</published><updated>2018-04-25T00:00:00+02:00</updated><id>http://localhost:4000/blog/2018/04/gsoc_18_doh</id><content type="html" xml:base="http://localhost:4000/blog/2018/04/gsoc_18_doh.html">&lt;p&gt;Hey folks,&lt;/p&gt;
+
+&lt;p&gt;Again, cheers to another fantastic summer coming up next :D.&lt;/p&gt;
+
+&lt;p&gt;A few days before, or better to be - 2 months before, I started to contribute towards GNU project and specifically to Wget2. To be honest, I could say that the exposure towards it and learning exposure I received by just submitting a few patches and researching about the GSoC project was tremendously huge.&lt;/p&gt;
+
+&lt;p&gt;By this time I hope you all understood that I got in as a student developer Intern with Google Summer of Code, again!!&lt;/p&gt;
+
+&lt;p&gt;This is just an introductory post, further details and others will be following this as soon as possible according to the way I would be able to accommodate my schedule. Since this summer is going to be tight as hell. (Will let you know why later :P).&lt;/p&gt;
+
+&lt;p&gt;Basically, my project for wget2 in GNU project is to provide support for a DNS resolver over HTTP with SSL verification, that is, DNS-over-HTTPS. For that, I would be implementing the whole DNS packet acquiring and everything from scratch since Wget2 doesn’t have support for it.  On an overview, I will be implementing DNS packets, IPv4, IPv6, DNS-SD, EDNS and much more.&lt;/p&gt;
+
+&lt;p&gt;DNS over HTTPS is a web protocol that argues for sending DNS requests and receiving DNS responses via HTTPS connections, hence providing query confidentiality. DoH provides more than just privacy – it also helps guarantee the integrity of the response users receives to their requests. Because the DNS response is invisible between responder and user, ISPs and others in the end-to-end network chain can’t interfere in the responses.&lt;/p&gt;
+
+&lt;p&gt;Henceforth, we provide a plan for a new implementation of a parsing DNS over HTTPS. In the process, we would create a new library to handle DNS resolution. Further, we provided added support for handling IPv4 and IPv6 DNS packets as well as support for EDNS. The integration with HTTP provides a transport suitable for traditional DNS clients seeking access to the DNS. In the end, our client will be capable of sending DNS queries and getting DNS responses over HTTP using https:// and implies TLS security integrity and confidentiality.&lt;/p&gt;
+
+&lt;p&gt;Furthermore, we plan to provide support for DNS Service Discovery which is a way of using standard DNS programming interfaces, servers, and packet formats to browse the network for services.&lt;/p&gt;
+
+&lt;p&gt;That would be it for this time folks, will get back to you with further details and updates regularly from now onwards.&lt;/p&gt;
+
+&lt;p&gt;You can read the full &lt;a href=&quot;https://docs.google.com/document/d/1B3j9Z11iPSoN5XshYJr1Jc7kxlgD6AY3D8v4YPBAXKc/edit?usp=sharing&quot;&gt;GSoC proposal here&lt;/a&gt; if someone wishes to see it and if somebody is familiar with DNS-over-HTTPS implementation, please do feel free to ping me and help me out with your valuable suggestions :)&lt;/p&gt;
+
+&lt;p&gt;Cheers.&lt;/p&gt;</content><author><name>Aniketh Girish</name></author><category term="GSoC" /><category term="OSS" /><category term="Wget2" /><summary type="html">Hey folks,</summary></entry><entry><title type="html">A roadtrip through 2017 with KDE</title><link href="http://localhost:4000/blog/2018/01/kde_roadmap_17.html" rel="alternate" type="text/html" title="A roadtrip through 2017 with KDE" /><published>2018-01-02T00:00:00+01:00</published><updated>2018-01-02T00:00:00+01:00</updated><id>http://localhost:4000/blog/2018/01/kde_roadmap_17</id><content type="html" xml:base="http://localhost:4000/blog/2018/01/kde_roadmap_17.html">&lt;p&gt;Good evening fellas,&lt;/p&gt;
+
+&lt;p&gt;Happy New Year to all! The year 2017 has been a rollercoaster, to be honest. Well, it was rich and prosperous year regarding in technical terms. It was a beautiful year of great learning, splendid travel and got to network with some fantastic folks all around the globe.&lt;/p&gt;
+
+&lt;p&gt;The best reason for making this 2017 incredible for me is KDE. One of the exciting community I have ever seen! It all started at the end of 2016, I got intrigued by the Tagline of KDE, &lt;em&gt;&lt;strong&gt;“Experience freedom”.&lt;/strong&gt;&lt;/em&gt; I started contributing to various projects inside KDE. My initial start was with Konsole, system settings, KIO and various educational suite programs. Moving on, I came across a student program organized by KDE named KDE-SoK and I was selected for it, yay!!!&lt;/p&gt;
+
+&lt;p&gt;The project was with KStars(KDE’s amateur astronomy software which provides real-time and an accurate graphical simulation of the night sky, from any location on Earth.) to collect a new set of images from NASA/ESO catalogs along with orientation and pixel scale (arcsecs/pixel) from the whole set of Messier Catalog (which is a collection of 110 astronomy objects in the night sky). Images were processed for overlay in KStars using OpenCV, so to have transparency and to modulate according to the software.&lt;/p&gt;
+
+&lt;p&gt;After the successful completion of the project, I was invited as a speaker to give a talk on “Object-Tracking Using OpenCV and Qt” at KDE India Conference held at IIT Guwahati in March 2017. Again, yay!! :P. There I met a lot of enthusiastic KDE people out there. :)&lt;/p&gt;
+
+&lt;p&gt;Later on, I was selected as a Google Summer of Code (2017 edition) intern funded by Google. I contributed to  Krita(Krita is a professional and open source painting program) of KDE. The project was to Integrate share.krita.org.&lt;/p&gt;
+
+&lt;p&gt;Share.krita.org is a place where users can share Krita scripts, images, brush packs and more. This project has two parts: integrate with the KNSCore part of the KNewStuff framework (or reimplement the protocol) and create a GUI for sharing. The second part is improving the support for creating and editing bundles. Bundles can contain brushes, patterns, gradients and so on. Also, Krita needed basic support for creating and editing bundles.&lt;/p&gt;
+
+&lt;p&gt;Thus said, the entire journey with KDE last year was splendid!! The community as such is a group of awesome and enthusiastic people from all around the globe. To do more than I could last year – I hope to be a part of this great venture in 2018.&lt;/p&gt;
+
+&lt;p&gt;Here’s to a productive year, and looking forward to the same in 2018. You can see more of what happened in KDE in 2017 on the &lt;a href=&quot;https://www.kde.org/fundraisers/yearend2017/&quot;&gt;KDE year-end fundraiser&lt;/a&gt; page. Please do show some of your support to the community and its developers through the fundraiser to built your favorite software :)&lt;/p&gt;
+
+&lt;p&gt;Some of my blog post regarding my work last year:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://anikethgirish.wordpress.com/2017/05/13/kde-sok-2016-201/&quot;&gt;KDE SoK 2016-2017&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://anikethgirish.wordpress.com/2017/05/15/introduction-for-gsoc-2017-with-kde-krita/&quot;&gt;Introduction for GSoC 2017 with KDE, Krita&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://anikethgirish.wordpress.com/2017/05/15/awesomekde-community/&quot;&gt;Awesome::KDE Community :)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://anikethgirish.wordpress.com/2017/06/10/gsoc-17-week-1/&quot;&gt;GSoC ’17 – Week #1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://anikethgirish.wordpress.com/2017/06/23/gsoc17-week-2/&quot;&gt;GSoC ’17 – Week #2&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://anikethgirish.wordpress.com/2017/07/03/gsoc17-week-3/&quot;&gt;GSoC ’17 – Week #3&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://anikethgirish.wordpress.com/2017/07/14/gsoc17-week-4/&quot;&gt;GSoC ’17 – Week #4&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://anikethgirish.wordpress.com/2017/07/23/gsoc17-week-5/&quot;&gt;GSoC ’17 – Week #5&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://anikethgirish.wordpress.com/2017/07/30/gsoc17-week-6/&quot;&gt;GSoC’17 - Week #6&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://anikethgirish.wordpress.com/2017/09/10/gsoc17-from-1-line-of-code-to-4828/&quot;&gt;GSoC’17: From 1 Line of Code to 4828&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To the awesome year coming right your way,&lt;/p&gt;
+
+&lt;p&gt;Cheers.&lt;/p&gt;</content><author><name>Aniketh Girish</name></author><category term="KDE" /><category term="OSS" /><summary type="html">Good evening fellas,</summary></entry><entry><title type="html">amFOSS &amp;amp; Me.</title><link href="http://localhost:4000/blog/2017/05/amfoss_me.html" rel="alternate" type="text/html" title="amFOSS &amp; Me." /><published>2017-05-23T00:00:00+02:00</published><updated>2017-05-23T00:00:00+02:00</updated><id>http://localhost:4000/blog/2017/05/amfoss_me</id><content type="html" xml:base="http://localhost:4000/blog/2017/05/amfoss_me.html">&lt;p&gt;To me, FOSS is something for which I could keep on talking about it day and night. It’s something which helped me always to define what I was and what I’m now. Actually, the passion to be a better person causes me to be a part of this large community over here. I could have spent my extra time on enjoying things like others do, going for trips, enjoying whole time with their colleagues in the hostel. But I chose not to be that and not to continue that old mannerism, again and again, hence for that I chose to be in the lab, doing something worthwhile, which kept my focus on one thing. That is, re-write my future into a better one so that I could be a helping hand in making the world a better place to live in.&lt;/p&gt;
+
+&lt;p&gt;For me, if you asked what was FOSS club before 6 months, I would have said that it’s just a club which deals with something related to coding about free and open source software that’s it, nothing else. But now after 6 to 7 months roughly I would say for me FOSS club is everything. The lab, the people, the energy and the enthusiasm with which the club move forward make me feel this as my second home. When most of my batch mate leaves home I stay here itself in college and do something worthwhile. Yeah! Most of them asked me why don’t you go home? I would rather smile at them than answering to that question. I say in my mind that yeah, I do miss my family and friends, but the aim to be better and make my family proud drives me to stay here and learn. But, most of that feeling of missing my family was gone as I had a new family up here, Our own FOSS family.&lt;/p&gt;
+
+&lt;p&gt;Now after just 6 months, if again it’s asked that what is FOSS for you, I would say it’s an Emotion. Being a part of this really cool community over here in FOSS@Amrita, Whatever I did here maybe it can be called as achievements, but it feels certainly something else, a feeling that keeps you to move on and learn again new stuff. From learning new technologies to choosing an open source organization to as KDE to contribute, again learning new technologies like Qt with C++ and getting selected for KDE SoK and writing multiple articles for open source magazines and much more would only have happened with a club and mentors like these here. If it wasn’t for mentors like Vipin sir and seniors like Harish ettan, chirath ettan, and anu chechi and many others (Taking all their names would bring a list up here.) to motivate me when I was down and help me while I was stuck and to bring me up to try again harder to achieve what was necessary and chose what to do and not to.&lt;/p&gt;
+
+&lt;p&gt;After joining this club and the KDE community I became so socialized as at first I never used to interact with many people, but now it seems like I am changing from an introvert to an extrovert, even if my whole body seems to break down during that process, but the thought that members of this club will be there for me every time, helps me to do whatever I wished for.&lt;/p&gt;
+
+&lt;p&gt;After all, I wouldn’t be in this position (at least I think) without the help of FOSS club and it’s members. I would like to thank each and everyone here in FOSS@Amrita who helped me to be what I acquired within this time span always remembering that, without you, I wouldn’t be capable of doing what all I have done.&lt;/p&gt;</content><author><name>Aniketh Girish</name></author><category term="OSS" /><summary type="html">To me, FOSS is something for which I could keep on talking about it day and night. It’s something which helped me always to define what I was and what I’m now. Actually, the passion to be a better person causes me to be a part of this large community over here. I could have spent my extra time on enjoying things like others do, going for trips, enjoying whole time with their colleagues in the hostel. But I chose not to be that and not to continue that old mannerism, again and again, hence for that I chose to be in the lab, doing something worthwhile, which kept my focus on one thing. That is, re-write my future into a better one so that I could be a helping hand in making the world a better place to live in.</summary></entry><entry><title type="html">Kick Starter: How to Start contribution to KDE.</title><link href="http://localhost:4000/blog/2017/05/start_contributing_to_kde.html" rel="alternate" type="text/html" title="Kick Starter: How to Start contribution to KDE." /><published>2017-05-17T00:00:00+02:00</published><updated>2017-05-17T00:00:00+02:00</updated><id>http://localhost:4000/blog/2017/05/start_contributing_to_kde</id><content type="html" xml:base="http://localhost:4000/blog/2017/05/start_contributing_to_kde.html">&lt;p&gt;Basically, to fix bugs or to make contributions to a codebase, you are first required to build the application from source as not to make any problems in the existing code base. Obviously, you need to fetch the source first, which you can get by browsing through cgit.kde.org Once you have the source, you’re required to build the code that you just fetched/cloned. KDE projects make use of CMake - a cross-platform makefile generator.&lt;/p&gt;
+
+&lt;p&gt;So, to build an application, you can either follow the instructions given in the README or INSTALL files inside the repository. Usually, this involves the following steps:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;your-source-code-directory&quot;&lt;/span&gt;
+~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;build &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;build cmake .. &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;don&lt;span class=&quot;s1&quot;&gt;'t forget the dots! )
+~$ make -j&quot;no of processors -1&quot; (eg: make -j5) ​
+~$ make install
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;​What happens when you follow these set of commands is that ​your application is compiled and the build files, i.e the output of the compilation stage are left inside the build folder you just created.&lt;/p&gt;
+
+&lt;p&gt;Now in the last step, i.e when you run “make install”, all your build output is put in the right place, so as to get picked up at the time you launch your application. This is by default in /usr/bin or so.&lt;/p&gt;
+
+&lt;p&gt;So when any file needs to be moved to / prefix, it requires you to authenticate with “sudo” and it’s not advisable to install any application to a / prefix.&lt;/p&gt;
+
+&lt;p&gt;If you haven’t followed the above, don’t worry. Just remember, try NOT to use “sudo” in any commands you might use while building your applications.&lt;/p&gt;
+
+&lt;p&gt;​So what is the workaround for this? Whatever you build needs to be put(or installed) to a place from where your system can pick it up on runtime(i.e when you launch any app).​ For this purpose, it is suggested that you always install any application which you build from source to a custom prefix. In my case, development environment looks like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://anikethgirish.files.wordpress.com/2017/05/devel.png&quot; alt=&quot;devel&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;so when you configure your prefix properly, instead of installing to /usr, your build outputs would be installed to ~/devel/install/ and for this, you do not need to use “sudo” anywhere. The whole idea is that if something were to go wrong with an executable or if while installing, some configurations get altered your system wide configurations shouldn’t get affected(i.e configs in / prefix).&lt;/p&gt;
+
+&lt;p&gt;​​So in my case, I intend to install to ~/devel/install and I clone my source codes inside ~/devel/src folder. Once you have this directory structure, to make things simple for you, add this in bashrc or zshrc according to which bash you are using.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;KDE_SRC&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/home/aniketh/devel/src 
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;KDE_BUILD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/home/aniketh/devel/build 
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;KDE_INSTALL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/home/aniketh/devel/install 
+&lt;span class=&quot;c&quot;&gt;#export QTDIR=/usr export KF5=$KDE_INSTALL&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$KF5&lt;/span&gt;/bin:&lt;span class=&quot;nv&quot;&gt;$PATH&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;XDG_DATA_DIRS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$KF5&lt;/span&gt;/share:&lt;span class=&quot;nv&quot;&gt;$XDG_DATA_DIRS&lt;/span&gt; 
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;XDG_CONFIG_DIRS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$KF5&lt;/span&gt;/etc/xdg:&lt;span class=&quot;nv&quot;&gt;$XDG_CONFIG_DIRS&lt;/span&gt;:/etc/xdg:/usr/local/etc/xdg 
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;QT_PLUGIN_PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$KF5&lt;/span&gt;/lib64/plugins:/usr/local/lib64/plugins:&lt;span class=&quot;nv&quot;&gt;$QT_PLUGIN_PATH&lt;/span&gt; 
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;QML2_IMPORT_PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$KF5&lt;/span&gt;/lib64/qml:&lt;span class=&quot;nv&quot;&gt;$KF5&lt;/span&gt;/lib/x86_64-linux-gnu/qml:/usr/local/lib64/qml:&lt;span class=&quot;nv&quot;&gt;$QML2_IMPORT_PATH&lt;/span&gt; 
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;QML_IMPORT_PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$QML2_IMPORT_PATH&lt;/span&gt;:&lt;span class=&quot;nv&quot;&gt;$QML_IMPORT_PATH&lt;/span&gt; 
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;CMAKE_PREFIX_PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$KF5&lt;/span&gt;:&lt;span class=&quot;nv&quot;&gt;$CMAKE_PREFIX_PATH&lt;/span&gt; 
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;KDEDIRS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$KDE_INSTALL&lt;/span&gt;:&lt;span class=&quot;nv&quot;&gt;$KDEDIRS&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LD_LIBRARY_PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$KDE_INSTALL&lt;/span&gt;/lib64:&lt;span class=&quot;nv&quot;&gt;$LD_LIBRARY_PATH&lt;/span&gt; 
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PKG_CONFIG_PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/usr/lib/pkgconfig:&lt;span class=&quot;nv&quot;&gt;$KDE_INSTALL&lt;/span&gt;/lib64/pkgconfig:/usr/share/pkgconfig:&lt;span class=&quot;nv&quot;&gt;$PKG_CONFIG_PATH&lt;/span&gt; 
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;KDE_INTEGRATION&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;true&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You just need to open the terminal and write down.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;vim .zshrc or .bashrc
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You can use any of the text editors and add the variables.&lt;/p&gt;
+
+&lt;p&gt;So, the obvious thing to do here would be to add a command to your .bashrc or .zshrc which would source the environment variables in your script on every session’s startup. (This is what we have done, instead of writing down the whole set of the environment variable in a file and source it every time. So rather doing this we have initialised it once and no more we have to worry about that).&lt;/p&gt;
+
+&lt;p&gt;Once you’ve done this, to build any application, you will need to do just the following:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cmake &lt;span class=&quot;nt&quot;&gt;-DCMAKE_INSTALL_PREFIX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$KDE_INSTALL&lt;/span&gt; .. 
+make &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;no_of_processors&quot;&lt;/span&gt; 
+make &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;That’s it really. When we run the cmake command, it is obvious that we would encounter with error messages saying that some API’s needed for the project is missing, hence we will have to find the package which is missing.&lt;/p&gt;
+
+&lt;p&gt;The best way to do that is to give a search in the apt cache.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;apt-cache search package_name
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;After that run the cmake again till you get the configuration is done.&lt;/p&gt;
+
+&lt;p&gt;Hence that it, we will get the project up and running. If you encounter with other problems please feel free to contact me :)&lt;/p&gt;
+
+&lt;p&gt;Cheers.&lt;/p&gt;</content><author><name>Aniketh Girish</name></author><category term="KDE" /><category term="OSS" /><summary type="html">Basically, to fix bugs or to make contributions to a codebase, you are first required to build the application from source as not to make any problems in the existing code base. Obviously, you need to fetch the source first, which you can get by browsing through cgit.kde.org Once you have the source, you’re required to build the code that you just fetched/cloned. KDE projects make use of CMake - a cross-platform makefile generator.</summary></entry></feed>
