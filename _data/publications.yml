@@ -1,3 +1,119 @@
+- id: attribution
+  title: "Mixed Signals: Analyzing Software Attribution Challenges in the Android Ecosystem"
+  year: 2023
+  authors:
+    - Kaspar Hageman
+    - Álvaro Feal
+    - Julien Gamba
+    - Aniketh Girish
+    - Jakob Bleier
+    - Martina Lindorfer
+    - Juan Tapiador
+    - Narseo Vallina-Rodriguez
+  # awards:
+  #   - Best Paper Award
+  venue: IEEE Transactions on Software Engineering
+  venue_tags:
+    - TSE
+  # venue_location: Rome, Italy, December
+  venue_url: https://ieeexplore.ieee.org/xpl/aboutJournal.jsp?punumber=32
+  pdf: https://ieeexplore.ieee.org/abstract/document/10015797
+  # link: https://dane-study.github.io/
+  # doi: 10.1109/TVCG.2018.2865240
+  # short_doi: 10/cs68
+  highlight: true
+  tags:
+    - Android
+    - Authorship attribution
+  type:
+    - journal
+
+- id: testing-challenges
+  title: "Challenges in inferring privacy properties of smart devices: Towards scalable multi-vantage point testing methods"
+  year: 2022
+  authors:
+    - Aniketh Girish
+    - Vijay Prakash
+    - Serge Egelman
+    - Joel Reardon
+    - Juan Tapiador
+    - Danny Yuxing Huang
+    - Srdjan Matic
+    - Narseo Vallina-Rodriguez
+  # awards:
+  #   - Best Paper Award
+  venue: Proceedings of the 3rd International CoNEXT Student Workshop
+  venue_tags:
+    - CoNEXT-SW
+  venue_location: Rome, Italy, December
+  venue_url: https://conferences.sigcomm.org/co-next/2022/#!/home
+  pdf: https://dspace.networks.imdea.org/bitstream/handle/20.500.12761/1642/conext22-sw-%2323.pdf?sequence=1&isAllowed=y
+  # link: https://dane-study.github.io/
+  # doi: 10.1109/TVCG.2018.2865240
+  # short_doi: 10/cs68
+  highlight: true
+  tags:
+    - Privacy analysis
+    - hybrid black-box testing
+    - testing challenges
+  type:
+    - workshop
+
+- id: imposter-poster
+  title: "Towards an extensible privacy analysis framework for Smart Homes"
+  year: 2022
+  authors:
+    - Aniketh Girish
+    - Juan Tapiador
+    - Srdjan Matic
+    - Narseo Vallina-Rodriguez
+  # awards:
+  #   - Best Paper Award
+  venue: Proceedings of the 22nd ACM Internet Measurement Conference
+  venue_tags:
+    - IMC
+  venue_location: Nice, France, October
+  venue_url: https://conferences.sigcomm.org/imc/2022/
+  pdf: https://dspace.networks.imdea.org/bitstream/handle/20.500.12761/1627/dspace_version_imc22.pdf?sequence=1&isAllowed=y
+  # link: https://dane-study.github.io/
+  # doi: 10.1109/TVCG.2018.2865240
+  # short_doi: 10/cs68
+  highlight: true
+  tags:
+    - Privacy analysis
+    - Smart home
+    - hybrid black-box testing
+  type:
+    - Conference
+
+- id: imposter-tma
+  title: "ImposTer: Towards an Extensible Privacy Analysis framework for Smart home ecosystem"
+  year: 2022
+  authors:
+    - Aniketh Girish
+    - Juan Tapiador
+    - Srdjan Matic
+    - Narseo Vallina-Rodriguez
+  awards:
+    - Best Poster Award
+  venue: 10th Traffic Monitoring and Analysis PhD School “Network Intelligence and Measurements"
+  venue_tags:
+    - TMA
+  venue_location: Enschede, The Netherlands, June
+  venue_url: https://tma.ifip.org/2022/
+  # pdf: https://dspace.networks.imdea.org/bitstream/handle/20.500.12761/1627/dspace_version_imc22.pdf?sequence=1&isAllowed=y
+  # link: https://dane-study.github.io/
+  # doi: 10.1109/TVCG.2018.2865240
+  # short_doi: 10/cs68
+  highlight: true
+  tags:
+    - Privacy analysis
+    - Smart home
+    - hybrid black-box testing
+  type:
+    - Conference
+
+
 - id: master-thesis
   title: ImposTer-Towards an extensible privacy analysis framework for Smart Home ecosystem.
   year: 2021
@@ -38,7 +154,7 @@
     - Internet Security
   type:
     - Conference
-    - Journal
+    # - Journal
 
 
 - id: bachelor-thesis
