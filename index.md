@@ -45,7 +45,8 @@ I graduated from [Amrita Vishwa Vidyapeetham](https://www.amrita.edu/) in 2020, 
 
 I was also an active member of [amFOSS](https://amfoss.in) club advised by [Vipin P](https://www.linkedin.com/in/vipin-pavithran?originalSubdomain=in). amFOSS is a student-run community where like-minded people gather together to learn, solve and have tonnes of fun working on computer science problems and on exciting projects.
 
-<!-- More Details are enclosed in my [CV]({{ "/assets/Aniketh_CV.pdf" | relative_url }}). Detailed description of my interest could be found in [here]({{ "/assets/Cover_letter.pdf" | relative_url }}). -->
+More details are enclosed in my [CV]({{ "/assets/Aniketh_CV.pdf" | relative_url }}). 
+<!-- Detailed description of my interest could be found in [here]({{ "/assets/Cover_letter.pdf" | relative_url }}). -->
 
 
 ## Featured Publications
