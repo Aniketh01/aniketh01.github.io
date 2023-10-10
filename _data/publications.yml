@@ -1,3 +1,41 @@
+- id: IoTLAN
+  title: "In the Room Where It Happens: Characterizing Local Communication and Threats in Smart Homes"
+  year: 2023
+  authors:
+    - Aniketh Girish
+    - Tianrui Hu
+    - Vijay Prakash
+    - Daniel J. Dubois
+    - Srdjan Matic
+    - Danny Yuxing Huang
+    - Serge Egelman
+    - Joel Reardon
+    - Juan Tapiador
+    - David Choffnes
+    - Narseo Vallina-Rodriguez
+  # awards:
+  #   - Best Paper Award
+  venue: Proceedings of the 23nd ACM Internet Measurement Conference (IMC)
+  venue_tags:
+    - IMC
+  venue_location: Montréal, Canada
+  venue_url: https://conferences.sigcomm.org/imc/2023/
+  pdf: https://doi.org/10.1145/3618257.3624830
+  # link: https://dane-study.github.io/
+  # doi: 10.1109/TVCG.2018.2865240
+  # short_doi: 10/cs68
+  highlight: true
+  tags:
+    - Smart Home
+    - IoT
+    - Local Communication
+    - Security
+    - Privacy
+    - Side Channels
+    - Household Fingerprinting
+  type:
+    - Conference
+
 - id: attribution
   title: "Mixed Signals: Analyzing Software Attribution Challenges in the Android Ecosystem"
   year: 2023
@@ -69,7 +107,7 @@
     - Narseo Vallina-Rodriguez
   # awards:
   #   - Best Paper Award
-  venue: Proceedings of the 22nd ACM Internet Measurement Conference
+  venue: Proceedings of the 22nd ACM Internet Measurement Conference (IMC)
   venue_tags:
     - IMC
   venue_location: Nice, France, October
