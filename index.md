@@ -15,7 +15,7 @@ class: home
 
 <!-- <p style="color:red;"><i>From January 2020 onwards, I'm actively looking for Research Associate/Assitant/Internship position to exploring the general areas of networking, measurements, internet protocols and it's security extensions. <b>Email me</b> if you find an overlap of interests!</i></p> -->
 
-I'm a second year PhD student in [Internet Analytics group](http://people.networks.imdea.org/~narseo_vallina/research.html) at the IMDEA Networks Institute and Universidad Carlos III de Madrid, Madrid, Spain advised by [Dr. Narseo Vallina-Rodriguez](https://networks.imdea.org/team/imdea-networks-team/people/narseo-vallina-rodriguez/). I emperically measure the privacy and security risks of smart home and Mobile ecosystem with a particular focus on consumer data protection and regulatory compliance.
+I'm a final year PhD student in [Internet Analytics group](http://people.networks.imdea.org/~narseo_vallina/research.html) at the IMDEA Networks Institute and Universidad Carlos III de Madrid, Madrid, Spain advised by [Dr. Narseo Vallina-Rodriguez](https://networks.imdea.org/team/imdea-networks-team/people/narseo-vallina-rodriguez/). I empirically measure the privacy and security risks of smart home and mobile ecosystem with a particular focus on consumer data protection and regulatory compliance.
 
 Prior to joining IMDEA, I was a Remote Research Intern at Rochester Institute of Technology, USA collaborating with [Prof. Tijay](https://taejoong.github.io) and also a Research Associate Intern at the IIJ Innovation Institute (IIJ-II), collaborating with the amazing [Dr. Hajime](https://www.iij-ii.co.jp/members/tazaki.html). My work was focused on Email and DNS Security extensions, and Process-based Isolation with Linux Unikernels.
 
