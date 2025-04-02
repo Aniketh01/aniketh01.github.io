@@ -1,3 +1,55 @@
+- id: SignalSDK
+  title: "Your Signal, Their Data: An Empirical Privacy Analysis of Wireless-scanning SDKs in Android"
+  year: 2025
+  authors:
+    - Aniketh Girish
+    - Joel Reardon
+    - Juan Tapiador
+    - Srdjan Matic
+    - Narseo Vallina-Rodriguez
+  venue: Proceedings on Privacy Enhancing Technologies (PoPETs)
+  venue_tags:
+    - PoPETs
+  venue_url: https://petsymposium.org/
+  pdf: https://arxiv.org/abs/2503.15238
+  highlight: true
+  tags:
+    - Android
+    - SDKs
+    - Wireless Scanning
+    - Privacy
+    - Mobile Ecosystem
+    - BLE
+    - Wi-Fi
+  type:
+    - Conference
+
+
+- id: ChildPrivacy
+  title: "The Effect of Platform Policies on App Privacy Compliance: A Study of Child-Directed Apps"
+  year: 2025
+  authors:
+    - Noura Alomar
+    - Joel Reardon
+    - Aniketh Girish
+    - Narseo Vallina-Rodriguez
+    - Serge Egelman
+  venue: Proceedings on Privacy Enhancing Technologies (PoPETs)
+  venue_tags:
+    - PoPETs
+  venue_url: https://petsymposium.org/
+  highlight: true
+  tags:
+    - Privacy
+    - Children
+    - Platform Policies
+    - App Compliance
+    - Mobile Ecosystem
+    - COPPA
+  type:
+    - Conference
+
+
 - id: IoTLAN
   title: "In the Room Where It Happens: Characterizing Local Communication and Threats in Smart Homes"
   year: 2023
@@ -13,17 +65,14 @@
     - Juan Tapiador
     - David Choffnes
     - Narseo Vallina-Rodriguez
-  # awards:
-  #   - Best Paper Award
+  awards:
+    - Prompted Android 16's new local network permission.
   venue: Proceedings of the 23nd ACM Internet Measurement Conference (IMC)
   venue_tags:
     - IMC
   venue_location: Montréal, Canada
   venue_url: https://conferences.sigcomm.org/imc/2023/
   pdf: https://doi.org/10.1145/3618257.3624830
-  # link: https://dane-study.github.io/
-  # doi: 10.1109/TVCG.2018.2865240
-  # short_doi: 10/cs68
   highlight: true
   tags:
     - Smart Home
