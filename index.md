@@ -17,7 +17,6 @@ I am a Ph.D. student at IMDEA Networks Institute in Madrid, Spain, advised by Dr
 
 During my Ph.D., I was a visiting researcher at Northeastern University’s Cybersecurity and Privacy Institute (USA), advised by Prof. David Choffnes. Prior to that, I held research positions at the Rochester Institute of Technology (USA) and IIJ Innovation Institute (Japan). I was selected twice for Google Summer of Code, contributing to KDE and GNU Linux, and spent a summer at Ben-Gurion University (Israel) exploring applications of machine learning in cybersecurity.
 
-
 <!-- <p style="color:red;"><i>From January 2020 onwards, I'm actively looking for Research Associate/Assitant/Internship position to exploring the general areas of networking, measurements, internet protocols and it's security extensions. <b>Email me</b> if you find an overlap of interests!</i></p> -->
 
 <!-- I'm a final year PhD student in [Internet Analytics group](http://people.networks.imdea.org/~narseo_vallina/research.html) at the IMDEA Networks Institute and Universidad Carlos III de Madrid, Madrid, Spain advised by [Dr. Narseo Vallina-Rodriguez](https://networks.imdea.org/team/imdea-networks-team/people/narseo-vallina-rodriguez/). I empirically measure the privacy and security risks of smart home and mobile ecosystem with a particular focus on consumer data protection and regulatory compliance. -->
@@ -60,6 +59,8 @@ My research has also informed enforcement policies at leading regulatory authori
 
 More details are enclosed in my [CV]({{ "/assets/Aniketh_CV.pdf" | relative_url }}). 
 <!-- Detailed description of my interest could be found in [here]({{ "/assets/Cover_letter.pdf" | relative_url }}). -->
+
+<b> I’m open to full-time opportunities in the next 6~12 months, feel free to contact me if you think I’d be a fit! </b>
 
 
 ## Featured Publications
