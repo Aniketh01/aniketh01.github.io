@@ -1,8 +1,8 @@
 # Site settings
 title: Aniketh Girish
-email: aniketh.girish@imdea.org
+email: aniketh.girish@networks.imdea.org
 description: > # this means to ignore newlines until "baseurl:"
-  Aniketh Girish: Second year PhD student at IMDEA Networks Institute and 
+  Aniketh Girish: Postdoc at IMDEA Networks Institute and 
   Universidad Carlos III de Madrid. Interested in the privacy and measurement of 
   IoT and mobile infrastructure.
 baseurl: "" # the subpath of your site, e.g. /blog

@@ -13,7 +13,8 @@ class: home
 
 <div class="intro" markdown="1">
 
-I am a Ph.D. student at IMDEA Networks Institute in Madrid, Spain, advised by Dr. Narseo Vallina-Rodriguez since 2020. My research falls at the intersection of (1) hybrid black-box testing, (2) empirical analysis of covert privacy risks in smart home and mobile ecosystems, and (3) regulatory compliance. I have published in top peer-reviewed venues (e.g., PETS, IMC, USENIX Security), and Q1 journals (IEEE Transactions on Software Engineering). I got the Best Poster Award at the TMA'22 Ph.D. school for my novel approach to IoT testing.
+I'm a Postdoctoral Researcher at the IMDEA Networks Institute in Madrid, Spain. I completed my Ph.D. at IMDEA Networks Institute in 2025, advised by Dr. Narseo Vallina-Rodriguez.
+My research falls at the intersection of (1) hybrid black-box testing, (2) empirical analysis of covert privacy risks in smart home and mobile ecosystems, and (3) regulatory compliance. I have published in top peer-reviewed venues (e.g., PETS, IMC, USENIX Security), and Q1 journals (IEEE Transactions on Software Engineering). I got the Best Poster Award at the TMA'22 Ph.D. school for my novel approach to IoT testing.
 
 During my Ph.D., I was a visiting researcher at Northeastern University’s Cybersecurity and Privacy Institute (USA), advised by Prof. David Choffnes. Prior to that, I held research positions at the Rochester Institute of Technology (USA) and IIJ Innovation Institute (Japan). I was selected twice for Google Summer of Code, contributing to KDE and GNU Linux, and spent a summer at Ben-Gurion University (Israel) exploring applications of machine learning in cybersecurity.
 
