@@ -1,3 +1,37 @@
+- id: bridges-to-self
+  title: "Bridges to Self: An Empirical Analysis of Self-Hosted Third-Party Services in the Mobile Ecosystem"
+  year: 2025
+  authors:
+    - Aniketh Girish
+    - Joel Reardon
+    - Juan Tapiador
+    - Srdjan Matic
+    - Narseo Vallina-Rodriguez
+  venue: To appear in Proceedings of the 35th USENIX Security Symposium, 2026.
+  venue_tags:
+    - USENIX
+  venue_url: https://www.usenix.org/conferences/usenixsecurity26
+  pdf: https://localmess.github.io/assets/bridges-to-self-localmess-usenix-security-26.pdf
+  link: https://localmess.github.io/
+  code: https://github.com/localmess/localhost-abuse
+  highlight: true
+  awards:
+    - Chrome and Firefox introduced protections to block localhost access; DuckDuckGo, uBlock Origin, and AdGuard enhanced their blocklists.
+    - Informed Chrome & Firefox localhost protections; adopted by DuckDuckGo, uBlock Origin, and AdGuard.
+    - Accelerated W3C Local Network Access (LNA) standardization.
+    - Prompted Android 17 localhost permission.
+    - Triggered regulatory engagement (CNIL, UK CMA, EC, EDPB) and U.S. congressional inquiry.
+    - Cited in class actions (U.S., Canada, Germany).
+    - Testified before Spanish Congress for the investigation into Meta; referenced in public statements by Spain's Prime Minister.
+
+  tags:
+    - Cross-Platform tracking
+    - Privacy
+    - Mobile Ecosystem
+    - Web Tracking
+  type:
+    - Conference
+
 - id: SignalSDK
   title: "Your Signal, Their Data: An Empirical Privacy Analysis of Wireless-scanning SDKs in Android"
   year: 2025
