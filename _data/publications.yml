@@ -8,7 +8,7 @@
     - Gunes Acar
     - Frederik Zuiderveen Borgesius
     - Narseo Vallina-Rodriguez
-  venue: In Proceedings of the 35th USENIX Security Symposium
+  venue: Proceedings of the 35th USENIX Security Symposium
   venue_tags:
     - USENIX
   venue_url: https://www.usenix.org/conferences/usenixsecurity26
@@ -242,7 +242,7 @@
   pdf: /papers/aniketh_thesis_v1.pdf
 
 - id: dane
-  title: "A Longitudinal and Comprehensive Study of the DANE Ecosystem in Email "
+  title: "A Longitudinal and Comprehensive Study of the DANE Ecosystem in Email"
   year: 2020
   authors:
     - Hyeonmin Lee
@@ -252,7 +252,7 @@
     - Taejoong Chung
   # awards:
   #   - Best Paper Award
-  venue: In Proceedings of the USENIX Security Symposium (Security'20)
+  venue: Proceedings of the 29th USENIX Security Symposium
   venue_tags:
     - USENIX Security
   venue_location: Boston, United States, August
