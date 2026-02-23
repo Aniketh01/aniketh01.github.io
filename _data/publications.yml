@@ -2,10 +2,11 @@
   title: "Bridges to Self: An Empirical Analysis of Self-Hosted Third-Party Services in the Mobile Ecosystem"
   year: 2025
   authors:
+    - Tim Vlummens
     - Aniketh Girish
-    - Joel Reardon
-    - Juan Tapiador
-    - Srdjan Matic
+    - Nipuna Weerasekara
+    - Gunes Acar
+    - Frederik Zuiderveen Borgesius
     - Narseo Vallina-Rodriguez
   venue: To appear in Proceedings of the 35th USENIX Security Symposium, 2026.
   venue_tags:
