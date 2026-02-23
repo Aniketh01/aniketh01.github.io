@@ -96,6 +96,9 @@
     - Juan Tapiador
     - David Choffnes
     - Narseo Vallina-Rodriguez
+  co_first_authors:
+    - Aniketh Girish
+    - Tianrui Hu
   awards:
     - Prompted Android 16's new local network permission.
   venue: Proceedings of the 23nd ACM Internet Measurement Conference (IMC)
