@@ -17,14 +17,7 @@
   code: https://github.com/localmess/localhost-abuse
   highlight: true
   awards:
-    - Chrome and Firefox introduced protections to block localhost access; DuckDuckGo, uBlock Origin, and AdGuard enhanced their blocklists.
-    - Informed Chrome & Firefox localhost protections; adopted by DuckDuckGo, uBlock Origin, and AdGuard.
-    - Accelerated W3C Local Network Access (LNA) standardization.
-    - Prompted Android 17 localhost permission.
-    - Triggered regulatory engagement (CNIL, UK CMA, EC, EDPB) and U.S. congressional inquiry.
-    - Cited in class actions (U.S., Canada, Germany).
-    - Testified before Spanish Congress for the investigation into Meta; referenced in public statements by Spain's Prime Minister.
-
+    - Informed browser localhost protections (Chrome, Firefox; adopted by DuckDuckGo, uBlock Origin, AdGuard); accelerated W3C LNA standardization; prompted Android 17 localhost permission; triggered regulatory engagement (CNIL, UK CMA, EC, EDPB) and U.S. congressional inquiry; cited in class actions (U.S., Canada, Germany); testified before Spanish Congress investigation into Meta and referenced in public statements by Spain's Prime Minister.
   tags:
     - Cross-Platform tracking
     - Privacy
