@@ -254,7 +254,7 @@
   #   - Best Paper Award
   venue: Proceedings of the 29th USENIX Security Symposium
   venue_tags:
-    - USENIX Security
+    - USENIX
   venue_location: Boston, United States, August
   venue_url: https://www.usenix.org/conference/usenixsecurity20
   pdf: /papers/sec20fall-final327.pdf
