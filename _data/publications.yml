@@ -1,6 +1,6 @@
 - id: bridges-to-self
   title: "Bridges to Self: An Empirical Analysis of Self-Hosted Third-Party Services in the Mobile Ecosystem"
-  year: 2025
+  year: 2026
   authors:
     - Tim Vlummens
     - Aniketh Girish
@@ -8,7 +8,7 @@
     - Gunes Acar
     - Frederik Zuiderveen Borgesius
     - Narseo Vallina-Rodriguez
-  venue: To appear in Proceedings of the 35th USENIX Security Symposium, 2026.
+  venue: To appear in Proceedings of the 35th USENIX Security Symposium.
   venue_tags:
     - USENIX
   venue_url: https://www.usenix.org/conferences/usenixsecurity26
