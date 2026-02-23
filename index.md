@@ -71,7 +71,7 @@ More details are enclosed in my [CV]({{ "/assets/Aniketh_CV.pdf" | relative_url 
     {% if pub.highlight %}
       <a href="{{ pub.pdf }}" class="publication">
         <strong>{{ pub.title }}</strong>
-        <span class="authors">{% for author in pub.authors %}{{ author }}{% unless forloop.last %}, {% endunless %}{% endfor %}</span>.
+        <span class="authors">{% for author in pub.authors %}{{ author }}{% if pub.co_first_authors contains author %}<sup>*</sup>{% endif %}{% unless forloop.last %}, {% endunless %}{% endfor %}</span>{% if pub.co_first_authors %} <span class="co-first-note"><sup>*</sup> Co-first authors</span>{% endif %}.
         <i>{{ pub.venue }}, {{ pub.year }}</i>.
         {% for award in pub.awards %}<br/><span class="award"><i class="fas fa-{% if award == "Best Paper Award" %}trophy{% else %}award{% endif %}" aria-hidden="true"></i> {{ award }}</span>{% endfor %}
       </a>

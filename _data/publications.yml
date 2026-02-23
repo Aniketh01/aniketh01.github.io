@@ -8,6 +8,9 @@
     - Gunes Acar
     - Frederik Zuiderveen Borgesius
     - Narseo Vallina-Rodriguez
+  co_first_authors:
+    - Tim Vlummens
+    - Aniketh Girish
   venue: Proceedings of the 35th USENIX Security Symposium
   venue_tags:
     - USENIX
