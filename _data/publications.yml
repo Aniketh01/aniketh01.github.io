@@ -53,7 +53,7 @@
   venue_tags:
     - PoPETs
   venue_url: https://petsymposium.org/
-  pdf: https://arxiv.org/abs/2503.15238
+  pdf: https://petsymposium.org/popets/2025/popets-2025-0103.pdf
   highlight: true
   tags:
     - Android
@@ -81,6 +81,7 @@
     - PoPETs
   venue_url: https://petsymposium.org/
   highlight: true
+  pdf: https://petsymposium.org/popets/2025/popets-2025-0094.pdf
   tags:
     - Privacy
     - Children
