@@ -29,6 +29,17 @@
   type:
     - Conference
 
+- id: understanding-interconnected-abuse
+  title: "Understanding Interconnected Abuse in Consumer Smart Device Ecosystems"
+  year: 2025
+  authors:
+    - Aniketh Girish
+  type:
+    - Thesis
+  pdf: https://dspace.networks.imdea.org/bitstream/handle/20.500.12761/1994/aniketh_dissertation.pdf?sequence=1&isAllowed=y
+  description: PhD dissertation.
+
+
 - id: SignalSDK
   title: "Your Signal, Their Data: An Empirical Privacy Analysis of Wireless-scanning SDKs in Android"
   year: 2025
@@ -238,7 +249,7 @@
 - id: master-thesis
   title: ImposTer-Towards an extensible privacy analysis framework for Smart Home ecosystem.
   year: 2021
-  description: My MsC dissertation. 
+  description: MsC dissertation. 
   authors:
     - Aniketh Girish
   advisor:
