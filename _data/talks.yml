@@ -1,3 +1,38 @@
+- title: "Sweat, Sync, and Exposure: A Privacy Analysis of Interoperable Health and Fitness Ecosystem"
+  location: University of Zaragoza, EMACS Workshop
+  city: Jaca, Spain
+  date: 2026-01
+
+- title: "Covert Web-to-App Tracking via Localhost on Android"
+  location: EURECOM Mobsec Seminar
+  city: Sophia Antipolis (Remote)
+  date: 2025-06
+
+- title: "Covert Web-to-App Tracking via Localhost on Android"
+  location: Ad-Filtering Dev Summit
+  city: Limassol, Cyprus
+  date: 2025-05
+
+- title: "Covert Web-to-App Tracking via Localhost on Android"
+  location: IETF 123 (PEARG)
+  city: Madrid, Spain
+  date: 2025-03
+
+- title: "Your Signal, Their Data: An Empirical Privacy Analysis of Wireless-scanning SDKs in Android"
+  location: XIX RediMadrid Conference
+  city: Madrid, Spain
+  date: 2025-02
+
+- title: "In the Room Where It Happens — Characterizing Local Communication and Threats in Smart Homes"
+  location: RIPE 89 Plenary
+  city: Prague, Czech Republic
+  date: 2024-10
+
+- title: "In the Room Where It Happens — Characterizing Local Communication and Threats in Smart Homes"
+  location: XIX RediMadrid Conference
+  city: Madrid, Spain
+  date: 2024-02
+
 - title: "Email security with DANE: Empirical Analysis of DANE for SMTP in the wild"
   location: BSides India
   city: Delhi, India (Remote)

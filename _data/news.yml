@@ -1,8 +1,50 @@
-# - message: "I attended TMA(Network Traffic Measurement and Analysis Conference) 2020, remotely."
-#   date: 2020-06
-# - message: "Our paper that studied the email PKI ecosystem (DANE) has been accepted at USENIX Security 2020!"
-#   date: 2020-02
-# - message: "I will be speaking at Akademy'19 at Milan, Italy."
-#   date: 2019-09
-# - message: "I will be interning at IIJ Innovation Institute in Tokyo, Japan this summer."
-#   date: 2019-06
+- message: "Invited talk at the University of Zaragoza EMACS Workshop on interoperable health and fitness ecosystem privacy."
+  date: 2026-01
+
+- message: "[Bridges to Self](https://dspace.networks.imdea.org/bitstream/handle/20.500.12761/2015/bridges-to-self-localmess-usenix-security-26.pdf?sequence=1) accepted at [**USENIX Security 2026**](https://www.usenix.org/conference/usenixsecurity26) — exposing silent web-to-app tracking via localhost on Android."
+  date: 2025-10
+
+- message: "Our team testified before the **Spanish Congress** on Meta's localhost tracking abuse, following a parliamentary investigation [announced by the Spanish Prime Minister](https://www.lamoncloa.gob.es/lang/en/presidente/news/paginas/2025/20251119-metafuture-4th-edition.aspx)."
+  date: 2025-07
+
+- message: "U.S. Congress members cited our localhost research in a [**formal inquiry to Meta leadership**](https://schakowsky.house.gov/sites/evo-subsites/schakowsky.house.gov/files/evo-media-document/letter-to-meta-concerning-violation-of-android-privacy-protections.pdf)."
+  date: 2025-07
+
+- message: "Google introduced a **[localhost permission in Android 17](https://web.archive.org/web/20260214205048/https://developer.android.com/about/versions/17/behavior-changes-17#localhost-protections)**, prompted by our research."
+  date: 2025-06
+
+- message: "Meta and Yandex terminated localhost abuse on the day of our [public disclosure](https://localmess.github.io/). Covered by 100+ outlets including [Washington Post](https://www.washingtonpost.com/technology/2025/06/06/meta-privacy-facebook-instagram/), [Ars Technica](https://arstechnica.com/security/2025/06/meta-and-yandex-are-de-anonymizing-android-users-web-browsing-identifiers/), and [El Pa&iacute;s](https://elpais.com/tecnologia/2025-06-03/este-es-el-metodo-oculto-con-el-que-meta-rastrea-sin-permiso-la-navegacion-en-moviles-tambien-en-modo-incognito-o-con-vpn.html)."
+  date: 2025-06
+
+- message: "[Chrome 137](https://chromestatus.com/feature/5765473641725952) and [Firefox](https://bugzilla.mozilla.org/show_bug.cgi?id=1969916) deployed access restrictions based on our localhost findings."
+  date: 2025-06
+
+- message: "Invited to present at [**IETF PEARG 123**](https://datatracker.ietf.org/meeting/123/session/pearg/) (Madrid) on covert localhost tracking."
+  date: 2025-03
+
+- message: "Started as **Postdoctoral Researcher** at [IMDEA Networks Institute](https://networks.imdea.org/)."
+  date: 2025-10
+
+- message: "Completed my Ph.D. **Cum Laude** at [IMDEA Networks](https://networks.imdea.org/) / UC3M."
+  date: 2025-10
+
+- message: "Two papers accepted at [**PoPETs 2025**](https://petsymposium.org/): [wireless-scanning SDK privacy analysis](https://petsymposium.org/popets/2025/popets-2025-0103.pdf) and [child-directed app compliance](https://petsymposium.org/popets/2025/popets-2025-0094.pdf)."
+  date: 2025-01
+
+- message: "Google introduced a **[local network permission](https://developer.android.com/reference/android/Manifest.permission#ACCESS_LOCAL_NETWORK) in Android 16**, prompted by our [IoT smart home research](https://doi.org/10.1145/3618257.3624830)."
+  date: 2024-10
+
+- message: "Invited plenary talk at [**RIPE 89**](https://ripe89.ripe.net/) in Prague on smart home privacy threats."
+  date: 2024-10
+
+- message: "Visiting researcher at [**Northeastern University**](https://www.northeastern.edu/) Cybersecurity and Privacy Institute, hosted by [Prof. David Choffnes](https://david.choffnes.com/)."
+  date: 2024-04
+
+- message: "Our paper on [local communication in smart homes](https://doi.org/10.1145/3618257.3624830) published at [**IMC 2023**](https://conferences.sigcomm.org/imc/2023/)."
+  date: 2023-10
+
+- message: "Attended the [**EPFL Summer Research Institute**](https://sri-security-privacy.epfl.ch/) on Security and Privacy in Lausanne."
+  date: 2023-07
+
+- message: "Best Poster and Presentation Award at [**TMA 2022**](https://tma.ifip.org/2022/) Ph.D. school."
+  date: 2022-06

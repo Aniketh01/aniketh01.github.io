@@ -1,29 +1,58 @@
 - title: LocalMess
   url: https://localmess.github.io/
-  description: "LocalMess is a novel tracking method by Meta and Yandex that potentially affects billions of Android users. It allows native Android apps to silently listen on fixed local ports for tracking purposes, effectively de-anonymizing users' web activity."
-  highlight: 1
+  code: https://github.com/localmess/localhost-abuse
+  paper: https://localmess.github.io/
+  description: "Novel tracking method by Meta and Yandex affecting billions of Android users. Native apps silently listen on fixed local ports, de-anonymizing users' web activity — even in incognito mode or behind a VPN."
+  highlight: true
   image: localmess.png
+  tags:
+    - Privacy
+    - Android
+    - Tracking
 
-- title: engine
+- title: IoT-LAN
+  code: https://github.com/Android-Observatory/IoT-LAN
+  paper: https://doi.org/10.1145/3618257.3624830
+  description: "Tools for testing privacy and security threats of IoT local network protocols (UPnP, mDNS) in home networks. Includes active scanners, honeypots, traffic analysis, and app analysis scripts."
+  highlight: true
+  tags:
+    - IoT
+    - Smart Home
+    - Privacy
+
+- title: Wireless Beacon Analysis
+  code: https://github.com/wireless-scanning-SDKs/wireless-beacon-analysis
+  paper: https://petsymposium.org/popets/2025/popets-2025-0103.pdf
+  description: "Analysis code and datasets for studying wireless-scanning SDKs in Android. Includes call graph extraction, beacon SDK detection, and empirical datasets from static and dynamic analysis."
+  highlight: true
+  tags:
+    - Android
+    - Wireless
+    - SDKs
+
+- title: dockerd-darwin
   code: https://github.com/ukontainer/dockerd-darwin/tree/darwin-port/cmd/dockerd
-  image: docker.jpg
-  description: "Dockerd port for macOS. Dockerd is self-sufficient runtime for containers."
-  highlight: 2
-
-# - title: Probe
-#   image: probe.jpg
-#   description: "A high performant lightweight userspace Network stack over Go exhibiting full kernel bypass."
-#   highlight: 2
+  description: "Port of the Docker daemon (dockerd) to macOS/Darwin. Enables running the self-sufficient container runtime natively on macOS without a Linux VM, contributing upstream to the ukontainer project."
+  highlight: false
+  tags:
+    - Containers
+    - Systems
+    - Go
 
 - title: goRFC
-  image: RFC.png
-  description: "goRFC, an RFC prettifie written in Go."
-  highlight: 3
-  
+  code: https://github.com/Aniketh01/goRFC
+  description: "A command-line RFC reader and prettifier written in Go. Fetches, caches, and renders IETF RFCs with clean formatting for terminal reading."
+  highlight: false
+  tags:
+    - Go
+    - CLI
+
 - title: amFOSS.in
   code: https://github.com/amfoss/fosswebsite
-  image: amfoss.png
-  description: "A club management system that handles student details, progress, events, achievements, attendance, status updates, teams and workshop registrations. This is the official FOSS@Amrita website"
+  description: "Full-stack club management platform for [FOSS@Amrita](https://amfoss.in) — handles member profiles, attendance tracking, event management, team formation, and workshop registrations. Built with Django and deployed for 100+ active members."
+  tags:
+    - Django
+    - Open Source
 
 # - title: Falcon
 #   url: https://github.com/uwdata/falcon

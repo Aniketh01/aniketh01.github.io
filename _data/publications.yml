@@ -20,7 +20,7 @@
   code: https://github.com/localmess/localhost-abuse
   highlight: true
   awards:
-    - Informed browser localhost protections (adopted by Chrome, Firefox; DuckDuckGo, uBlock Origin, AdGuard); accelerated W3C LNA standardization; prompted Android 17 localhost permission; triggered regulatory engagement (CNIL, UK CMA, EC, EDPB) and U.S. congressional inquiry; cited in class actions (U.S., Canada, Germany); testified before Spanish Congress investigation into Meta and referenced in public statements by Spain's Prime Minister.
+    - Informed browser localhost protections (adopted by Chrome, Firefox; DuckDuckGo, uBlock Origin, AdGuard); accelerated W3C LNA standardization; prompted Android 17 localhost permission; triggered regulatory engagement (CNIL, UK CMA, EC, EDPB) and U.S. congressional inquiry; cited in class actions (U.S., Canada, Germany); our team testified before Spanish Congress investigation into Meta and referenced in public statements by Spain's Prime Minister.
   tags:
     - Cross-Platform tracking
     - Privacy
@@ -112,7 +112,7 @@
     - Aniketh Girish
     - Tianrui Hu
   awards:
-    - Prompted Android 16's new local network permission.
+    - Prompted Android 16's new local network permission. Presented at CNIL Privacy Research Day 2024.
   venue: Proceedings of the 23nd ACM Internet Measurement Conference (IMC)
   venue_tags:
     - IMC
@@ -154,7 +154,7 @@
   # link: https://dane-study.github.io/
   # doi: 10.1109/TVCG.2018.2865240
   # short_doi: 10/cs68
-  highlight: true
+  highlight: false
   tags:
     - Android
     - Authorship attribution
@@ -184,7 +184,7 @@
   # link: https://dane-study.github.io/
   # doi: 10.1109/TVCG.2018.2865240
   # short_doi: 10/cs68
-  highlight: true
+  highlight: false
   tags:
     - Privacy analysis
     - hybrid black-box testing
@@ -211,7 +211,7 @@
   # link: https://dane-study.github.io/
   # doi: 10.1109/TVCG.2018.2865240
   # short_doi: 10/cs68
-  highlight: true
+  highlight: false
   tags:
     - Privacy analysis
     - Smart home
@@ -238,7 +238,7 @@
   # link: https://dane-study.github.io/
   # doi: 10.1109/TVCG.2018.2865240
   # short_doi: 10/cs68
-  highlight: true
+  highlight: false
   tags:
     - Privacy analysis
     - Smart home
@@ -279,7 +279,7 @@
   link: https://dane-study.github.io/
   # doi: 10.1109/TVCG.2018.2865240
   # short_doi: 10/cs68
-  highlight: true
+  highlight: false
   tags:
     - Analysis of network and security protocols
     - Network infrastructure security
