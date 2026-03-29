@@ -40,9 +40,6 @@ class: impact
   <button class="topic-btn" data-topic="wireless">
     <span class="topic-dot dot-wireless"></span> Wireless SDKs
   </button>
-  <button class="topic-btn" data-topic="childapps">
-    <span class="topic-dot dot-childapps"></span> Child-Directed Apps
-  </button>
 </div>
 
 <!-- ============================================ -->
@@ -211,41 +208,6 @@ class: impact
 
 </div>
 
-<!-- ============================================ -->
-<!-- CHILD-DIRECTED APPS -->
-<!-- ============================================ -->
-<div class="topic-block" data-topics="childapps">
-
-<div class="topic-header childapps-header">
-  <div class="topic-header-content">
-    <h2>Child-Directed Apps</h2>
-    <p class="topic-subtitle">Empirical evidence that platform policy enforcement is insufficient for regulatory compliance &mdash; developers cannot control third-party SDK behavior, revealing structural limitations in how access control policies propagate through the software supply chain.</p>
-    <div class="topic-paper">
-      <span class="venue-badge">PoPETs 2025</span>
-      <span class="paper-title">The Effect of Platform Policies on App Privacy Compliance</span>
-      <a href="https://petsymposium.org/popets/2025/popets-2025-0094.pdf" class="paper-link"><i class="fa-solid fa-file-pdf"></i></a>
-    </div>
-  </div>
-</div>
-
-<div class="topic-impact-sections">
-
-<div class="impact-col">
-<h4><i class="fa-solid fa-shield-halved"></i> Impact</h4>
-<ul class="impact-list">
-  <li>Demonstrated that despite Google Play's stricter SDK restrictions and privacy label requirements, developers remain unable to control third-party SDK behavior.</li>
-  <li>Revealed a <strong>structural limitation</strong> in how platform access control policies propagate through the software supply chain.</li>
-  <li>Informed ongoing policy debates around children's online privacy regulation.</li>
-</ul>
-</div>
-
-</div>
-
-</div>
-
-<div class="impact-footer-note">
-  All research artifacts are publicly released following open science principles. Achieved within a PhD completed <em>Cum Laude</em> at IMDEA Networks / UC3M, now continuing as a postdoctoral researcher at IMDEA Networks Institute.
-</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -253,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const counters = document.querySelectorAll('.stat-number');
   const animateCounter = (counter) => {
     const target = +counter.getAttribute('data-target');
-    const suffix = target >= 20 ? '+' : '';
+    const suffix = '+';
     const increment = Math.max(1, Math.floor(target / 60));
     let current = 0;
     const updateCount = () => {

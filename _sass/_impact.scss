@@ -33,16 +33,15 @@
   }
 
   .stat-card {
-    background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
-    border-radius: 8px;
+    background: #fafafa;
+    border-radius: 6px;
     padding: 1em 0.8em;
     text-align: center;
     border: 1px solid #e8e8e8;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: box-shadow 0.2s ease;
 
     &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     }
   }
 
@@ -132,34 +131,34 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  // Topic header — colored banner per paper
+  // Topic header — subtle left-border accent per paper
   .topic-header {
-    border-radius: 10px;
-    padding: 1.2em 1.5em;
+    border-left: 4px solid #ddd;
+    padding: 0.8em 1.2em;
     margin-bottom: 1em;
-    color: #fff;
-
-    a { color: rgba(255,255,255,0.9); &:hover { color: #fff; opacity: 1; } }
+    background: #fafafa;
+    border-radius: 0 4px 4px 0;
   }
 
-  .localhost-header  { background: linear-gradient(135deg, #991b1b 0%, #dc2626 100%); }
-  .iot-header        { background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); }
-  .wireless-header   { background: linear-gradient(135deg, #5b21b6 0%, #8b5cf6 100%); }
-  .childapps-header  { background: linear-gradient(135deg, #065f46 0%, #10b981 100%); }
+  .localhost-header  { border-left-color: #dc2626; }
+  .iot-header        { border-left-color: #2563eb; }
+  .wireless-header   { border-left-color: #7c3aed; }
+  .childapps-header  { border-left-color: #059669; }
 
   .topic-header-content {
     h2 {
-      color: #fff;
-      margin: 0 0 0.3em 0;
+      color: $text-color;
+      margin: 0 0 0.2em 0;
+      font-size: 1.2em;
     }
   }
 
   .topic-subtitle {
-    font-size: 0.88em;
+    font-size: 0.85em;
     font-weight: 300;
     line-height: 1.5;
-    opacity: 0.92;
-    margin-bottom: 0.8em;
+    color: $grey-color-dark;
+    margin-bottom: 0.6em;
   }
 
   .topic-paper {
@@ -167,13 +166,14 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 0.5em;
-    font-size: 0.82em;
+    font-size: 0.8em;
   }
 
   .venue-badge {
-    background: rgba(255,255,255,0.2);
-    padding: 0.2em 0.6em;
-    border-radius: 4px;
+    background: #eee;
+    color: $text-color;
+    padding: 0.15em 0.5em;
+    border-radius: 3px;
     font-weight: 500;
     font-size: 0.85em;
     text-transform: uppercase;
@@ -182,13 +182,12 @@
 
   .paper-title {
     font-weight: 400;
-    opacity: 0.9;
+    color: $grey-color-dark;
   }
 
   .paper-link {
-    color: #fff;
-    opacity: 0.8;
-    &:hover { opacity: 1; text-decoration: none; }
+    color: $link-color;
+    &:hover { opacity: 0.8; text-decoration: none; }
   }
 
   // Impact sections within a topic (multi-column)
