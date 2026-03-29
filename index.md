@@ -35,6 +35,7 @@ During my Ph.D., I was a visiting researcher at Northeastern University's Cybers
 <div class="impact-banner" markdown="1">
 
 My measurement-driven research has led to concrete technical impact across platforms and ecosystems. It directly influenced platform practices — Google introduced a local-network permission in Android 16 and a localhost permission in Android 17 as a direct result of my work — and prompted privacy redesigns by major IoT vendors (e.g., Philips, Apple, TP-Link, Google) and the removal of dozens of privacy-invasive apps and SDKs from the Google Play Store. Chrome, Firefox, and DuckDuckGo deployed browser-level mitigations, while uBlock Origin and AdGuard adopted tracking protections based on our findings. The work advanced and expedited deployment of the W3C Local Network Access (LNA) standard.
+
 At the policy and enforcement level, the Spanish Prime Minister cited our research to announce a parliamentary investigation into Meta, before which we testified. U.S. Congress members cited the research in a formal inquiry to Meta leadership. Class action lawsuits were filed in the U.S., Canada, and Germany. Our disclosures to European regulators (EDPS, AEPD, CNIL, EDPB, UK CMA) prompted enforcement discussions. The work has been covered by 100+ international media outlets including the Washington Post, Wired, Ars Technica, El Pa&iacute;s, and Sky News, and engaged by civil society organizations (EFF, Privacy International).
 
 More details are enclosed in my [CV]({{ "/assets/Aniketh_CV.pdf" | relative_url }}).
