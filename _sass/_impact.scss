@@ -1,53 +1,49 @@
+// ==========================================================================
+// Impact page — Ripple / concentric rings layout
+// ==========================================================================
+
 .impact {
-  h2 {
-    font-size: 1.5em;
-    border-bottom: none;
-    margin-top: 2.5em;
+
+  // ---- Opening narrative ------------------------------------------------
+  .ripple-opening {
+    max-width: 700px;
+    margin: 0 auto 2em;
+    text-align: center;
   }
 
-  hr {
-    border: none;
-    border-top: 1px solid #e0e0e0;
-    margin: 2em 0;
-  }
-
-  // Hero tagline
-  .impact-hero {
-    margin-bottom: 2em;
-  }
-
-  .impact-tagline {
-    font-size: 1.25em;
+  .ripple-narrative {
+    font-size: 1.15em;
+    line-height: 1.65;
     color: $grey-color-dark;
     font-weight: 300;
-    line-height: 1.5;
     border-left: 4px solid $brand-color;
     padding-left: 1em;
+    text-align: left;
     margin: 0;
   }
 
-  // Animated stat cards
+  // ---- Stat counters ----------------------------------------------------
   .impact-stats {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1em;
-    margin-bottom: 1em;
+    margin-bottom: 2.5em;
 
     @include media-query($on-laptop) {
       grid-template-columns: repeat(2, 1fr);
     }
-
     @include media-query($on-palm) {
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6em;
     }
   }
 
   .stat-card {
-    background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
+    background: #fff;
+    border: 1px solid #e0e0e0;
     border-radius: 8px;
-    padding: 1.2em 1em;
+    padding: 1.2em 0.8em;
     text-align: center;
-    border: 1px solid #e8e8e8;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 
     &:hover {
@@ -57,222 +53,223 @@
   }
 
   .stat-number {
-    font-size: 2.5em;
+    font-size: 2.4em;
     font-weight: 500;
     color: $brand-color;
     line-height: 1.1;
   }
 
   .stat-label {
-    font-size: 0.85em;
+    font-size: 0.8em;
     font-weight: 500;
     color: $text-color;
-    margin-top: 0.3em;
+    margin-top: 0.2em;
     text-transform: uppercase;
     letter-spacing: 0.03em;
   }
 
-  .stat-sub {
-    font-size: 0.72em;
-    color: $grey-color;
-    margin-top: 0.3em;
-    line-height: 1.3;
+  // ---- Generic ring section ---------------------------------------------
+  .ripple-ring {
+    // full-bleed band
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    padding: 2.5em calc(50vw - 50%);
+    margin-bottom: 0;
+    // fade-in animation
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+
+    &.ring-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
-  // Section titles
-  .impact-section-title {
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
+  // Ring colour bands — darkest at center, lighter outward
+  .ring-1 {
+    background: #1e293b;
+    color: #e2e8f0;
+
+    a { color: #93c5fd; &:hover { color: #bfdbfe; } }
+    .ring-num { background: $brand-color; color: #fff; }
+    .ring-item { background: rgba(255,255,255,0.06); border-left-color: $brand-color; }
+    .ring-item i { color: $brand-color; }
+  }
+
+  .ring-2 {
+    background: #2d3a4f;
+    color: #e2e8f0;
+
+    a { color: #93c5fd; &:hover { color: #bfdbfe; } }
+    .ring-num { background: #2563eb; color: #fff; }
+    .ring-item { background: rgba(255,255,255,0.06); border-left-color: #2563eb; }
+    .ring-item i { color: #60a5fa; }
+  }
+
+  .ring-3 {
+    background: #f1f5f9;
     color: $text-color;
 
-    &::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: #ddd;
-    }
+    .ring-num { background: #dc2626; color: #fff; }
+    .ring-item { background: #fff; border-left-color: #dc2626; }
+    .ring-item i { color: #dc2626; }
   }
 
-  // Category blocks
-  .impact-category {
-    display: flex;
-    gap: 1.2em;
-    margin-bottom: 2em;
-    padding: 1.2em;
-    border-radius: 8px;
-    border: 1px solid #e8e8e8;
-    background: #fcfcfc;
+  .ring-4 {
+    background: #fafafa;
+    color: $text-color;
 
-    p {
-      margin-bottom: 0.8em;
-      font-size: 0.92em;
-      line-height: 1.6;
-    }
-
-    @include media-query($on-palm) {
-      flex-direction: column;
-      gap: 0.5em;
-    }
+    .ring-num { background: #059669; color: #fff; }
   }
 
-  .category-icon {
-    font-size: 1.5em;
-    flex-shrink: 0;
-    width: 2.2em;
-    height: 2.2em;
+  // ---- Ring inner container (respects content-width) --------------------
+  .ring-inner {
+    max-width: $content-width;
+    margin: 0 auto;
+  }
+
+  // ---- Ring label -------------------------------------------------------
+  .ring-label {
+    font-size: 1.3em;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.2em;
     display: flex;
     align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    color: #fff;
-
-    .platform & { background: #2563eb; }
-    .industry & { background: #7c3aed; }
-    .regulatory & { background: #dc2626; }
-    .awareness & { background: #059669; }
-  }
-
-  .category-content {
-    flex: 1;
-    min-width: 0;
-  }
-
-  // Impact grid within categories
-  .impact-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.7em;
-  }
-
-  .impact-item {
-    padding: 0.7em 0.9em;
-    background: #fff;
-    border-radius: 6px;
-    border-left: 3px solid #ddd;
-    font-size: 0.88em;
-    line-height: 1.5;
-    transition: border-color 0.2s;
-
-    .platform & { border-left-color: #93b5f1; &:hover { border-left-color: #2563eb; } }
-    .regulatory & { border-left-color: #f1a3a3; &:hover { border-left-color: #dc2626; } }
-
-    strong {
-      font-weight: 500;
-    }
-  }
-
-  // Tags
-  .impact-tag {
-    display: inline-block;
-    font-size: 0.7em;
-    font-weight: 500;
-    padding: 0.15em 0.5em;
-    border-radius: 3px;
-    margin-right: 0.3em;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    vertical-align: middle;
-    color: #fff;
-  }
-
-  .tag-os        { background: #16a34a; }
-  .tag-browser   { background: #2563eb; }
-  .tag-standard  { background: #7c3aed; }
-  .tag-tool      { background: #0891b2; }
-  .tag-enforcement { background: #ea580c; }
-  .tag-govt      { background: #dc2626; }
-  .tag-legal     { background: #9333ea; }
-
-  // Civil society
-  .civil-society-logos {
-    display: flex;
-    gap: 1em;
-    margin-bottom: 0.8em;
-
-    span {
-      a {
-        display: inline-block;
-        padding: 0.4em 1em;
-        border: 1px solid #ddd;
-        border-radius: 6px;
-        font-weight: 500;
-        font-size: 0.9em;
-        color: $text-color;
-        transition: border-color 0.2s, background 0.2s;
-
-        &:hover {
-          text-decoration: none;
-          border-color: #059669;
-          background: #f0fdf4;
-        }
-      }
-    }
-  }
-
-  // Press coverage
-  .press-section {
-    h4 {
-      font-size: 0.95em;
-      font-weight: 500;
-      color: $grey-color-dark;
-      margin-top: 1.5em;
-      margin-bottom: 0.7em;
-      padding-bottom: 0.3em;
-      border-bottom: 1px dashed #ddd;
-    }
-  }
-
-  .press-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
     gap: 0.5em;
+  }
+
+  .ring-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.6em;
+    height: 1.6em;
+    border-radius: 50%;
+    font-size: 0.75em;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .ring-subtitle {
+    font-size: 0.9em;
+    opacity: 0.75;
+    margin-top: 0;
+    margin-bottom: 1.2em;
+  }
+
+  // ---- Ring items list --------------------------------------------------
+  .ring-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.7em;
 
     @include media-query($on-palm) {
       grid-template-columns: 1fr;
     }
   }
 
-  .press-item {
+  .ring-item {
     display: flex;
-    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.7em;
+    padding: 0.75em 0.9em;
+    border-radius: 6px;
+    border-left: 3px solid #ddd;
+    font-size: 0.88em;
+    line-height: 1.55;
+    transition: border-left-color 0.2s;
+
+    i {
+      margin-top: 0.2em;
+      font-size: 1em;
+      flex-shrink: 0;
+      width: 1.2em;
+      text-align: center;
+    }
+
+    strong {
+      font-weight: 500;
+    }
+  }
+
+  // ---- Ring 4 sub-headings & press grid ---------------------------------
+  .ring-sub-heading {
+    font-size: 0.92em;
+    font-weight: 500;
+    margin-top: 1.5em;
+    margin-bottom: 0.6em;
+    padding-bottom: 0.3em;
+    border-bottom: 1px dashed #ddd;
+    color: $grey-color-dark;
+  }
+
+  .press-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5em;
+
+    @include media-query($on-laptop) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @include media-query($on-palm) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .press-card {
+    display: block;
     padding: 0.6em 0.8em;
     border-radius: 6px;
-    border: 1px solid #eee;
+    border: 1px solid #e0e0e0;
     background: #fff;
-    color: $text-color;
-    transition: border-color 0.2s, box-shadow 0.2s;
     text-decoration: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
 
     &:hover {
       text-decoration: none;
       border-color: $link-color;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      opacity: 1;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    &.civil {
+      border-color: #bbf7d0;
+      &:hover { border-color: #059669; }
     }
   }
 
   .press-outlet {
-    font-size: 0.72em;
+    font-size: 0.78em;
     font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: $brand-color;
-    margin-bottom: 0.15em;
+    color: $text-color;
+
+    i { margin-right: 0.25em; color: #dc2626; }
   }
 
-  .press-title {
-    font-size: 0.82em;
-    line-height: 1.3;
+  // ---- Research section -------------------------------------------------
+  .ripple-research {
+    margin-top: 2.5em;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+
+    &.ring-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .research-label {
+    margin-bottom: 0.8em;
     color: $text-color;
   }
 
-  // Research cards
   .research-cards {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1em;
-    margin-top: 1em;
 
     @include media-query($on-palm) {
       grid-template-columns: 1fr;
@@ -318,12 +315,10 @@
     font-size: 0.8em;
     font-weight: 500;
 
-    i {
-      margin-right: 0.2em;
-    }
+    i { margin-right: 0.2em; }
   }
 
-  // Footer note
+  // ---- Footer note ------------------------------------------------------
   .impact-footer-note {
     margin-top: 2.5em;
     padding: 1em 1.2em;
@@ -333,5 +328,18 @@
     color: $grey-color-dark;
     text-align: center;
     border: 1px solid #e8e8e8;
+  }
+
+  // ---- Override default page h2 styling for this layout -----------------
+  h2 {
+    font-size: 1.5em;
+    border-bottom: none;
+    margin-top: 0;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    margin: 2em 0;
   }
 }
