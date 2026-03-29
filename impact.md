@@ -13,155 +13,188 @@ class: impact
   <div class="stat-card">
     <div class="stat-number" data-target="100">0</div>
     <div class="stat-label">Media outlets</div>
-    <div class="stat-sub">Washington Post, Wired, Ars Technica, El Pa&iacute;s, Sky News &hellip;</div>
   </div>
   <div class="stat-card">
     <div class="stat-number" data-target="20">0</div>
     <div class="stat-label">IoT vendors patched</div>
-    <div class="stat-sub">Philips, Google, TP-Link, Apple &hellip;</div>
   </div>
   <div class="stat-card">
     <div class="stat-number" data-target="3">0</div>
     <div class="stat-label">Countries with lawsuits</div>
-    <div class="stat-sub">U.S., Canada, Germany</div>
   </div>
   <div class="stat-card">
     <div class="stat-number" data-target="6">0</div>
     <div class="stat-label">Browser/OS mitigations</div>
-    <div class="stat-sub">Chrome, Firefox, Android, DuckDuckGo, uBlock, AdGuard</div>
   </div>
 </div>
 
----
+<!-- Tab navigation -->
+<div class="impact-tabs">
+  <button class="tab-btn active" data-tab="platform"><i class="fa-solid fa-shield-halved"></i> Platform</button>
+  <button class="tab-btn" data-tab="industry"><i class="fa-solid fa-building"></i> Industry</button>
+  <button class="tab-btn" data-tab="regulatory"><i class="fa-solid fa-landmark"></i> Regulatory</button>
+  <button class="tab-btn" data-tab="awareness"><i class="fa-solid fa-bullhorn"></i> Awareness</button>
+  <button class="tab-btn" data-tab="press"><i class="fa-solid fa-newspaper"></i> Press</button>
+  <button class="tab-btn" data-tab="research"><i class="fa-solid fa-flask"></i> Research</button>
+</div>
 
-## Platform &amp; Technical Changes
-{: .impact-section-title}
-
-<div class="impact-category platform">
-  <div class="category-icon"><i class="fa-solid fa-shield-halved"></i></div>
-  <div class="category-content">
-
-Our disclosures led directly to new platform-level protections benefiting billions of users worldwide.
+<!-- Tab: Platform -->
+<div class="tab-panel active" id="tab-platform">
 
 <div class="impact-grid">
 
 <div class="impact-item">
-  <span class="impact-tag tag-os">Android</span>
-  <strong>Android 16</strong> &mdash; Google introduced a dedicated <em>local network permission</em>, prompted by the IoT smart home work.
+  <span class="impact-tag tag-os">Android 16</span>
+  Dedicated <em>local network permission</em> introduced, prompted by the IoT smart home work.
 </div>
 
 <div class="impact-item">
-  <span class="impact-tag tag-os">Android</span>
-  <strong>Android 17</strong> &mdash; Google introduced a dedicated <em>localhost permission</em>, prompted by the localhost tracking work.
+  <span class="impact-tag tag-os">Android 17</span>
+  Dedicated <em>localhost permission</em> introduced, prompted by the localhost tracking work.
 </div>
 
 <div class="impact-item">
-  <span class="impact-tag tag-browser">Chrome</span>
-  <strong>Chrome 137</strong> &mdash; Deployed access restrictions blocking localhost abuse. Will influence all Chromium-based browsers.
+  <span class="impact-tag tag-browser">Chrome 137</span>
+  Access restrictions blocking localhost abuse. Influences all Chromium-based browsers.
 </div>
 
 <div class="impact-item">
   <span class="impact-tag tag-browser">Firefox</span>
-  <strong>Firefox</strong> &mdash; <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1969916">Deployed localhost access restrictions</a>.
+  <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1969916">Deployed localhost access restrictions</a>.
 </div>
 
 <div class="impact-item">
   <span class="impact-tag tag-browser">WebKit</span>
-  <strong>WebKit</strong> &mdash; <a href="https://bugs.webkit.org/show_bug.cgi?id=171934#c111">Engaged with our findings</a> for Safari protections.
+  <a href="https://bugs.webkit.org/show_bug.cgi?id=171934#c111">Engaged with findings</a> for Safari protections.
 </div>
 
 <div class="impact-item">
   <span class="impact-tag tag-standard">W3C</span>
-  <strong>Local Network Access (LNA)</strong> &mdash; Our work advanced and expedited deployment of the W3C LNA standard. We identified and disclosed alternative bypass vectors.
+  Advanced and expedited the <strong>Local Network Access (LNA)</strong> standard. We identified and disclosed alternative bypass vectors.
 </div>
 
 <div class="impact-item">
   <span class="impact-tag tag-standard">IETF</span>
-  <strong>IETF PEARG 123</strong> &mdash; Invited to present findings to the Privacy Enhancements and Assessments Research Group.
+  Invited to present at <strong>IETF PEARG 123</strong>.
 </div>
 
 <div class="impact-item">
   <span class="impact-tag tag-tool">Privacy Tools</span>
-  <strong>DuckDuckGo, <a href="https://github.com/AuBlockOrigin/uAssets/blob/f7b32ede2447603d889685925d2be05cc505f0f1/filters/privacy.txt#L1544-L1545">uBlock Origin</a>, <a href="https://adguard.com/en/blog/meta-yandex-abuse-localhost-to-track-users.html">AdGuard</a></strong> &mdash; Enhanced blocklists to protect users.
+  <a href="https://github.com/uBlockOrigin/uAssets/blob/f7b32ede2447603d889685925d2be05cc505f0f1/filters/privacy.txt#L1544-L1545">uBlock Origin</a>, <a href="https://adguard.com/en/blog/meta-yandex-abuse-localhost-to-track-users.html">AdGuard</a>, DuckDuckGo enhanced blocklists.
 </div>
 
 <div class="impact-item">
   <span class="impact-tag tag-enforcement">Play Store</span>
-  <strong>Google Play</strong> &mdash; Dozens of privacy-invasive apps and SDKs removed from the store.
+  Dozens of privacy-invasive apps and SDKs removed.
 </div>
 
 </div>
-  </div>
 </div>
 
-## Industry Response
-{: .impact-section-title}
-
-<div class="impact-category industry">
-  <div class="category-icon"><i class="fa-solid fa-building"></i></div>
-  <div class="category-content">
-
-Both Meta and Yandex terminated the localhost abuse campaign on the day of public disclosure. 20+ IoT vendors &mdash; including Philips, Google, TP-Link, and Apple &mdash; redesigned identifier schemes following responsible disclosures. The W3C Privacy Working Group and IETF PEARG engaged with the findings for ongoing standard revisions.
-
-  </div>
-</div>
-
-## Regulatory &amp; Legislative Action
-{: .impact-section-title}
-
-<div class="impact-category regulatory">
-  <div class="category-icon"><i class="fa-solid fa-landmark"></i></div>
-  <div class="category-content">
+<!-- Tab: Industry -->
+<div class="tab-panel" id="tab-industry">
 
 <div class="impact-grid">
 
 <div class="impact-item">
+  <span class="impact-tag tag-enforcement">Meta &amp; Yandex</span>
+  Terminated the localhost abuse campaign on the <strong>day of public disclosure</strong>.
+</div>
+
+<div class="impact-item">
+  <span class="impact-tag tag-os">20+ IoT Vendors</span>
+  Philips, Google, TP-Link, Apple and others <strong>redesigned identifier schemes</strong> following responsible disclosures.
+</div>
+
+<div class="impact-item">
+  <span class="impact-tag tag-standard">W3C &amp; IETF</span>
+  Engaged with findings for <strong>ongoing standard revisions</strong>. Invited to W3C Privacy Working Group and IETF PEARG.
+</div>
+
+<div class="impact-item">
+  <span class="impact-tag tag-tool">VPN &amp; Cross-Profile</span>
+  Disclosed VPN vulnerability and cross-profile tracking vectors.
+</div>
+
+</div>
+</div>
+
+<!-- Tab: Regulatory -->
+<div class="tab-panel" id="tab-regulatory">
+
+<div class="impact-grid">
+
+<div class="impact-item highlight-item">
   <span class="impact-tag tag-govt">Spain</span>
-  The <strong>Spanish Prime Minister</strong> cited the localhost research to announce a parliamentary investigation into Meta, before which we <strong>testified</strong> before the Spanish Congress commission.
+  The <strong>Spanish Prime Minister</strong> cited the localhost research to announce a parliamentary investigation into Meta. We <strong>testified</strong> before the Spanish Congress commission.
 </div>
 
-<div class="impact-item">
+<div class="impact-item highlight-item">
   <span class="impact-tag tag-govt">U.S. Congress</span>
-  Members of the <strong>U.S. House of Representatives</strong> cited the research in a formal inquiry to Meta leadership concerning privacy violations.
+  Members of the <strong>U.S. House of Representatives</strong> cited the research in a formal inquiry to Meta leadership.
 </div>
 
 <div class="impact-item">
-  <span class="impact-tag tag-legal">Class Actions</span>
-  Lawsuits filed in the <strong>U.S.</strong> (<a href="https://www.pacermonitor.com/public/case/58359378/Rose_v_Meta_Platforms,_Inc">Rose v. Meta</a>, Carroll, Zaveeri), <strong>Canada</strong>, and <strong>Germany</strong>.
+  <span class="impact-tag tag-legal">U.S.</span>
+  <a href="https://www.pacermonitor.com/public/case/58359378/Rose_v_Meta_Platforms,_Inc">Rose v. Meta</a>, plus Carroll and Zaveeri class actions filed.
+</div>
+
+<div class="impact-item">
+  <span class="impact-tag tag-legal">Canada &amp; Germany</span>
+  Additional class action lawsuits filed invoking our results.
 </div>
 
 <div class="impact-item">
   <span class="impact-tag tag-legal">EU Regulators</span>
-  Disclosures to <strong>CNIL, EDPS, AEPD, EDPB, UK CMA</strong>, and the <strong>European Commission</strong> prompted enforcement and regulation discussions.
+  Disclosures to <strong>CNIL, EDPS, AEPD, EDPB, UK CMA</strong>, and the <strong>European Commission</strong> prompted enforcement discussions.
 </div>
 
 </div>
-  </div>
 </div>
 
-## Civil Society &amp; Public Awareness
-{: .impact-section-title}
+<!-- Tab: Awareness -->
+<div class="tab-panel" id="tab-awareness">
 
-<div class="impact-category awareness">
-  <div class="category-icon"><i class="fa-solid fa-bullhorn"></i></div>
-  <div class="category-content">
+<div class="awareness-content">
 
-<div class="civil-society-logos">
-  <span><a href="https://www.eff.org/deeplinks/2025/06/protect-yourself-metas-latest-attack-privacy">EFF</a></span>
-  <span><a href="https://privacyinternational.org/long-read/5621/meta-and-yandex-break-security-save-their-business-model">Privacy International</a></span>
+<div class="org-badges">
+  <a href="https://www.eff.org/deeplinks/2025/06/protect-yourself-metas-latest-attack-privacy" class="org-badge">
+    <i class="fa-solid fa-shield"></i> EFF Blog Post
+  </a>
+  <a href="https://www.eff.org/effector/37/7" class="org-badge">
+    <i class="fa-solid fa-envelope"></i> EFF Newsletter
+  </a>
+  <a href="https://privacyinternational.org/long-read/5621/meta-and-yandex-break-security-save-their-business-model" class="org-badge">
+    <i class="fa-solid fa-globe"></i> Privacy International
+  </a>
 </div>
 
-Covered by 100+ international media outlets. Civil society organizations engaged with the findings to raise public awareness and accountability debates.
+<div class="impact-grid">
 
-  </div>
+<div class="impact-item">
+  <span class="impact-tag tag-enforcement">Media Reach</span>
+  Covered by <strong>100+ international outlets</strong> including Washington Post, Wired, Ars Technica, El Pa&iacute;s, Sky News, Deutschlandfunk (radio), and more.
 </div>
 
-## Selected Press Coverage
-{: .impact-section-title}
+<div class="impact-item">
+  <span class="impact-tag tag-standard">Commentary</span>
+  <a href="https://medium.com/enrique-dans/its-time-to-shut-down-meta-and-prosecute-mark-zuckerberg-5a8d22031426">Enrique Dans</a> &bull; <a href="https://www.zeropartydata.es/p/localhost-tracking-explained-it-could">Zero Party Data (est. &euro;32B fines)</a> &bull; <a href="https://www.linkedin.com/pulse/technical-deep-dive-metas-exploitation-android-browser-joel-guff-baj4c">Technical deep dives</a>
+</div>
 
-<div class="press-section">
+<div class="impact-item">
+  <span class="impact-tag tag-tool">Podcasts &amp; Video</span>
+  <a href="https://www.youtube.com/watch?v=q6BKgOJD7fU&t=1295s">40-min podcast</a> &bull;
+  <a href="https://www.youtube.com/watch?v=-dBYjA-v4XQ">Video coverage</a> &bull;
+  <a href="https://www.youtube.com/watch?v=AVdo2IYxUEg">Analysis video</a> &bull;
+  <a href="https://plus.rtl.de/podcast/passwort-der-podcast-von-heise-security-bdebo5j1ld7vu/neue-folge">Heise Security (DE)</a>
+</div>
 
-<h4>Localhost / LocalMess Tracking</h4>
+</div>
+</div>
+</div>
+
+<!-- Tab: Press -->
+<div class="tab-panel" id="tab-press">
 
 <div class="press-grid">
 
@@ -177,7 +210,7 @@ Covered by 100+ international media outlets. Civil society organizations engaged
 
 <a class="press-item" href="https://elpais.com/tecnologia/2025-06-03/este-es-el-metodo-oculto-con-el-que-meta-rastrea-sin-permiso-la-navegacion-en-moviles-tambien-en-modo-incognito-o-con-vpn.html">
   <span class="press-outlet">El Pa&iacute;s</span>
-  <span class="press-title">The hidden method Meta uses to track mobile browsing without permission</span>
+  <span class="press-title">The hidden method Meta uses to track mobile browsing</span>
 </a>
 
 <a class="press-item" href="https://www.schneier.com/blog/archives/2025/06/new-way-to-track-covertly-android-users.html">
@@ -185,9 +218,9 @@ Covered by 100+ international media outlets. Civil society organizations engaged
   <span class="press-title">New Way to Covertly Track Android Users</span>
 </a>
 
-<a class="press-item" href="https://www.deutschlandfunk.de/app-attacke-europaeische-forscher-decken-groben-privacy-verstoss-von-meta-auf-100.html">
-  <span class="press-outlet">Deutschlandfunk</span>
-  <span class="press-title">App-Attacke: Forscher decken groben Privacy-Versto&szlig; von Meta auf</span>
+<a class="press-item" href="https://daringfireball.net/linked/2025/06/04/meta-and-yandexs-local-mess-exploit-seemingly-only-works-on-android">
+  <span class="press-outlet">Daring Fireball</span>
+  <span class="press-title">Meta and Yandex's LocalMess exploit on Android</span>
 </a>
 
 <a class="press-item" href="https://www.demorgen.be/nieuws/het-sluwe-achterpoortje-waarmee-u-online-gevolgd-wordt-meta-deed-er-alles-aan-om-dit-verborgen-te-houden~ba3bb620/">
@@ -195,9 +228,9 @@ Covered by 100+ international media outlets. Civil society organizations engaged
   <span class="press-title">Het sluwe achterpoortje waarmee u online gevolgd wordt</span>
 </a>
 
-<a class="press-item" href="https://daringfireball.net/linked/2025/06/04/meta-and-yandexs-local-mess-exploit-seemingly-only-works-on-android">
-  <span class="press-outlet">Daring Fireball</span>
-  <span class="press-title">Meta and Yandex's LocalMess exploit on Android</span>
+<a class="press-item" href="https://www.deutschlandfunk.de/app-attacke-europaeische-forscher-decken-groben-privacy-verstoss-von-meta-auf-100.html">
+  <span class="press-outlet">Deutschlandfunk <i class="fa-solid fa-microphone"></i></span>
+  <span class="press-title">Forscher decken groben Privacy-Versto&szlig; von Meta auf</span>
 </a>
 
 <a class="press-item" href="https://www.techdirt.com/2025/06/13/meta-busted-spying-on-android-users-in-extremely-creepy-new-way-then-lies-about-it/">
@@ -212,7 +245,7 @@ Covered by 100+ international media outlets. Civil society organizations engaged
 
 <a class="press-item" href="https://www.cpomagazine.com/data-privacy/meta-and-yandex-accused-of-using-android-loophole-for-surreptitious-user-tracking/">
   <span class="press-outlet">CPO Magazine</span>
-  <span class="press-title">Meta and Yandex accused of using Android loophole for user tracking</span>
+  <span class="press-title">Meta and Yandex accused of using Android loophole for tracking</span>
 </a>
 
 <a class="press-item" href="https://securityboulevard.com/2025/06/meta-local-mess-richixbw/">
@@ -235,69 +268,16 @@ Covered by 100+ international media outlets. Civil society organizations engaged
   <span class="press-title">Security bulletin on LocalMess findings</span>
 </a>
 
-</div>
-
-<h4>IoT &amp; Smart Home Privacy</h4>
-
-<div class="press-grid">
-
-<a class="press-item" href="https://elpais.com/tecnologia/2025-07-01/how-smart-devices-spy.html">
-  <span class="press-outlet">El Pa&iacute;s</span>
-  <span class="press-title">How thousands of apps are exploiting mysterious indoor location tracking</span>
-</a>
-
-<a class="press-item" href="https://www.wired.com/story/smart-home-devices-privacy/">
-  <span class="press-outlet">Wired</span>
-  <span class="press-title">Los dispositivos de tu hogar inteligente te esp&iacute;an</span>
-</a>
-
-<a class="press-item" href="https://www.cbsnews.com/calgary/smart-devices-leaking-private-data/">
-  <span class="press-outlet">CBS News</span>
-  <span class="press-title">Are your home's smart devices leaking private data?</span>
+<a class="press-item" href="https://www.dailykos.com/stories/2025/7/4/2331483/-Want-Meta-to-stop-spying-on-you-Getting-off-Facebook-is-NOT-enough">
+  <span class="press-outlet">Daily Kos</span>
+  <span class="press-title">Want Meta to stop spying on you? Getting off Facebook is NOT enough</span>
 </a>
 
 </div>
-
-<h4>Selected Commentary &amp; Podcasts</h4>
-
-<div class="press-grid">
-
-<a class="press-item" href="https://www.eff.org/deeplinks/2025/06/protect-yourself-metas-latest-attack-privacy">
-  <span class="press-outlet">EFF</span>
-  <span class="press-title">Protect Yourself from Meta's Latest Attack on Privacy</span>
-</a>
-
-<a class="press-item" href="https://privacyinternational.org/long-read/5621/meta-and-yandex-break-security-save-their-business-model">
-  <span class="press-outlet">Privacy International</span>
-  <span class="press-title">Meta and Yandex break security to save their business model</span>
-</a>
-
-<a class="press-item" href="https://medium.com/enrique-dans/its-time-to-shut-down-meta-and-prosecute-mark-zuckerberg-5a8d22031426">
-  <span class="press-outlet">Enrique Dans</span>
-  <span class="press-title">It's time to shut down Meta and prosecute Mark Zuckerberg</span>
-</a>
-
-<a class="press-item" href="https://www.zeropartydata.es/p/localhost-tracking-explained-it-could">
-  <span class="press-outlet">Zero Party Data</span>
-  <span class="press-title">Localhost tracking explained &mdash; it could cost Meta 32 billion</span>
-</a>
-
-<a class="press-item" href="https://www.youtube.com/watch?v=q6BKgOJD7fU&t=1295s">
-  <span class="press-outlet"><i class="fa-brands fa-youtube"></i> Podcast</span>
-  <span class="press-title">In-depth discussion (40 min)</span>
-</a>
-
-<a class="press-item" href="https://www.youtube.com/watch?v=-dBYjA-v4XQ">
-  <span class="press-outlet"><i class="fa-brands fa-youtube"></i> Video</span>
-  <span class="press-title">Video coverage of the findings</span>
-</a>
-
 </div>
 
-</div>
-
-## Underlying Research
-{: .impact-section-title}
+<!-- Tab: Research -->
+<div class="tab-panel" id="tab-research">
 
 <div class="research-cards">
 
@@ -335,39 +315,40 @@ Covered by 100+ international media outlets. Civil society organizations engaged
   All research artifacts are publicly released following open science principles. Achieved within a PhD completed <em>Cum Laude</em> at IMDEA Networks / UC3M.
 </div>
 
+</div>
+
 <script>
-// Animate stat counters on scroll
+// Animated counters
 document.addEventListener('DOMContentLoaded', function() {
   const counters = document.querySelectorAll('.stat-number');
-  const speed = 60;
-
   const animateCounter = (counter) => {
     const target = +counter.getAttribute('data-target');
-    const suffix = target >= 100 ? '+' : target >= 20 ? '+' : '';
-    const increment = Math.max(1, Math.floor(target / speed));
+    const suffix = target >= 20 ? '+' : '';
+    const increment = Math.max(1, Math.floor(target / 60));
     let current = 0;
-
     const updateCount = () => {
       current += increment;
-      if (current >= target) {
-        counter.innerText = target + suffix;
-        return;
-      }
+      if (current >= target) { counter.innerText = target + suffix; return; }
       counter.innerText = current;
       requestAnimationFrame(updateCount);
     };
     updateCount();
   };
-
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateCounter(entry.target);
-        observer.unobserve(entry.target);
-      }
+      if (entry.isIntersecting) { animateCounter(entry.target); observer.unobserve(entry.target); }
     });
   }, { threshold: 0.5 });
-
   counters.forEach(counter => observer.observe(counter));
+
+  // Tab switching
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    });
+  });
 });
 </script>
