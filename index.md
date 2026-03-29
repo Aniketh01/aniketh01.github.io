@@ -66,16 +66,28 @@ More details are enclosed in my [CV]({{ "/assets/Aniketh_CV.pdf" | relative_url 
 ## Featured Projects
 
 <div class="featured-projects">
-  {% assign sorted_projects = site.data.projects | sort: 'highlight' %}
-  {% for project in sorted_projects %}
-    {% if project.highlight %}
-      {% include project.html project=project %}
+  {% for project in site.data.projects %}
+    {% if project.highlight == true %}
+      <div class="fp-card">
+        <div class="fp-card-top">
+          <span class="fp-title">{{ project.title }}</span>
+          {% if project.tags %}
+          <div class="fp-tags">{% for tag in project.tags %}<span>{{ tag }}</span>{% endfor %}</div>
+          {% endif %}
+        </div>
+        <p class="fp-desc">{{ project.description | strip_html | truncate: 140 }}</p>
+        <div class="fp-links">
+          {% if project.url %}<a href="{{ project.url }}"><i class="fas fa-link"></i> Site</a>{% endif %}
+          {% if project.code %}<a href="{{ project.code }}"><i class="fab fa-github"></i> Code</a>{% endif %}
+          {% if project.paper %}<a href="{{ project.paper }}"><i class="far fa-file-pdf"></i> Paper</a>{% endif %}
+        </div>
+      </div>
     {% endif %}
   {% endfor %}
 </div>
 <a href="{{ "/projects/" | relative_url }}" class="button">
   <i class="fas fa-chevron-circle-right"></i>
-  Show More Projects
+  Show All Projects
 </a>
 
 

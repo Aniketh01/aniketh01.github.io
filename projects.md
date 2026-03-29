@@ -9,9 +9,9 @@ class: projects
 # Projects
 
 {:.lead}
-Here are some projects I have worked on for school, work, or fun. You can find the code for most of them on [GitHub](https://github.com/Aniketh01).
+Research tools, open-source contributions, and side projects. Code on [GitHub](https://github.com/Aniketh01).
 
-<div class="grid">
+<div class="project-list">
   {% for project in site.data.projects %}
     {% include project.html project=project %}
   {% endfor %}
