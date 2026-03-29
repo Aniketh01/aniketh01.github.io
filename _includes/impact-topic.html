@@ -1,0 +1,47 @@
+<div class="topic-block" data-topics="{{ include.topic.id }}">
+
+<div class="topic-header {{ include.topic.color }}-header">
+  <div class="topic-header-content">
+    <h2>{{ include.topic.title }}</h2>
+    <p class="topic-subtitle">{{ include.topic.subtitle }}</p>
+    <div class="topic-paper">
+      <span class="venue-badge">{{ include.topic.paper.venue }}</span>
+      <span class="paper-title">{{ include.topic.paper.title }}</span>
+      {% if include.topic.paper.link %}<a href="{{ include.topic.paper.link }}" class="paper-link"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>{% endif %}
+    </div>
+  </div>
+</div>
+
+<div class="impact-grid">
+{% for section in include.topic.sections %}
+<div class="impact-section{% if section.wide %} impact-section-wide{% endif %}">
+<h4><i class="fa-solid fa-{{ section.icon }}"></i> {{ section.title }}</h4>
+<ul>
+{% for item in section.items %}
+  <li>{{ item }}</li>
+{% endfor %}
+</ul>
+</div>
+{% endfor %}
+</div>
+
+{% if include.topic.press %}
+<details class="press-details">
+<summary><i class="fa-solid fa-newspaper"></i> {{ include.topic.press.label }} <span class="press-count">{{ include.topic.press.count }}</span></summary>
+<div class="press-grid">
+{% for p in include.topic.press.items %}
+<a class="press-item" {% if p.url %}href="{{ p.url }}"{% endif %}><span class="press-outlet">{{ p.outlet }}</span><span class="press-title">{{ p.title }}</span></a>
+{% endfor %}
+</div>
+{% if include.topic.press.commentary %}
+<h5>{{ include.topic.press.commentary_label }}</h5>
+<div class="press-grid">
+{% for p in include.topic.press.commentary %}
+<a class="press-item" {% if p.url %}href="{{ p.url }}"{% endif %}><span class="press-outlet">{{ p.outlet }}</span><span class="press-title">{{ p.title }}</span></a>
+{% endfor %}
+</div>
+{% endif %}
+</details>
+{% endif %}
+
+</div>

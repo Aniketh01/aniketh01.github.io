@@ -190,85 +190,65 @@
     &:hover { opacity: 0.8; text-decoration: none; }
   }
 
-  // Impact sections within a topic (multi-column)
-  .topic-impact-sections {
+  // Impact grid — two-column clean layout
+  .impact-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1em;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 2em;
+    margin-bottom: 0.8em;
+
+    @include media-query($on-palm) {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+  }
+
+  .impact-section {
     margin-bottom: 0.5em;
-  }
 
-  .impact-col {
     h4 {
-      font-size: 0.9em;
-      font-weight: 500;
-      margin-bottom: 0.6em;
-      color: $text-color;
-      padding-bottom: 0.3em;
-      border-bottom: 1px solid #eee;
-
-      i { margin-right: 0.3em; color: $grey-color; }
-    }
-  }
-
-  .impact-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-
-    li {
       font-size: 0.85em;
-      line-height: 1.5;
-      padding: 0.5em 0.6em;
-      margin-bottom: 0.3em;
-      border-radius: 5px;
-      background: #f9f9f9;
-      border-left: 3px solid #e0e0e0;
-      transition: border-color 0.2s;
+      font-weight: 500;
+      color: $grey-color-dark;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin: 0 0 0.5em 0;
 
-      &:hover { border-left-color: $brand-color; }
-
-      &.impact-highlight {
-        background: #fef7f7;
-        border-left-color: $brand-color;
-        font-weight: 400;
+      i {
+        margin-right: 0.3em;
+        color: $grey-color;
+        font-size: 0.9em;
       }
+    }
 
-      strong { font-weight: 500; }
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        font-size: 0.85em;
+        line-height: 1.55;
+        padding: 0.35em 0;
+        color: $text-color;
+
+        & + li {
+          border-top: 1px solid #f0f0f0;
+        }
+
+        strong { font-weight: 500; }
+
+        a {
+          color: $link-color;
+          &:hover { opacity: 0.8; }
+        }
+      }
+    }
+
+    &-wide {
+      grid-column: 1 / -1;
     }
   }
-
-  // Flag / pill badges
-  .flag {
-    display: inline-block;
-    font-size: 0.7em;
-    font-weight: 500;
-    padding: 0.1em 0.4em;
-    border-radius: 3px;
-    margin-right: 0.2em;
-    background: #fee2e2;
-    color: #991b1b;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-  }
-
-  .pill {
-    display: inline-block;
-    font-size: 0.68em;
-    font-weight: 500;
-    padding: 0.15em 0.5em;
-    border-radius: 3px;
-    margin-right: 0.2em;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: #fff;
-  }
-
-  .pill-os          { background: #16a34a; }
-  .pill-browser     { background: #2563eb; }
-  .pill-std         { background: #7c3aed; }
-  .pill-tool        { background: #0891b2; }
-  .pill-enforcement { background: #ea580c; }
 
   // =====================
   // Press (collapsible per topic)

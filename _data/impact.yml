@@ -1,0 +1,177 @@
+# Each topic maps to a research paper/project and its real-world impact.
+# To add a new topic: copy a block below and fill in the fields.
+#
+# Fields:
+#   id:        unique slug, used for filtering and CSS color class
+#   title:     display name shown in header and filter button
+#   color:     CSS class suffix for left-border color (defined in _impact.scss)
+#   subtitle:  one-line description shown below the title
+#   paper:
+#     venue:   short venue name (e.g., "USENIX Security 2026")
+#     title:   full paper title
+#     link:    URL to paper page or PDF
+#   sections:  list of impact categories (use consistent names across topics)
+#     - title: category name (e.g., "Regulatory & Policy", "Platform & Technical")
+#       icon:  Font Awesome icon name without "fa-solid fa-" prefix
+#       wide:  true to span full width (optional, default false)
+#       items: list of HTML strings (links, bold, etc. are fine)
+#   press:     optional collapsible press coverage
+#     label:   summary text (e.g., "Press Coverage & Commentary")
+#     count:   badge text (e.g., "15+ outlets")
+#     items:   list of {outlet, title, url}
+#     commentary_label: optional subheading for commentary section
+#     commentary:       optional list of {outlet, title, url}
+
+- id: localhost
+  title: Localhost Tracking
+  color: localhost
+  subtitle: "Silent web-to-app tracking on mobile via localhost &mdash; exposing how Meta and Yandex covertly tracked Android users' browsing across apps."
+  paper:
+    venue: USENIX Security 2026
+    title: "Bridges to Self: Silent Web-to-App Tracking on Mobile via Localhost"
+    link: https://localmess.github.io/
+  sections:
+    - title: "Regulatory & Policy"
+      icon: landmark
+      items:
+        - 'The <strong>Spanish Prime Minister</strong> <a href="https://www.lamoncloa.gob.es/lang/en/presidente/news/paginas/2025/20251119-metafuture-4th-edition.aspx">cited the research</a> to announce a parliamentary investigation into Meta. Our team <strong>testified</strong> before the Spanish Congress commission.'
+        - 'Members of the <strong>U.S. House of Representatives</strong> cited the research in a <a href="https://schakowsky.house.gov/sites/evo-subsites/schakowsky.house.gov/files/evo-media-document/letter-to-meta-concerning-violation-of-android-privacy-protections.pdf">formal inquiry to Meta leadership</a>.'
+        - 'Class actions filed in the U.S. (<a href="https://www.pacermonitor.com/public/case/58359378/Rose_v_Meta_Platforms,_Inc">Rose v. Meta</a>, Carroll, Zaveeri), Canada, and Germany.'
+        - 'Disclosures to CNIL, EDPS, AEPD, EDPB, UK CMA, and the European Commission.'
+        - 'Civil society response from <a href="https://www.eff.org/deeplinks/2025/06/protect-yourself-metas-latest-attack-privacy">EFF</a> and <a href="https://privacyinternational.org/long-read/5621/meta-and-yandex-break-security-save-their-business-model">Privacy International</a>.'
+    - title: "Platform & Technical"
+      icon: shield-halved
+      items:
+        - 'Google introduced a <a href="https://web.archive.org/web/20260214205048/https://developer.android.com/about/versions/17/behavior-changes-17#localhost-protections">localhost permission in Android 17</a> to prevent platform-wide abuse.'
+        - '<a href="https://chromestatus.com/feature/5765473641725952">Chrome 137</a> and <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1969916">Firefox</a> deployed localhost access restrictions. <a href="https://bugs.webkit.org/show_bug.cgi?id=171934#c111">WebKit</a> engaged with findings.'
+        - 'Advanced the W3C Local Network Access (LNA) standard. Disclosed bypass vectors.'
+        - 'Invited to present at <a href="https://datatracker.ietf.org/meeting/123/materials/slides-123-pearg-covert-web-to-app-tracking-via-localhost-on-android-00">IETF PEARG 123</a> and the <a href="https://www.youtube.com/watch?v=mIUmNl1WKUs">Ad-Filtering Dev Summit 2025</a>.'
+        - '<a href="https://github.com/uBlockOrigin/uAssets/blob/f7b32ede2447603d889685925d2be05cc505f0f1/filters/privacy.txt#L1544-L1545">uBlock Origin</a>, <a href="https://adguard.com/en/blog/meta-yandex-abuse-localhost-to-track-users.html">AdGuard</a>, and DuckDuckGo adopted tracking protections based on our findings.'
+    - title: "Industry Response"
+      icon: building
+      wide: true
+      items:
+        - 'Meta and Yandex <strong>terminated the abuse on the day of public disclosure</strong>.'
+        - 'VPN vulnerability and cross-profile tracking vectors disclosed to Google.'
+  press:
+    label: "Press Coverage & Commentary"
+    count: "15+ outlets"
+    items:
+      - outlet: Washington Post
+        title: "Meta found a new way to violate your privacy"
+        url: https://www.washingtonpost.com/technology/2025/06/06/meta-privacy-facebook-instagram/
+      - outlet: Ars Technica
+        title: "Meta and Yandex are de-anonymizing Android users"
+        url: https://arstechnica.com/security/2025/06/meta-and-yandex-are-de-anonymizing-android-users-web-browsing-identifiers/
+      - outlet: "El Pa&iacute;s"
+        title: "The hidden method Meta uses to track mobile browsing"
+        url: https://elpais.com/tecnologia/2025-06-03/este-es-el-metodo-oculto-con-el-que-meta-rastrea-sin-permiso-la-navegacion-en-moviles-tambien-en-modo-incognito-o-con-vpn.html
+      - outlet: Schneier on Security
+        title: "New Way to Covertly Track Android Users"
+        url: https://www.schneier.com/blog/archives/2025/06/new-way-to-track-covertly-android-users.html
+      - outlet: Daring Fireball
+        title: "Meta and Yandex's LocalMess exploit on Android"
+        url: https://daringfireball.net/linked/2025/06/04/meta-and-yandexs-local-mess-exploit-seemingly-only-works-on-android
+      - outlet: De Morgen
+        title: "Het sluwe achterpoortje waarmee u online gevolgd wordt"
+        url: https://www.demorgen.be/nieuws/het-sluwe-achterpoortje-waarmee-u-online-gevolgd-wordt-meta-deed-er-alles-aan-om-dit-verborgen-te-houden~ba3bb620/
+      - outlet: 'Deutschlandfunk <i class="fa-solid fa-microphone"></i>'
+        title: "Forscher decken Privacy-Versto&szlig; von Meta auf"
+        url: https://www.deutschlandfunk.de/app-attacke-europaeische-forscher-decken-groben-privacy-verstoss-von-meta-auf-100.html
+      - outlet: Techdirt
+        title: "Meta busted spying on Android users in creepy new way"
+        url: https://www.techdirt.com/2025/06/13/meta-busted-spying-on-android-users-in-extremely-creepy-new-way-then-lies-about-it/
+      - outlet: Tweakers
+        title: "Meta had inzage in surfgedrag van Android-gebruikers"
+        url: https://tweakers.net/nieuws/235760/meta-had-vanaf-september-inzage-in-surfgedrag-van-android-gebruikers.html
+      - outlet: Security Boulevard
+        title: "Meta's LocalMess tracking technique"
+        url: https://securityboulevard.com/2025/06/meta-local-mess-richixbw/
+      - outlet: CPO Magazine
+        title: "Meta and Yandex accused of using Android loophole"
+        url: https://www.cpomagazine.com/data-privacy/meta-and-yandex-accused-of-using-android-loophole-for-surreptitious-user-tracking/
+      - outlet: Knack Data News
+        title: "Facebook en Yandex apps weten welke sites je bezoekt"
+        url: https://datanews.knack.be/nieuws/security/privacy/facebook-en-yandex-apps-weten-welke-sites-je-bezoekt-ook-incognito/
+      - outlet: ABC
+        title: "Meta y Yandex consiguen datos concretos sobre tus h&aacute;bitos"
+        url: https://www.abc.es/tecnologia/meta-yandex-consiguen-datos-concretos-sobre-tus-20250604174148-nt.html
+      - outlet: Daily Kos
+        title: "Getting off Facebook is NOT enough"
+        url: https://www.dailykos.com/stories/2025/7/4/2331483/-Want-Meta-to-stop-spying-on-you-Getting-off-Facebook-is-NOT-enough
+    commentary_label: Commentary
+    commentary:
+      - outlet: Enrique Dans
+        title: "It's time to shut down Meta"
+        url: https://medium.com/enrique-dans/its-time-to-shut-down-meta-and-prosecute-mark-zuckerberg-5a8d22031426
+      - outlet: Zero Party Data
+        title: "Localhost tracking &mdash; est. &euro;32B in fines"
+        url: https://www.zeropartydata.es/p/localhost-tracking-explained-it-could
+      - outlet: '<i class="fa-brands fa-youtube"></i> Podcast'
+        title: "In-depth discussion (40 min)"
+        url: https://www.youtube.com/watch?v=q6BKgOJD7fU&t=1295s
+      - outlet: '<i class="fa-brands fa-youtube"></i> Video'
+        title: "Video coverage"
+        url: https://www.youtube.com/watch?v=-dBYjA-v4XQ
+
+- id: iot
+  title: "Smart Home / IoT"
+  color: iot
+  subtitle: "Exposing how local network protocols in smart homes violate platform access control assumptions &mdash; apps bypass Android's permission model to harvest device metadata."
+  paper:
+    venue: IMC 2023
+    title: "In the Room Where It Happens: Characterizing Local Communication and Threats in Smart Homes"
+    link: https://doi.org/10.1145/3618257.3624830
+  sections:
+    - title: "Platform & Technical"
+      icon: shield-halved
+      items:
+        - 'Google introduced a <a href="https://developer.android.com/reference/android/Manifest.permission#ACCESS_LOCAL_NETWORK">dedicated local network permission</a> in Android 16.'
+        - 'Dozens of privacy-invasive apps and SDKs removed from the Google Play Store.'
+        - '20+ IoT vendors (Philips, Google, TP-Link, Apple) <strong>redesigned identifier schemes</strong>.'
+    - title: "Regulatory & Policy"
+      icon: landmark
+      items:
+        - 'Presented at CNIL Privacy Research Day 2024, RIPE 89 Plenary (Prague), and RediMadrid Conference.'
+        - 'Findings shared with EDPS, AEPD, and CNIL.'
+    - title: "Industry Response"
+      icon: building
+      wide: true
+      items:
+        - 'Google publicly recognized the real-world impact of our findings, awarded a <strong>$2,000 bug bounty</strong> (donated to M&eacute;decins Sans Fronti&egrave;res), and engaged with us to explore mitigations via Android OS, app review processes, and IoT standardization efforts.'
+  press:
+    label: "Press Coverage"
+    count: "5+ outlets"
+    items:
+      - outlet: "El Pa&iacute;s"
+        title: "How smart devices spy on us and reveal information about our homes"
+        url: https://elpais.com/tecnologia/2023-10-smart-devices-spy.html
+      - outlet: Wired
+        title: "Los dispositivos de tu hogar inteligente te esp&iacute;an"
+        url: https://www.wired.com/story/smart-home-devices-privacy/
+      - outlet: CBS News
+        title: "Are your home's smart devices leaking private data?"
+        url: https://www.cbsnews.com/calgary/smart-devices-leaking-private-data/
+
+- id: wireless
+  title: Wireless SDKs
+  color: wireless
+  subtitle: "Empirical privacy analysis of wireless-scanning SDKs in Android &mdash; revealing how apps exploit Wi-Fi, Bluetooth, and other wireless signals for covert location tracking."
+  paper:
+    venue: "PoPETs 2025"
+    title: "Your Signal, Their Data: An Empirical Privacy Analysis of Wireless-Scanning SDKs in Android"
+    link: https://petsymposium.org/popets/2025/popets-2025-0103.pdf
+  sections:
+    - title: "Regulatory & Policy"
+      icon: landmark
+      wide: true
+      items:
+        - 'Findings shared with CNIL, EDPS, and AEPD to inform enforcement discussions.'
+  press:
+    label: "Press Coverage"
+    count: "2 outlets"
+    items:
+      - outlet: "El Pa&iacute;s"
+        title: "How does your phone know so many private details? How thousands of apps are exploiting mysterious indoor location tracking"
+      - outlet: 'La Sexta Noticias <i class="fa-solid fa-tv"></i>'
+        title: "&iquest;Alguna vez has pensado que el m&oacute;vil te esp&iacute;a? Confirmado, apps te siguen usando WIFI, Bluetooth y datos aunque no actives el GPS"
