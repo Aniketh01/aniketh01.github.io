@@ -1,17 +1,20 @@
+// ============================================================
+// Impact page — vertical timeline layout
+// ============================================================
+
+// Color palette for event types
+$tl-research:   #2563eb;
+$tl-industry:   #ea580c;
+$tl-platform:   #16a34a;
+$tl-media:      #7c3aed;
+$tl-regulatory: #dc2626;
+$tl-standards:  #0891b2;
+
 .impact {
-  h2 {
-    font-size: 1.5em;
-    border-bottom: none;
-    margin-top: 2.5em;
-  }
 
-  hr {
-    border: none;
-    border-top: 1px solid #e0e0e0;
-    margin: 2em 0;
-  }
-
+  // --------------------------------------------------------
   // Hero tagline
+  // --------------------------------------------------------
   .impact-hero {
     margin-bottom: 2em;
   }
@@ -26,12 +29,14 @@
     margin: 0;
   }
 
+  // --------------------------------------------------------
   // Animated stat cards
+  // --------------------------------------------------------
   .impact-stats {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1em;
-    margin-bottom: 1em;
+    margin-bottom: 2.5em;
 
     @include media-query($on-laptop) {
       grid-template-columns: repeat(2, 1fr);
@@ -79,251 +84,278 @@
     line-height: 1.3;
   }
 
-  // Section titles
-  .impact-section-title {
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
-    color: $text-color;
+  // --------------------------------------------------------
+  // Timeline container
+  // --------------------------------------------------------
+  .timeline {
+    position: relative;
+    padding: 2em 0;
 
-    &::after {
+    // Vertical centre line (desktop)
+    &::before {
       content: '';
-      flex: 1;
-      height: 1px;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 3px;
       background: #ddd;
-    }
-  }
+      transform: translateX(-50%);
 
-  // Category blocks
-  .impact-category {
-    display: flex;
-    gap: 1.2em;
-    margin-bottom: 2em;
-    padding: 1.2em;
-    border-radius: 8px;
-    border: 1px solid #e8e8e8;
-    background: #fcfcfc;
-
-    p {
-      margin-bottom: 0.8em;
-      font-size: 0.92em;
-      line-height: 1.6;
-    }
-
-    @include media-query($on-palm) {
-      flex-direction: column;
-      gap: 0.5em;
-    }
-  }
-
-  .category-icon {
-    font-size: 1.5em;
-    flex-shrink: 0;
-    width: 2.2em;
-    height: 2.2em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    color: #fff;
-
-    .platform & { background: #2563eb; }
-    .industry & { background: #7c3aed; }
-    .regulatory & { background: #dc2626; }
-    .awareness & { background: #059669; }
-  }
-
-  .category-content {
-    flex: 1;
-    min-width: 0;
-  }
-
-  // Impact grid within categories
-  .impact-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.7em;
-  }
-
-  .impact-item {
-    padding: 0.7em 0.9em;
-    background: #fff;
-    border-radius: 6px;
-    border-left: 3px solid #ddd;
-    font-size: 0.88em;
-    line-height: 1.5;
-    transition: border-color 0.2s;
-
-    .platform & { border-left-color: #93b5f1; &:hover { border-left-color: #2563eb; } }
-    .regulatory & { border-left-color: #f1a3a3; &:hover { border-left-color: #dc2626; } }
-
-    strong {
-      font-weight: 500;
-    }
-  }
-
-  // Tags
-  .impact-tag {
-    display: inline-block;
-    font-size: 0.7em;
-    font-weight: 500;
-    padding: 0.15em 0.5em;
-    border-radius: 3px;
-    margin-right: 0.3em;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    vertical-align: middle;
-    color: #fff;
-  }
-
-  .tag-os        { background: #16a34a; }
-  .tag-browser   { background: #2563eb; }
-  .tag-standard  { background: #7c3aed; }
-  .tag-tool      { background: #0891b2; }
-  .tag-enforcement { background: #ea580c; }
-  .tag-govt      { background: #dc2626; }
-  .tag-legal     { background: #9333ea; }
-
-  // Civil society
-  .civil-society-logos {
-    display: flex;
-    gap: 1em;
-    margin-bottom: 0.8em;
-
-    span {
-      a {
-        display: inline-block;
-        padding: 0.4em 1em;
-        border: 1px solid #ddd;
-        border-radius: 6px;
-        font-weight: 500;
-        font-size: 0.9em;
-        color: $text-color;
-        transition: border-color 0.2s, background 0.2s;
-
-        &:hover {
-          text-decoration: none;
-          border-color: #059669;
-          background: #f0fdf4;
-        }
+      @include media-query($on-palm) {
+        left: 18px;
+        transform: none;
       }
     }
   }
 
-  // Press coverage
-  .press-section {
-    h4 {
-      font-size: 0.95em;
-      font-weight: 500;
-      color: $grey-color-dark;
-      margin-top: 1.5em;
-      margin-bottom: 0.7em;
-      padding-bottom: 0.3em;
-      border-bottom: 1px dashed #ddd;
+  // --------------------------------------------------------
+  // Individual event
+  // --------------------------------------------------------
+  .timeline-event {
+    position: relative;
+    width: 50%;
+    padding: 0 2.5em 2em 0;
+    box-sizing: border-box;
+
+    // Default: left side (odd)
+    left: 0;
+    text-align: right;
+
+    // Even events: right side
+    &:nth-child(even) {
+      left: 50%;
+      padding: 0 0 2em 2.5em;
+      text-align: left;
+    }
+
+    // Scroll-in animation (hidden by default)
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+
+    &:nth-child(odd) {
+      transform: translateX(-30px) translateY(0);
+    }
+
+    &:nth-child(even) {
+      transform: translateX(30px) translateY(0);
+    }
+
+    &.is-visible {
+      opacity: 1;
+      transform: translateX(0) translateY(0);
+    }
+
+    // Mobile: all events left-aligned
+    @include media-query($on-palm) {
+      width: 100%;
+      left: 0 !important;
+      padding: 0 0 2em 3em !important;
+      text-align: left !important;
+
+      &:nth-child(odd),
+      &:nth-child(even) {
+        transform: translateY(30px) translateX(0);
+      }
+
+      &.is-visible {
+        transform: translateY(0) translateX(0);
+      }
     }
   }
 
-  .press-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5em;
+  // --------------------------------------------------------
+  // Timeline dot (on the centre line)
+  // --------------------------------------------------------
+  .timeline-dot {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 0.8em;
+    z-index: 2;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+
+    // Odd events: dot sits at right edge
+    top: 0.2em;
+    right: -18px;
+
+    .timeline-event:nth-child(even) & {
+      right: auto;
+      left: -18px;
+    }
 
     @include media-query($on-palm) {
-      grid-template-columns: 1fr;
+      left: 0 !important;
+      right: auto !important;
     }
   }
 
-  .press-item {
-    display: flex;
-    flex-direction: column;
-    padding: 0.6em 0.8em;
-    border-radius: 6px;
-    border: 1px solid #eee;
-    background: #fff;
-    color: $text-color;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    text-decoration: none;
+  // Type-based dot colours
+  .type-research   .timeline-dot { background: $tl-research; }
+  .type-industry   .timeline-dot { background: $tl-industry; }
+  .type-platform   .timeline-dot { background: $tl-platform; }
+  .type-media      .timeline-dot { background: $tl-media; }
+  .type-regulatory .timeline-dot { background: $tl-regulatory; }
+  .type-standards  .timeline-dot { background: $tl-standards; }
+
+  // --------------------------------------------------------
+  // Timeline content card
+  // --------------------------------------------------------
+  .timeline-content {
+    background: #fcfcfc;
+    border: 1px solid #e8e8e8;
+    border-radius: 8px;
+    padding: 1em 1.2em;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
 
     &:hover {
-      text-decoration: none;
-      border-color: $link-color;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      opacity: 1;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
+    }
+
+    h3 {
+      font-size: 1.05em;
+      font-weight: 500;
+      margin: 0.15em 0 0.4em;
+      color: $text-color;
+    }
+
+    p {
+      font-size: 0.88em;
+      line-height: 1.55;
+      color: $grey-color-dark;
+      margin: 0 0 0.6em;
     }
   }
 
-  .press-outlet {
+  // Type-based left-border accent on cards
+  .type-research   .timeline-content { border-left: 3px solid $tl-research; }
+  .type-industry   .timeline-content { border-left: 3px solid $tl-industry; }
+  .type-platform   .timeline-content { border-left: 3px solid $tl-platform; }
+  .type-media      .timeline-content { border-left: 3px solid $tl-media; }
+  .type-regulatory .timeline-content { border-left: 3px solid $tl-regulatory; }
+  .type-standards  .timeline-content { border-left: 3px solid $tl-standards; }
+
+  // Even events: accent on right border instead
+  .timeline-event:nth-child(odd) {
+    &.type-research   .timeline-content { border-left: 1px solid #e8e8e8; border-right: 3px solid $tl-research; }
+    &.type-industry   .timeline-content { border-left: 1px solid #e8e8e8; border-right: 3px solid $tl-industry; }
+    &.type-platform   .timeline-content { border-left: 1px solid #e8e8e8; border-right: 3px solid $tl-platform; }
+    &.type-media      .timeline-content { border-left: 1px solid #e8e8e8; border-right: 3px solid $tl-media; }
+    &.type-regulatory .timeline-content { border-left: 1px solid #e8e8e8; border-right: 3px solid $tl-regulatory; }
+    &.type-standards  .timeline-content { border-left: 1px solid #e8e8e8; border-right: 3px solid $tl-standards; }
+  }
+
+  // On mobile, always use left border
+  @include media-query($on-palm) {
+    .timeline-event:nth-child(odd) {
+      &.type-research   .timeline-content { border-right: 1px solid #e8e8e8; border-left: 3px solid $tl-research; }
+      &.type-industry   .timeline-content { border-right: 1px solid #e8e8e8; border-left: 3px solid $tl-industry; }
+      &.type-platform   .timeline-content { border-right: 1px solid #e8e8e8; border-left: 3px solid $tl-platform; }
+      &.type-media      .timeline-content { border-right: 1px solid #e8e8e8; border-left: 3px solid $tl-media; }
+      &.type-regulatory .timeline-content { border-right: 1px solid #e8e8e8; border-left: 3px solid $tl-regulatory; }
+      &.type-standards  .timeline-content { border-right: 1px solid #e8e8e8; border-left: 3px solid $tl-standards; }
+    }
+  }
+
+  // --------------------------------------------------------
+  // Date label
+  // --------------------------------------------------------
+  .timeline-date {
+    display: inline-block;
     font-size: 0.72em;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: $brand-color;
-    margin-bottom: 0.15em;
+    padding: 0.15em 0.6em;
+    border-radius: 3px;
+    background: #f0f0f0;
+    color: $grey-color-dark;
   }
 
-  .press-title {
-    font-size: 0.82em;
-    line-height: 1.3;
-    color: $text-color;
-  }
+  .type-research   .timeline-date { background: rgba($tl-research, 0.1);   color: darken($tl-research, 5%); }
+  .type-industry   .timeline-date { background: rgba($tl-industry, 0.1);   color: darken($tl-industry, 5%); }
+  .type-platform   .timeline-date { background: rgba($tl-platform, 0.1);   color: darken($tl-platform, 5%); }
+  .type-media      .timeline-date { background: rgba($tl-media, 0.1);      color: darken($tl-media, 5%); }
+  .type-regulatory .timeline-date { background: rgba($tl-regulatory, 0.1); color: darken($tl-regulatory, 5%); }
+  .type-standards  .timeline-date { background: rgba($tl-standards, 0.1);  color: darken($tl-standards, 5%); }
 
-  // Research cards
-  .research-cards {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1em;
-    margin-top: 1em;
-
-    @include media-query($on-palm) {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .research-card {
-    padding: 1em;
-    border-radius: 8px;
-    border: 1px solid #e0e0e0;
-    background: #fafafa;
-    transition: box-shadow 0.2s;
-
-    &:hover {
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
-    }
-  }
-
-  .research-venue {
-    font-size: 0.7em;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: $brand-color;
-    margin-bottom: 0.3em;
-  }
-
-  .research-title {
-    font-size: 0.9em;
-    font-weight: 500;
-    line-height: 1.3;
-    margin-bottom: 0.4em;
-  }
-
-  .research-authors {
-    font-size: 0.78em;
-    color: $grey-color;
-    line-height: 1.4;
-    margin-bottom: 0.5em;
-  }
-
-  .research-link {
+  // --------------------------------------------------------
+  // Links inside timeline cards
+  // --------------------------------------------------------
+  .timeline-link {
+    display: inline-block;
     font-size: 0.8em;
     font-weight: 500;
+    color: $link-color;
+    margin-right: 0.8em;
 
     i {
       margin-right: 0.2em;
     }
   }
 
+  .timeline-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3em;
+
+    .timeline-event:nth-child(odd) & {
+      justify-content: flex-end;
+
+      @include media-query($on-palm) {
+        justify-content: flex-start;
+      }
+    }
+  }
+
+  // --------------------------------------------------------
+  // Press grid inside media/civil-society events
+  // --------------------------------------------------------
+  .timeline-press-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35em;
+    margin-top: 0.3em;
+
+    .timeline-event:nth-child(odd) & {
+      justify-content: flex-end;
+
+      @include media-query($on-palm) {
+        justify-content: flex-start;
+      }
+    }
+
+    a {
+      display: inline-block;
+      font-size: 0.7em;
+      font-weight: 500;
+      padding: 0.2em 0.55em;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      color: $text-color;
+      background: #fff;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+
+      &:hover {
+        text-decoration: none;
+        border-color: $link-color;
+        background: rgba($link-color, 0.05);
+        color: $link-color;
+      }
+    }
+  }
+
+  // --------------------------------------------------------
   // Footer note
+  // --------------------------------------------------------
   .impact-footer-note {
     margin-top: 2.5em;
     padding: 1em 1.2em;
