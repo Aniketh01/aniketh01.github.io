@@ -48,8 +48,8 @@
       flex-shrink: 0;
 
       picture, img {
-        width: 200px;
-        height: 200px;
+        width: 220px;
+        height: 220px;
         border-radius: 50%;
         object-fit: cover;
         border: 3px solid #eee;
@@ -74,7 +74,7 @@
   // Hiring callout
   // =====================
   .hiring-note {
-    font-size: 0.88em;
+    font-size: 1.05em;
     color: $grey-color-dark;
     border-left: 3px solid $link-color;
     padding: 0.4em 0.8em;
@@ -218,10 +218,10 @@
     margin-bottom: 1.5em;
 
     .publication {
-      margin-bottom: 0.7em;
+      margin-bottom: 0.15em;
       display: block;
       color: $text-color;
-      padding: 0.6em 0.8em;
+      padding: 0.3em 0.8em;
       border-radius: 4px;
       transition: background 0.2s;
 
