@@ -1,8 +1,50 @@
-# - message: "I attended TMA(Network Traffic Measurement and Analysis Conference) 2020, remotely."
-#   date: 2020-06
-# - message: "Our paper that studied the email PKI ecosystem (DANE) has been accepted at USENIX Security 2020!"
-#   date: 2020-02
-# - message: "I will be speaking at Akademy'19 at Milan, Italy."
-#   date: 2019-09
-# - message: "I will be interning at IIJ Innovation Institute in Tokyo, Japan this summer."
-#   date: 2019-06
+- message: "Invited talk at the University of Zaragoza EMACS Workshop on interoperable health and fitness ecosystem privacy."
+  date: 2026-01
+
+- message: "[Bridges to Self](https://localmess.github.io/) accepted at **USENIX Security 2026** — exposing silent web-to-app tracking via localhost on Android."
+  date: 2025-10
+
+- message: "Testified before the **Spanish Congress** on Meta's localhost tracking abuse, following a parliamentary investigation announced by the Spanish Prime Minister."
+  date: 2025-07
+
+- message: "U.S. Congress members cited our localhost research in a **formal inquiry to Meta leadership**."
+  date: 2025-07
+
+- message: "Google introduced a **localhost permission in Android 17**, prompted by our research."
+  date: 2025-06
+
+- message: "Meta and Yandex terminated localhost abuse on the day of our [public disclosure](https://localmess.github.io/). Covered by 100+ outlets including [Washington Post](https://www.washingtonpost.com/technology/2025/06/06/meta-privacy-facebook-instagram/), [Ars Technica](https://arstechnica.com/security/2025/06/meta-and-yandex-are-de-anonymizing-android-users-web-browsing-identifiers/), and [El Pa&iacute;s](https://elpais.com/tecnologia/2025-06-03/este-es-el-metodo-oculto-con-el-que-meta-rastrea-sin-permiso-la-navegacion-en-moviles-tambien-en-modo-incognito-o-con-vpn.html)."
+  date: 2025-06
+
+- message: "Chrome 137 and Firefox deployed access restrictions based on our localhost findings."
+  date: 2025-06
+
+- message: "Invited to present at **IETF PEARG 123** (Madrid) on covert localhost tracking."
+  date: 2025-03
+
+- message: "Two papers accepted at **PoPETs 2025**: wireless-scanning SDK privacy analysis and child-directed app compliance."
+  date: 2025-01
+
+- message: "Completed my Ph.D. **Cum Laude** at IMDEA Networks / UC3M."
+  date: 2025-10
+
+- message: "Started as **Postdoctoral Researcher** at IMDEA Networks Institute."
+  date: 2025-10
+
+- message: "Google introduced a **local network permission in Android 16**, prompted by our IoT smart home research."
+  date: 2024-10
+
+- message: "Invited plenary talk at **RIPE 89** in Prague on smart home privacy threats."
+  date: 2024-10
+
+- message: "Visiting researcher at **Northeastern University** Cybersecurity and Privacy Institute, hosted by Prof. David Choffnes."
+  date: 2024-04
+
+- message: "Our paper on local communication in smart homes published at **IMC 2023**."
+  date: 2023-10
+
+- message: "Attended the **EPFL Summer Research Institute on Security and Privacy** in Lausanne."
+  date: 2023-07
+
+- message: "Best Poster and Presentation Award at **TMA 2022** Ph.D. school."
+  date: 2022-06
