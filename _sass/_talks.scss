@@ -33,3 +33,21 @@
     }
   }
 }
+
+@include media-query($on-palm) {
+  .talks .talk {
+    time {
+      float: none;
+      display: block;
+      font-size: 0.85em;
+      margin-bottom: 0.2em;
+    }
+
+    .extra-links a {
+      &:first-child {
+        margin-left: 0;
+      }
+      margin-left: 0.5em;
+    }
+  }
+}

@@ -90,30 +90,25 @@ nav {
 }
 
 @include media-query($on-palm) {
-  .site-title {
-    margin-top: 0.5em;
-  }
-
   nav {
-    justify-content: space-around;
+    justify-content: center;
+    line-height: 32px;
+
+    .site-title {
+      flex: 0 0 100%;
+      text-align: center;
+      font-size: 1.3em;
+      margin-top: 0.3em;
+    }
 
     & > *:last-child {
       margin-left: initial;
     }
 
-    .external {
-      flex: 0 1 100%;
-      justify-content: space-around;
-    }
-    .site-title {
-      text-align: center;
-    }
-    // hide icons from internal links
-    & > a .fas {
-      display: none;
-    }
-
     a {
+      padding: 0 0.3em;
+      margin: 0 0.1em;
+      font-size: 0.85em;
       border-radius: 3px;
 
       &:hover {
@@ -126,6 +121,12 @@ nav {
         background: lighten($brand-color, 50%);
         border-radius: 3px;
       }
+    }
+
+    .external {
+      flex: 0 1 100%;
+      justify-content: center;
+      gap: 0.2em;
     }
   }
 }

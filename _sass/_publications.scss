@@ -101,8 +101,10 @@
 
 #ft-search {
   width: 350px;
+  max-width: 100%;
   font-size: 1.1em;
   padding: 0.4em;
+  box-sizing: border-box;
 }
 
 .pubs {
