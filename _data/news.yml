@@ -1,3 +1,6 @@
+- message: "Disclosed [**LeakyLM**](https://leakylm.github.io/) — structural privacy risks in AI assistant platforms (ChatGPT, Claude, Grok, Perplexity) caused by third-party trackers leaking conversation data to Meta, Google, TikTok, and others."
+  date: 2026-05
+
 - message: "Invited talk at the University of Zaragoza EMACS Workshop on interoperable health and fitness ecosystem privacy."
   date: 2026-01
 

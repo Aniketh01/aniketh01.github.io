@@ -1,3 +1,12 @@
+- title: LeakyLM
+  url: https://leakylm.github.io/
+  description: "Structural privacy risks in generative AI platforms (ChatGPT, Claude, Grok, Perplexity) caused by third-party trackers. 13+ trackers — including Meta Pixel, Google, and TikTok — leak conversation metadata, enable user linkability across ad networks, and expose public permalinks without proper access controls."
+  highlight: true
+  tags:
+    - Privacy
+    - AI
+    - Tracking
+
 - title: LocalMess
   url: https://localmess.github.io/
   code: https://github.com/localmess/localhost-abuse
