@@ -1,3 +1,18 @@
+- title: "Covert Web-to-App Tracking via Localhost on Android"
+  location: CNIL Privacy Research Day
+  city: Paris, France
+  date: 2026-06
+
+- title: "Your Signal, Their Data: An Empirical Privacy Analysis of Wireless-scanning SDKs in Android"
+  location: Radboud University
+  city: Nijmegen, Netherlands
+  date: 2026-06
+
+- title: "When Local Isn’t Private: Exploiting Local Signals for Cross-Context Tracking"
+  location: Public Interest Technology Group (PITG) Tech Dive, an initiative of the IETF community
+  city: Online
+  date: 2026-04
+
 - title: "Sweat, Sync, and Exposure: A Privacy Analysis of Interoperable Health and Fitness Ecosystem"
   location: University of Zaragoza, EMACS Workshop
   city: Jaca, Spain

@@ -1,5 +1,17 @@
+- message: "Selected for **Y Combinator Startup School** in Paris."
+  date: 2026-06
+
+- message: "Our [**localhost research**](https://localmess.github.io/) will be presented at the **CNIL Privacy Research Day**."
+  date: 2026-06
+
+- message: "Invited talk at **Radboud University** on our [wireless-scanning SDK privacy analysis](https://petsymposium.org/popets/2025/popets-2025-0103.pdf) in Android."
+  date: 2026-06
+
 - message: "Disclosed [**LeakyLM**](https://leakylm.github.io/) — structural privacy risks in AI assistant platforms (ChatGPT, Claude, Grok, Perplexity) caused by third-party trackers leaking conversation data to Meta, Google, TikTok, and others."
   date: 2026-05
+
+- message: "Invited Public Interest Technology Group ([**PITG**](https://pitg.gitlab.io/about/), an initiative of the IETF community) tech dive on exploiting local signals for cross-context tracking on mobile."
+  date: 2026-04
 
 - message: "Invited talk at the University of Zaragoza EMACS Workshop on interoperable health and fitness ecosystem privacy."
   date: 2026-01
