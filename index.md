@@ -10,7 +10,7 @@ class: home
 
 # Hi, I'm Aniketh Girish
 
-<p class="hiring-note"><b>I'm open to full-time opportunities in the next 6~12 months, feel free to <a href="mailto:aniketh.girish@imdea.org">contact me</a> if you think I'd be a fit!</b></p>
+<!-- <p class="hiring-note"><b>I'm open to full-time opportunities in the next 6~12 months, feel free to <a href="mailto:aniketh.girish@imdea.org">contact me</a> if you think I'd be a fit!</b></p> -->
 
 I'm a Postdoctoral Researcher at the [IMDEA Networks Institute](https://networks.imdea.org/) in Madrid, Spain. I completed my Ph.D. *Cum Laude* at IMDEA Networks Institute in 2025, advised by [Dr. Narseo Vallina-Rodriguez](https://networks.imdea.org/team/imdea-networks-team/people/narseo-vallina-rodriguez/).
 My research falls at the intersection of (1) hybrid black-box testing, (2) empirical analysis of covert privacy risks in smart home and mobile ecosystems, and (3) regulatory compliance. I have published in top peer-reviewed venues (e.g., PETS, IMC, USENIX Security). I got the Best Poster Award at the TMA'22 Ph.D. school for my novel approach to IoT testing.

@@ -1,3 +1,24 @@
+- id: dead-domains
+  title: "Dead Domains, Living Data: A Privacy Risk Analysis of Domain Lifecycle in Android Apps"
+  year: 2026
+  authors:
+    - Gabriel Hortea
+    - Aniketh Girish
+    - Narseo Vallina-Rodriguez
+    - Juan Tapiador
+  venue: Proceedings on Privacy Enhancing Technologies (PoPETs)
+  venue_tags:
+    - PoPETs
+  venue_url: https://petsymposium.org/
+  highlight: true
+  tags:
+    - Android
+    - Domain Lifecycle
+    - Privacy
+    - Mobile Ecosystem
+  type:
+    - Conference
+
 - id: bridges-to-self
   title: "Bridges to Self: Silent Web-to-App Tracking on Mobile via Localhost"
   year: 2026

@@ -34,9 +34,9 @@
     - title: "Regulatory & Policy"
       icon: landmark
       items:
-        - 'The <strong>Spanish Prime Minister</strong> <a href="https://www.lamoncloa.gob.es/lang/en/presidente/news/paginas/2025/20251119-metafuture-4th-edition.aspx">cited the research</a> to announce a parliamentary investigation into Meta. Our team <strong>testified</strong> before the Spanish Congress commission.'
+        - 'The <strong>Spanish Prime Minister</strong> <a href="https://www.lamoncloa.gob.es/lang/en/presidente/news/paginas/2025/20251119-metafuture-4th-edition.aspx">cited the research</a> to announce a parliamentary investigation into Meta. Our team <strong><a href="https://www.congreso.es/public_oficiales/L15/CONG/DS/CO/DSCD-15-CO-477.PDF">testified</a></strong> before the Spanish Congress commission.'
         - 'Members of the <strong>U.S. House of Representatives</strong> cited the research in a <a href="https://schakowsky.house.gov/sites/evo-subsites/schakowsky.house.gov/files/evo-media-document/letter-to-meta-concerning-violation-of-android-privacy-protections.pdf">formal inquiry to Meta leadership</a>.'
-        - 'Class actions filed in the U.S. (<a href="https://www.pacermonitor.com/public/case/58359378/Rose_v_Meta_Platforms,_Inc">Rose v. Meta</a>, Carroll, Zaveeri), Canada, and Germany.'
+        - 'Class actions filed in the U.S. (<a href="https://www.courtlistener.com/docket/70448987/in-re-meta-android-privacy-litigation/">Rose v. Meta</a>, Carroll, Zaveeri), <a href="https://www.registredesactionscollectives.quebec/fr/Fichier/Document?NomFichier=16960.pdf">Quebec</a>, <a href="https://slatervecchio.com/wp-content/uploads/2025/11/2025-10-24-filed-nocc-meta.pdf">British Columbia</a>, and Germany (<a href="https://somi.nl/en/somi-foundation-launches-collective-action-in-germany-against-metas-secret-tracking-on-facebook-and-instagram">SOMI Foundation</a>).'
         - 'Disclosures to CNIL, EDPS, AEPD, EDPB, UK CMA, and the European Commission.'
         - 'Invited to present at the <strong>CNIL Privacy Research Day</strong> 2026.'
         - 'Civil society response from <a href="https://www.eff.org/deeplinks/2025/06/protect-yourself-metas-latest-attack-privacy">EFF</a> and <a href="https://privacyinternational.org/long-read/5621/meta-and-yandex-break-security-save-their-business-model">Privacy International</a>.'
@@ -47,6 +47,7 @@
         - '<a href="https://chromestatus.com/feature/5765473641725952">Chrome 137</a> and <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1969916">Firefox</a> deployed localhost access restrictions. <a href="https://bugs.webkit.org/show_bug.cgi?id=171934#c111">WebKit</a> engaged with findings.'
         - 'Advanced the W3C Local Network Access (LNA) standard. Disclosed bypass vectors.'
         - 'Invited to present at <a href="https://datatracker.ietf.org/meeting/123/materials/slides-123-pearg-covert-web-to-app-tracking-via-localhost-on-android-00">IETF PEARG 123</a> and the <a href="https://www.youtube.com/watch?v=mIUmNl1WKUs">Ad-Filtering Dev Summit 2025</a>.'
+        - 'Research highlighted at the <a href="https://rijndael-ieeemilestone.cs.ru.nl/">IEEE Milestone Award Ceremony</a> honoring the selection of Rijndael as AES.'
         - '<a href="https://github.com/uBlockOrigin/uAssets/blob/f7b32ede2447603d889685925d2be05cc505f0f1/filters/privacy.txt#L1544-L1545">uBlock Origin</a>, <a href="https://adguard.com/en/blog/meta-yandex-abuse-localhost-to-track-users.html">AdGuard</a>, and DuckDuckGo adopted tracking protections based on our findings.'
     - title: "Industry Response"
       icon: building
@@ -100,6 +101,15 @@
       - outlet: Daily Kos
         title: "Getting off Facebook is NOT enough"
         url: https://www.dailykos.com/stories/2025/7/4/2331483/-Want-Meta-to-stop-spying-on-you-Getting-off-Facebook-is-NOT-enough
+      - outlet: Sky News
+        title: "Meta found 'covertly tracking' Android users through Instagram and Facebook"
+        url: https://news.sky.com/story/meta-found-covertly-tracking-android-users-through-instagram-and-facebook-13379083
+      - outlet: The Register
+        title: "Meta pauses mobile port tracking tech on Android after researchers cry foul"
+        url: https://www.theregister.com/2025/06/03/meta_pauses_android_tracking_tech/
+      - outlet: MediaPost
+        title: "Meta Must Face Suit For Allegedly Tracking Android Users' Web Browsing"
+        url: https://www.mediapost.com/publications/article/415028/meta-must-face-suit-for-allegedly-tracking-android.html
     commentary_label: Commentary
     commentary:
       - outlet: Enrique Dans
