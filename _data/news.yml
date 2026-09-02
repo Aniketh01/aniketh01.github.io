@@ -1,7 +1,13 @@
+- message: "Joined [**DuckDuckGo**](https://duckduckgo.com/) as Senior Privacy Engineer."
+  date: 2026-09
+
 - message: "Our work on [covert web-to-app tracking via localhost](https://localmess.github.io/) received the **USENIX Security 2026 Distinguished Paper Award** and the **USENIX Internet Defense Prize 2026**."
   date: 2026-08
 
 - message: "Attending [**USENIX Security 2026**](https://www.usenix.org/conference/usenixsecurity26) — if you're around, come say hi!"
+  date: 2026-08
+
+- message: "[Dead Domains, Living Data](https://petsymposium.org/popets/2026/popets-2026-0112.pdf) accepted at **PoPETs 2026** — a privacy risk analysis of domain lifecycle in Android apps."
   date: 2026-08
 
 - message: "Our localhost research received the [**CNIL-Inria Privacy Protection Prize 2026**](https://www.cnil.fr/fr/prix-inria-cnil-2026) — awarded for outstanding societal impact in privacy research. (24 June, Paris)"
@@ -10,7 +16,7 @@
 - message: "Selected for **Y Combinator Startup School** in Paris."
   date: 2026-06
 
-- message: "Our [**localhost research**](https://localmess.github.io/) will be presented at the **CNIL Privacy Research Day**."
+- message: "Presented our [**localhost research**](https://localmess.github.io/) at the **CNIL Privacy Research Day 2026**."
   date: 2026-06
 
 - message: "Invited talk at **Radboud University** on our [wireless-scanning SDK privacy analysis](https://petsymposium.org/popets/2025/popets-2025-0103.pdf) in Android."
