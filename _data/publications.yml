@@ -1,3 +1,78 @@
+- id: sweat-sync-exposure
+  title: "Sweat, Sync, and Exposure: A Privacy Analysis of Interoperable Health and Fitness Ecosystems in Android"
+  year: 2027
+  authors:
+    - Aniketh Girish
+    - Johanna T. Gunawan
+    - Srdjan Matic
+    - Joel Reardon
+    - Juan Tapiador
+    - Narseo Vallina-Rodriguez
+  venue: Proceedings on Privacy Enhancing Technologies (PoPETs)
+  venue_tags:
+    - PoPETs
+  venue_url: https://petsymposium.org/
+  highlight: true
+  tags:
+    - Health Privacy
+    - Android
+    - Fitness Ecosystems
+    - Interoperability
+  type:
+    - Conference
+
+- id: agent-in-the-middle
+  title: "The Agent in the Middle: A Security and Privacy Analysis of Android AppFunctions"
+  year: 2027
+  authors:
+    - Tautvydas Jackevicius
+    - Aniketh Girish
+    - Vinuri Bandara
+    - Guillermo Suarez-Tangil
+    - Juan Tapiador
+    - Narseo Vallina-Rodriguez
+  venue: Proceedings on Privacy Enhancing Technologies (PoPETs)
+  venue_tags:
+    - PoPETs
+  venue_url: https://petsymposium.org/
+  highlight: true
+  tags:
+    - Android
+    - AI Agents
+    - AppFunctions
+    - Security
+    - Privacy
+  type:
+    - Conference
+
+- id: leakylm
+  title: "Prompt like a Butterfly, Sting like a Tracker: A Privacy Analysis of Web and Mobile Conversational AI Agents"
+  year: 2027
+  authors:
+    - Guilherme Oliveira
+    - Miguel Sanchez
+    - Juan Manuel De Santa Olalla Gómez
+    - Roi S. Serna
+    - Tautvydas Jackevicius
+    - Jorge Garcia-Herrero
+    - Aniketh Girish
+    - Guillermo Suarez-Tangil
+    - Narseo Vallina-Rodriguez
+  venue: Proceedings on Privacy Enhancing Technologies (PoPETs)
+  venue_tags:
+    - PoPETs
+  venue_url: https://petsymposium.org/
+  highlight: true
+  awards:
+    - "Spanish DPA (AEPD) forwarded findings to the EDPB for coordinated evaluation at the June 2026 plenary."
+  tags:
+    - AI Privacy
+    - Conversational AI
+    - Web Tracking
+    - Mobile
+  type:
+    - Conference
+
 - id: dead-domains
   title: "Dead Domains, Living Data: A Privacy Risk Analysis of Domain Lifecycle in Android Apps"
   year: 2026
