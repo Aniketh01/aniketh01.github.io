@@ -1,9 +1,9 @@
 # Site settings
 title: Aniketh Girish
-email: aniketh.girish@networks.imdea.org
+email: agirish@duckduckgo.com
 description: > # this means to ignore newlines until "baseurl:"
-  Aniketh Girish: Postdoc at IMDEA Networks Institute. Interested in the privacy and measurement of
-  IoT and mobile infrastructure.
+  Aniketh Girish: Works on privacy at DuckDuckGo. Researches privacy in mobile, web,
+  IoT, and AI systems through large-scale measurement.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://www.anikethgirish.in" # the base hostname & protocol for your site
 production_url: "https://www.anikethgirish.in"
