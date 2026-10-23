@@ -36,6 +36,8 @@
     - PoPETs
   venue_url: https://petsymposium.org/
   highlight: true
+  awards:
+    - "Andreas Pfitzmann Best Student Paper Award Runner-up, PETS 2027"
   tags:
     - Android
     - AI Agents
@@ -64,6 +66,7 @@
   venue_url: https://petsymposium.org/
   highlight: true
   awards:
+    - "Andreas Pfitzmann Best Student Paper Award, PETS 2027"
     - "Spanish DPA (AEPD) forwarded findings to the EDPB for coordinated evaluation at the June 2026 plenary."
   tags:
     - AI Privacy

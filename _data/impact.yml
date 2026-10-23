@@ -22,6 +22,45 @@
 #     commentary_label: optional subheading for commentary section
 #     commentary:       optional list of {outlet, title, url}
 
+- id: leakylm
+  title: AI Assistant Tracking
+  color: leakylm
+  subtitle: "Structural privacy risks in AI assistant platforms (ChatGPT, Claude, Grok, Perplexity) &mdash; third-party trackers leak conversation data to Meta, Google, TikTok, and others."
+  paper:
+    venue: "PoPETs 2027"
+    title: "Prompt like a Butterfly, Sting like a Tracker: A Privacy Analysis of Web and Mobile Conversational AI Agents"
+    link: https://leakylm.github.io/
+  sections:
+    - title: "Regulatory & Policy"
+      icon: landmark
+      items:
+        - 'The <a href="https://www.aepd.es/prensa-y-comunicacion/notas-de-prensa/la-agencia-promueve-ante-las-autoridades-europeas-proteccion-estudie-ia">Spanish DPA (AEPD)</a> forwarded our findings to the <strong>EDPB</strong> for coordinated evaluation at the June 2026 plenary.'
+    - title: "Recognition"
+      icon: award
+      items:
+        - 'Received the <a href="https://petsymposium.org/student-paper-award.php"><strong>Andreas Pfitzmann Best Student Paper Award</strong></a> at PETS 2027.'
+  press:
+    label: "Press Coverage"
+    count: "1 outlet"
+    items:
+      - outlet: "El Pa&iacute;s"
+        title: "Hay chats privados de IA en abierto por internet: los crecientes riesgos para la privacidad de los principales chatbots"
+        url: https://elpais.com/tecnologia/2026-05-05/hay-chats-privados-de-ia-en-abierto-por-internet-los-crecientes-riesgos-para-la-privacidad-de-los-principales-chatbots.html
+
+- id: appfunctions
+  title: Android AI Agents
+  color: appfunctions
+  subtitle: "Security and privacy analysis of Android AppFunctions &mdash; the interface that lets AI agents invoke app functionality on the user's behalf."
+  paper:
+    venue: "PoPETs 2027"
+    title: "The Agent in the Middle: A Security and Privacy Analysis of Android AppFunctions"
+  sections:
+    - title: "Recognition"
+      icon: award
+      wide: true
+      items:
+        - 'Runner-up for the <a href="https://petsymposium.org/student-paper-award.php"><strong>Andreas Pfitzmann Best Student Paper Award</strong></a> at PETS 2027.'
+
 - id: localhost
   title: Localhost Tracking
   color: localhost
@@ -126,6 +165,29 @@
         title: "Video coverage"
         url: https://www.youtube.com/watch?v=-dBYjA-v4XQ
 
+- id: wireless
+  title: Wireless SDKs
+  color: wireless
+  subtitle: "Empirical privacy analysis of wireless-scanning SDKs in Android &mdash; revealing how apps exploit Wi-Fi, Bluetooth, and other wireless signals for covert location tracking."
+  paper:
+    venue: "PoPETs 2025"
+    title: "Your Signal, Their Data: An Empirical Privacy Analysis of Wireless-Scanning SDKs in Android"
+    link: https://petsymposium.org/popets/2025/popets-2025-0103.pdf
+  sections:
+    - title: "Regulatory & Policy"
+      icon: landmark
+      wide: true
+      items:
+        - 'Findings shared with CNIL, EDPS, and AEPD to inform enforcement discussions.'
+  press:
+    label: "Press Coverage"
+    count: "2 outlets"
+    items:
+      - outlet: "El Pa&iacute;s"
+        title: "How does your phone know so many private details? How thousands of apps are exploiting mysterious indoor location tracking"
+      - outlet: 'La Sexta Noticias <i class="fa-solid fa-tv"></i>'
+        title: "&iquest;Alguna vez has pensado que el m&oacute;vil te esp&iacute;a? Confirmado, apps te siguen usando WIFI, Bluetooth y datos aunque no actives el GPS"
+
 - id: iot
   title: "Smart Home / IoT"
   color: iot
@@ -164,26 +226,3 @@
       - outlet: CBS News
         title: "Are your home's smart devices leaking private data?"
         url: https://www.cbsnews.com/calgary/smart-devices-leaking-private-data/
-
-- id: wireless
-  title: Wireless SDKs
-  color: wireless
-  subtitle: "Empirical privacy analysis of wireless-scanning SDKs in Android &mdash; revealing how apps exploit Wi-Fi, Bluetooth, and other wireless signals for covert location tracking."
-  paper:
-    venue: "PoPETs 2025"
-    title: "Your Signal, Their Data: An Empirical Privacy Analysis of Wireless-Scanning SDKs in Android"
-    link: https://petsymposium.org/popets/2025/popets-2025-0103.pdf
-  sections:
-    - title: "Regulatory & Policy"
-      icon: landmark
-      wide: true
-      items:
-        - 'Findings shared with CNIL, EDPS, and AEPD to inform enforcement discussions.'
-  press:
-    label: "Press Coverage"
-    count: "2 outlets"
-    items:
-      - outlet: "El Pa&iacute;s"
-        title: "How does your phone know so many private details? How thousands of apps are exploiting mysterious indoor location tracking"
-      - outlet: 'La Sexta Noticias <i class="fa-solid fa-tv"></i>'
-        title: "&iquest;Alguna vez has pensado que el m&oacute;vil te esp&iacute;a? Confirmado, apps te siguen usando WIFI, Bluetooth y datos aunque no actives el GPS"
